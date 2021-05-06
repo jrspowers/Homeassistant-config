@@ -1,0 +1,5 @@
+################################################
+## Entities / Input Booleans / ledstrip Sonos off
+################################################
+ledstrip_sonos_off:
+  name: ledstrip sonos off

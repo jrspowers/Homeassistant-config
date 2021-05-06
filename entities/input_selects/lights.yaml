@@ -1,0 +1,16 @@
+################################################
+## Entities / Input Selects / Lights
+################################################
+lights:
+  name: Color Lights
+  options:
+    - wled - ledstring - jarne
+    - wled - ledstrip - tafel
+    - wled - ledring
+    - wled - ledstrip - sonosbeam
+    - ledstrip - plank
+    - ledstrip - deur
+    - ledstrip - kast
+    - lamp - kast
+    - lidl - lightbar - 1
+    - lidl - lightbar - 2

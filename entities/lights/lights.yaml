@@ -1,0 +1,9 @@
+################################################
+## Entities / Lights / Lights Lidl
+################################################
+platform: group
+name: lights
+entities:
+    - light.lidl_light_bar_1_2
+    - light.lidl_light_bar_2_2
+

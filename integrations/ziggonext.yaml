@@ -1,0 +1,7 @@
+################################################
+## Integrations / Ziggonext / Telenet
+################################################
+ziggonext:
+  username: !secret telenet_username
+  password: !secret telenet_password
+  country_code: be-nl

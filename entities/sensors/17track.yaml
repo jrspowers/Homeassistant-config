@@ -1,0 +1,6 @@
+################################################
+## Entities / Sensors / 17track  
+################################################
+platform: seventeentrack
+username: !secret seventeentrack_username
+password: !secret seventeentrack_password

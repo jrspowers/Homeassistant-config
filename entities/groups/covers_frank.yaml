@@ -1,0 +1,10 @@
+################################################
+## Entities / Groups / Frank Covers
+################################################
+covers:
+  name: frank covers
+  entities:
+    - cover.frank_links
+    - cover.frank_rechts
+    - cover.jarne
+    - cover.jathe

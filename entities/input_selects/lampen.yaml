@@ -1,0 +1,8 @@
+################################################
+## Entities / Input Selects / Lampen
+################################################
+lampen:
+  name: lampen
+  options:
+    - hue centris spot 1
+    - hue centris spot 2

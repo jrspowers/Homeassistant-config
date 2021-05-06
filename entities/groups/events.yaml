@@ -1,0 +1,9 @@
+################################################
+## Entities / Groups / Events
+################################################
+events:
+  name: events
+  entities:
+    - input_boolean.jarne_thuis
+    - input_boolean.jarne_weg
+    - input_boolean.jarne_slaap

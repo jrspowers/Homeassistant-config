@@ -1,0 +1,9 @@
+################################################
+## Entities / Groups / Lights Plafonlamp
+################################################
+lights_plafonlamp:
+  name: lights plafonlamp
+  entities:
+    - light.philips_plafonlamp_1
+    - light.philips_plafonlamp_2
+

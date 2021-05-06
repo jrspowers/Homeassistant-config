@@ -1,0 +1,5 @@
+################################################
+## Integrations / automation
+##############################################
+automation: !include ../automations.yaml
+automation split: !include_dir_list ../automations

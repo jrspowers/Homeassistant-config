@@ -1,0 +1,53 @@
+################################################
+## Integrations / untility-meter
+################################################
+# Example configuration.yaml entry
+utility_meter:
+  energy_bedvoor_monthly:
+    source: sensor.stroommeter_bedvoor_consumption
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedvoor_daily:
+    source: sensor.stroommeter_bedvoor_consumption
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedvoor_weekly:
+    source: sensor.stroommeter_bedvoor_consumption
+    cycle: weekly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedvoor_yearly:
+    source: sensor.stroommeter_bedvoor_consumption
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_monthly:
+    source: sensor.stroommeter_bedachterachterachter_consumption
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_daily:
+    source: sensor.stroommeter_bedachterachterachter_consumption
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_weekly:
+    source: sensor.stroommeter_bedachterachterachter_consumption
+    cycle: weekly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_yearly:
+    source: sensor.stroommeter_bedachterachterachter_consumption
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak

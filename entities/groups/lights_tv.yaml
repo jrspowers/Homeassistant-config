@@ -1,0 +1,12 @@
+################################################
+## Entities / Groups / Lights Tv
+################################################
+lights_tv:
+  name: lights tv
+  entities:
+    - light.hue_centris_ceiling_1
+    - light.bollamp_1
+    - light.bollamp_2
+    - light.hue_play_gradient_lightstrip_1
+    - light.hue_play_1
+    - light.hue_play_2

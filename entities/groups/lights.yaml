@@ -1,0 +1,11 @@
+################################################
+## Entities / Groups / Lights
+################################################
+lights:
+  name: lights
+  entities:
+    - light.lidl_light_bar_1_2
+    - light.lidl_light_bar_2_2
+    - switch.ledjes_kast_nachtkast_1
+    - switch.ledjes_nachtkast_kast_1
+    - switch.led_muismad_1

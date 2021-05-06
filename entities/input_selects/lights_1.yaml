@@ -1,0 +1,12 @@
+################################################
+## Entities / Input Selects / Lights 1
+################################################
+lights_1:
+  name: Color Lights 1
+  options:
+    - ledstrip - plank
+    - ledstrip - deur
+    - ledstrip - kast
+    - lamp - kast
+    - lidl - lightbar - 1
+    - lidl - lightbar - 2

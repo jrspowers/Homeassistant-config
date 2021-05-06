@@ -1,0 +1,4 @@
+################################################
+## Integrations / F1
+##############################################
+group: !include_dir_merge_named ../entities/sensors/f1_sensor.yaml

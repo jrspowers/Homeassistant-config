@@ -1,0 +1,13 @@
+################################################
+## Entities / Groups / Media
+################################################
+media:
+  name: media 
+  entities:
+    - media_player.slaapkamer
+    - media_player.sync_box
+    - media_player.lg_webos_smart_tv_2
+    - media_player.sonos_beam
+    - media_player.sonos_ra
+    - media_player.spotify_jarne_roussard
+    - media_player.telenettvbox

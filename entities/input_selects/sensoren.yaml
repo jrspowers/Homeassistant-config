@@ -1,0 +1,9 @@
+################################################
+## Entities / Input Selects / Sensoren
+################################################
+sensoren:
+  name: sensor
+  options:
+    - brandstofprijzen
+    - speedtest
+    - deursensor - raamsensor

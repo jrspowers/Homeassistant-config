@@ -1,0 +1,34 @@
+################################################
+## Entities / Sensors / Buienradar  
+################################################
+platform: buienradar
+latitude: !secret buienradar_latitude
+longitude: !secret buienradar_longitude
+timeframe: 5
+monitored_conditions:
+  - stationname
+  - barometerfc
+  - barometerfcname
+  - conditioncode
+  - condition
+  - conditiondetailed
+  - conditionexact
+  - symbol
+  - feeltemperature
+  - humidity
+  - temperature
+  - groundtemperature
+  - windspeed
+  - windforce
+  - winddirection
+  - windazimuth
+  - pressure
+  - visibility
+  - windgust
+  - precipitation
+  - irradiance
+  - precipitation_forecast_average
+  - precipitation_forecast_total
+  - rainlast24hour
+  - rainlasthour
+scan_interval: 15

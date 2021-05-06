@@ -1,0 +1,18 @@
+################################################
+## Integrations / Webostv
+################################################
+
+wake_on_lan: # enables `wake_on_lan` domain
+
+webostv:
+  host: !secret lg_host_ipadres
+  #other settings
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret lg_mac_adres
+      broadcast_address: !secret lg_broadcast_address
+
+media_player:
+
+notify:

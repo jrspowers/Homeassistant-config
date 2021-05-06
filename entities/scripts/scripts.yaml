@@ -1,0 +1,9 @@
+################################################
+## Entities / scripts / Cleartext3  
+################################################
+cleartext3:
+  sequence:
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.text3
+        value: "No Message"

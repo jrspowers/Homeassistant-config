@@ -1,0 +1,7 @@
+################################################
+## Integrations / Logger / Ziggonext
+################################################
+logger:
+  default: warning
+  logs:
+    ziggonext: debug

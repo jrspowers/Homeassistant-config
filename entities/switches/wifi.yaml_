@@ -1,0 +1,3 @@
+platform: compal_wifi
+host: !secrets compal_wifi_host
+password: !secrets compal_wifi_pasword

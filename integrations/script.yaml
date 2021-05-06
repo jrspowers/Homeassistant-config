@@ -1,0 +1,5 @@
+################################################
+## Integrations / Script
+################################################
+script: !include ../scripts.yaml
+script split: !include_dir_named ../scripts

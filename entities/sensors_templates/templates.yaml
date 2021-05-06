@@ -1,0 +1,15 @@
+platform: template
+sensors:
+  date_formatted:
+    friendly_name: "Date formatted"
+    value_template: "{{ as_timestamp(states('sensor.date_time_iso')) | timestamp_custom('%d-%m-%Y') }}"
+    icon_template: mdi:calendar-clock
+  wall_tablet_battery_level:
+    friendly_name: "Wall tablet battery level"
+    unit_of_measurement: '%'
+    value_template: "{{ states.sensor.wall_tablet_device_info.attributes.batteryLevel }}"
+    device_class: battery
+  time_formatted:
+    friendly_name: "Date and time"
+    value_template: "{{ as_timestamp(states('sensor.date_time_iso')) | timestamp_custom('%H:%M    %a %d/%m ') }}"
+    icon_template: mdi:calendar-clock

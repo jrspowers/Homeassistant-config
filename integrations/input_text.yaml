@@ -1,0 +1,4 @@
+################################################
+## Integrations / Input Text
+##############################################
+input_text: !include_dir_merge_named ../entities/input_texts

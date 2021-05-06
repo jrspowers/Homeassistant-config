@@ -1,0 +1,34 @@
+media_player.slaapkamer:
+  entity-picture: /local/titles/apple-tv-logo-1.png
+light.wall_tablet_screen:
+  icon: mdi:tablet-dashboard
+sensor.limburg_net_gft:
+  entity_picture: /local/images/afval_gft_small.png
+  friendly_name: GFT
+sensor.limburg_net_restafval:
+  entity_picture: /local/images/afval_rest_small.png
+  friendly_name: Rest
+sensor.limburg_net_papier:
+  entity_picture: /local/images/afval_papier_small.png
+  friendly_name: Papier
+sensor.limburg_net_pmd:
+  entity_picture: /local/images/afval_pmd_small.png
+  friendly_name: PMD
+sensor.limburg_net_grofvuil:
+  entity_picture: /local/afvalbeheer/grofvuil-afval.png
+  friendly_name: Grofvuil
+sensor.limburg_net_textiel:
+  entity_picture: /local/afvalbeheer/textiel-afval.png
+  friendly_name: Textiel
+sensor.limburg_net_vandaag:
+  entity_picture: /local/images/afval_geen_large.png
+  friendly_name: Vandaag
+sensor.limburg_net_morgen:
+  entity_picture: /local/images/afval_geen_large.png
+  friendly_name: Morgen
+sensor.limburg_net_morgen:
+  friendly_name: Afvalinfo
+  dwains_dashboard_popup: 'dwains-dashboard/addons/popups/afvalwijzer.yaml'
+sensor.limburg_net_kerstboom:
+  entity_picture: /local/images/afval_kerstboom_small.png
+  friendly_name: kerstboom

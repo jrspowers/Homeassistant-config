@@ -1,0 +1,8 @@
+################################################
+## Entities / Input Selects / Post
+################################################
+post:
+  name: post
+  options:
+    - post - sensor
+    - post - notify

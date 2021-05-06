@@ -1,0 +1,10 @@
+################################################
+## Entities / Groups / Wled
+################################################
+wled:
+  name: wled
+  entities:
+    - light.wled_ledstring_jarne
+    - light.wled_ledstrip_tafel
+    - light.wled_ledstrip_sonos_beam
+    - light.wled_ledring

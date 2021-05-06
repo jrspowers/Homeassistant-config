@@ -1,0 +1,12 @@
+################################################
+## Entities / Input Selects / Temperatuur
+################################################
+temperatuur:
+  name: temperatuur 
+  options:
+    - temperatuur - jarne
+    - temperatuur - jathe
+    - temperatuur - papa
+    - temperatuur - badkamer
+    - temperatuur - living
+    - temperatuur - terras

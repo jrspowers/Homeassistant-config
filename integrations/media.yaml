@@ -1,0 +1,9 @@
+################################################
+## Integrations / Mediaplayer / Xsarius
+################################################
+# Example configuration.yaml entry
+media_player:
+  # Use the Python ADB implementation
+  - platform: androidtv
+    name: xsarius
+    host: !secret xsarius_host

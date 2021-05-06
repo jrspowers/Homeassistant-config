@@ -1,0 +1,4 @@
+################################################
+## Integrations / Group
+##############################################
+group: !include_dir_merge_named ../entities/groups

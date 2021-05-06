@@ -1,0 +1,8 @@
+################################################
+## Entities / Sensors / Time Date  
+################################################
+platform: time_date
+display_options:
+  - "time"
+  - "date"
+  - "date_time_iso"

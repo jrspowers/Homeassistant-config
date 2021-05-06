@@ -1,0 +1,9 @@
+################################################
+## Integrations / Speedtest
+################################################
+speedtestdotnet:
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+  scan_interval: "00:10:00"

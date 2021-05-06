@@ -1,0 +1,20 @@
+################################################
+## Entities / Groups / Alle Lights
+################################################
+alle_lights:
+  name: alle lights
+  entities:
+    - light.wled_ledstring_jarne
+    - light.wled_ledstrip_tafel
+    - light.wled_ledstrip_sonos_beam
+    - light.wled_ledring
+    - light.philips_ledstrip_deur_1
+    - light.philips_ledstrip_plank_1
+    - light.philips_ledstrip_kast_1
+    - light.philips_lamp_kast_1
+    - light.philips_lamp_nachtkast_1
+    - light.lidl_light_bar_1_2
+    - light.lidl_light_bar_2_2
+    - switch.ledjes_kast_nachtkast_1
+    - switch.ledjes_nachtkast_kast_1
+    - switch.led_muismad_1

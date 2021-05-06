@@ -1,0 +1,5 @@
+################################################
+## Entities / Input Booleans / Sonos Group On
+################################################
+sonos_group_on: 
+  name: Sonos group on

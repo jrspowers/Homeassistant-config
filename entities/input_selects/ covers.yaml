@@ -1,0 +1,9 @@
+################################################
+## Entities / Input Selects / Covers
+################################################
+covers:
+  name: cover
+  options:
+    - cover - jarne
+    - cover - jathe
+    - cover - papa

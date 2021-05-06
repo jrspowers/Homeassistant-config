@@ -1,0 +1,131 @@
+blueprint:
+  name: ZHA - Aqara Opple - Wireless Scene Switch 2 Button
+  description: 'Control anything using Aqara Opple six button remote'
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: Opple remote to use
+      selector:
+        device:
+          integration: zha
+          manufacturer: LUMI
+          model: lumi.remote.b286opcn01
+    
+    # ---------------------------- BUTTON TOP LEFT ----------------------------
+    button_top_left_single_press:
+      name: Top left button - Single press
+      description: Action to run on a single press of the top left button
+      default: []
+      selector:
+        action: {}
+
+    button_top_left_double_press:
+      name: Top left button - Double press
+      description: Action to run on a double press of the top left button
+      default: []
+      selector:
+        action: {}
+
+    button_top_left_triple_press:
+      name: Top left button - Triple press
+      description: Action to run on a triple press of the top left button
+      default: []
+      selector:
+        action: {}
+
+    button_top_left_hold_release:
+      name: Top left button - Hold release
+      description: Action to run when top left button was held in and released
+      default: []
+      selector:
+        action: {}
+
+    button_top_left_hold_in:
+      name: Top left button - Hold in
+      description: Action to run when top left button is held in
+      default: []
+      selector:
+        action: {}
+
+    # ---------------------------- BUTTON TOP RIGHT ----------------------------
+    button_top_right_single_press:
+      name: Top right button - Single press
+      description: Action to run on a single press of the top right button
+      default: []
+      selector:
+        action: {}
+
+    button_top_right_double_press:
+      name: Top right button - Double press
+      description: Action to run on a double press of the top right button
+      default: []
+      selector:
+        action: {}
+
+    button_top_right_triple_press:
+      name: Top right button - Triple press
+      description: Action to run on a triple press of the top right button
+      default: []
+      selector:
+        action: {}
+
+    button_top_right_hold_release:
+      name: Top right button - Hold release
+      description: Action to run when top right button was held in and released
+      default: []
+      selector:
+        action: {}
+
+    button_top_right_hold_in:
+      name: Top right button - Hold in
+      description: Action to run when top right button is held in
+      default: []
+      selector:
+        action: {}
+
+mode: restart
+max_exceeded: silent
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input 'remote'
+action:
+- variables:
+    event: '{{ trigger.event.data.command }}'
+- choose:
+
+  # ---------------------------- BUTTON TOP LEFT ----------------------------
+  - conditions:
+    - '{{ event == "1_single" }}'
+    sequence: !input 'button_top_left_single_press'
+  - conditions:
+    - '{{ event == "1_double" }}'
+    sequence: !input 'button_top_left_double_press'
+  - conditions:
+    - '{{ event == "1_triple" }}'
+    sequence: !input 'button_top_left_triple_press'
+  - conditions:
+    - '{{ event == "1_release" }}'
+    sequence: !input 'button_top_left_hold_release'
+  - conditions:
+    - '{{ event == "1_long press" }}'
+    sequence: !input 'button_top_left_hold_in'
+
+  # ---------------------------- BUTTON TOP RIGHT ----------------------------
+  - conditions:
+    - '{{ event == "2_single" }}'
+    sequence: !input 'button_top_right_single_press'
+  - conditions:
+    - '{{ event == "2_double" }}'
+    sequence: !input 'button_top_right_double_press'
+  - conditions:
+    - '{{ event == "2_triple" }}'
+    sequence: !input 'button_top_right_triple_press'
+  - conditions:
+    - '{{ event == "2_release" }}'
+    sequence: !input 'button_top_right_hold_release'
+  - conditions:
+    - '{{ event == "2_long press" }}'
+    sequence: !input 'button_top_right_hold_in'

@@ -1,0 +1,10 @@
+################################################
+## Entities / Input Selects / Find My
+################################################
+find_my:
+  name: find my
+  options:
+    - devices
+    - apparaten
+    - map
+    - alarm

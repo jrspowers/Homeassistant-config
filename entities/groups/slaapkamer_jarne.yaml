@@ -1,0 +1,8 @@
+################################################
+## Entities / Groups / Slaapkamer Jarne
+################################################
+slaapkamer_jarne:
+  name: Slaapkamer Jarne
+  entities:
+    - binary_sensor.deur_sensor_jarne
+    - binary_sensor.raam_sensor_jarne

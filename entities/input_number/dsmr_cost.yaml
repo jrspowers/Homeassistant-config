@@ -1,0 +1,15 @@
+################################################
+## Entities / Input Number / Energy Tarif
+################################################
+energy_supplier_price_low_tarif:
+  initial: 0.1057
+  min: 0.001
+  step: 0.001
+  max: 2
+  mode: box
+energy_supplier_price_normal_tarif:
+  initial: 0.1303
+  min: 0.001
+  step: 0.001
+  max: 2
+  mode: box

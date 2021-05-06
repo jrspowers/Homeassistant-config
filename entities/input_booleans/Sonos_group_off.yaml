@@ -1,0 +1,5 @@
+################################################
+## Entities / Input Booleans / Sonos Group Off
+################################################
+sonos_group_off:
+  name: Sonos group off

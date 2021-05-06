@@ -1,0 +1,14 @@
+################################################
+## Entities / Input Selects / Media Player
+################################################
+media_player:
+  name: Media
+  options:
+    - AppleTV - Slaapkamer
+    - Telenettvbox
+    - Sonos - Radio
+    - Sonos - Spotify
+    - Sync - Box
+    - LgTV
+  icon: mdi:exit-to-app
+  initial: AppleTV - Slaapkamer

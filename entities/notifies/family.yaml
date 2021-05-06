@@ -1,0 +1,8 @@
+################################################
+## Entities / Notifies / Family  
+################################################
+name: family
+platform: group
+services:
+  - service: mobile_app_iphone_van_jarne
+  - service: mobile_app_sm_a705fn

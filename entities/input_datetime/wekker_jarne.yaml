@@ -1,0 +1,11 @@
+################################################
+## Entities / Input Datetime / Wekker Jarne
+################################################
+---
+# https://www.home-assistant.io/components/input_datetime/
+#
+
+wekker_jarne:
+  name: Wekker Jarne iphone
+  has_date: false
+  has_time: true

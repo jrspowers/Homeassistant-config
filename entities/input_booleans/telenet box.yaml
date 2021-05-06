@@ -1,0 +1,5 @@
+################################################
+## Entities / Input Booleans / Telenet Box
+################################################
+telenet_box:
+  name: telenet box

@@ -1,0 +1,7 @@
+################################################
+## Integrations / Remote / hue sync box 
+##############################################
+remote:
+  - platform: hue_sync_box
+    name: Hue Sync Box
+    ip_address: !secret hue_sync_box_ip_address

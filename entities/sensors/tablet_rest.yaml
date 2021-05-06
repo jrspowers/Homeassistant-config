@@ -1,0 +1,12 @@
+################################################
+## Entities / Sensors / Wall Tablet  
+################################################
+platform: rest
+name: Wall Tablet Device Info
+resource: !secret tablet_info
+json_attributes:
+  - screenBrightness
+  - screenOn
+  - batteryLevel
+  - kioskMode
+value_template: "OK"

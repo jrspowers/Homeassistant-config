@@ -1,0 +1,17 @@
+sensors:
+  group.covers:
+  value_template: >
+    {% set total = 0 %}
+    {% if is_state('cover.jarne', 'open') %}
+      {% set total = total + 1 %}
+    {% endif %}
+    {% if is_state('cover.jathe', 'open') %}
+      {% set total = total + 1 %}
+    {% endif %}
+    {% if is_state('cover.frank_links', 'open') %}
+      {% set total = total + 1 %}
+    {% endif %}
+    {% if is_state('cover.frank_rechts', 'open') %}
+      {% set total = total + 1 %}
+    {% endif %}
+    {{total}}

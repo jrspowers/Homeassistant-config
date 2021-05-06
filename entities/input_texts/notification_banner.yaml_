@@ -1,0 +1,8 @@
+################################################
+## Entities / Input Text / Text3
+################################################
+input_text:
+  text3:
+    name: Text 3
+    pattern: '[a-fA-F0-9]*'
+    initial: No Message

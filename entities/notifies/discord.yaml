@@ -1,0 +1,6 @@
+################################################
+## Entities / Notifies / Discord  
+################################################
+notify:
+platform: discord
+token: !secret discord_token

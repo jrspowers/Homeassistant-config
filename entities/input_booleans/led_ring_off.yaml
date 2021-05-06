@@ -1,0 +1,5 @@
+################################################
+## Entities / Input Booleans / Ledring Off
+################################################
+led_ring_off:
+  name: ledring off
