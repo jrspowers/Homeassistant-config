@@ -370,7 +370,7 @@
     domain: alarm_control_panel
     entity_id: alarm_control_panel.alarmo
     type: disarm
-    code: '197320'
+    code: !secret alarm_code
   - service: notify.mobile_app_iphone_van_jarne
     data:
       title: jarne thuis
