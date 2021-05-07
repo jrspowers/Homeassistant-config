@@ -1,0 +1,19 @@
+homeassistant:
+  packages: !include_dir_named integrations
+  customize: !include customize.yaml
+# # Configure a default setup of Home Assistant (frontend, api, etc)
+# default_config:
+
+# # Text to speech
+# tts:
+#   - platform: google_translate
+
+# group: !include groups.yaml
+# automation: !include automations.yaml
+# script: !include scripts.yaml
+# scene: !include scenes.yaml
+
+browser_mod:
+  prefix: "browser_mod_"
+
+
