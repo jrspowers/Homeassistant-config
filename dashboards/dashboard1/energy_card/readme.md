@@ -1,4 +1,4 @@
-# Energy Card
+# Energy Card 🔌
 
 ## 🔌[press here to my Energy card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/energy_card/energy_card.yaml)
 
