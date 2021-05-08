@@ -1,0 +1,859 @@
+#################################################
+## Dashboards / Dashboard1 / Custom Select card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Custom Select card 
+#################################################
+type: vertical-stack
+cards:
+  - type: entities
+    style: |
+      ha-card {
+        background: none;
+        box-shadow: none;
+        }
+    entities:
+      - type: 'custom:paper-buttons-row'
+        buttons:
+          - entity: light.wled
+            name: false
+            icon: 'hass:string-lights'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                box-shadow: >
+                  {% if is_state('light.wled', 'on') %} 0px 4px 10px rgba(0, 0,
+                  0, 0.2), inset 0 0 5px rgba(0,0,255,.5) {% else %}
+                    0px 4px 10px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                border-radius: 50px
+                padding: 10px
+                color: |
+                  {% if is_state('light.wled', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            state_styles:
+              '#p1':
+                button:
+                  background: 'rgba(255,255,255,.5)'
+                  box-shadow: '0 0 15px rgba(255,255,255,.6)'
+            tap_action:
+              action: navigate
+              navigation_path: '#p1'
+            hold_action:
+              action: toggle
+          - entity: light.philips
+            name: false
+            icon: 'mdi:led-strip-variant'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                padding: 10px
+                box-shadow: |
+                  {% if is_state('light.philips', 'on') %}
+                   0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0,0,255,.5)
+                  {% else %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                color: |
+                  {% if is_state('light.philips', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            tap_action:
+              action: navigate
+              navigation_path: '#p2'
+            hold_action:
+              action: toggle
+          - entity: group.lights
+            name: false
+            icon: 'hass:lightbulb-group-outline'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                padding: 10px
+                box-shadow: |
+                  {% if is_state('group.lights', 'on') %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2),inset 0 0 10px rgba(0,0,255,.5)
+                  {% else %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                color: |
+                  {% if is_state('group.lights', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            tap_action:
+              action: navigate
+              navigation_path: '#p3'
+            hold_action:
+              action: toggle
+          - entity: group.covers
+            name: false
+            icon: 'hass:window-shutter'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                padding: 10px
+                box-shadow: |
+                  {% if is_state('group.covers', 'on') %}
+                   0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0,0,255,.5)
+                  {% else %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                color: |
+                  {% if is_state('group.covers', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            tap_action:
+              action: navigate
+              navigation_path: '#p4'
+            hold_action:
+              action: navigate
+              navigation_path: network
+          - entity: group.media
+            name: false
+            icon: 'hass:television'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                padding: 10px
+                box-shadow: |
+                  {% if is_state('group.media', 'on') %}
+                   0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0,0,255,.5)
+                  {% else %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                color: |
+                  {% if is_state('group.media', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            tap_action:
+              action: navigate
+              navigation_path: '#p5'
+            hold_action:
+              action: navigate
+              navigation_path: media
+          - entity: group.media
+            name: false
+            icon: 'hass:power-plug-outline'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                padding: 10px
+                box-shadow: |
+                  {% if is_state('group.media', 'on') %}
+                   0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0,0,255,.5)
+                  {% else %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                color: |
+                  {% if is_state('group.media', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            tap_action:
+              action: navigate
+              navigation_path: '#p6'
+            hold_action:
+              action: navigate
+              navigation_path: stroomverbruik-slaapkamer-jarne
+          - entity: group.media
+            name: false
+            icon: 'hass:power-plug-outline'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                padding: 10px
+                box-shadow: |
+                  {% if is_state('group.media', 'on') %}
+                   0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0,0,255,.5)
+                  {% else %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                color: |
+                  {% if is_state('group.media', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            tap_action:
+              action: navigate
+              navigation_path: '#p7'
+            hold_action:
+              action: navigate
+              navigation_path: stroomverbruik-slaapkamer-jarne
+          - entity: weather.openweathermap
+            name: false
+            icon: 'hass:cloud-outline'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                padding: 10px
+                box-shadow: |
+                  {% if is_state('group.media', 'on') %}
+                   0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0,0,255,.5)
+                  {% else %}
+                    0px 8px 15px rgba(0, 0, 0, 0.2);
+                  {% endif %}
+                color: |
+                  {% if is_state('group.media', 'on') %}
+                    white
+                  {% else %}
+                    rgba(0,0,0,.5)
+                  {% endif %}
+              icon:
+                '--mdc-icon-size': 20px
+            tap_action:
+              action: navigate
+              navigation_path: '#p8'
+            hold_action:
+              action: navigate
+              navigation_path: weer
+  - type: 'custom:vertical-stack-in-card'
+    style: |
+      ha-card {
+        border-radius: 40px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+        }
+    cards:
+      - type: 'custom:state-switch'
+        entity: hash
+        default: p1
+        transition: none
+        states:
+          p1:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              cards:
+                - type: 'custom:button-card'
+                  entity: light.wled_ledstring_jarne
+                  name: Ledstring
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.wled_ledstrip_tafel
+                  name: Ledstrip Tafel
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.wled_ledstrip_sonos_beam
+                  name: Sonos
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.wled_ledring
+                  name: Ledring
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.wled_ledstrip_kast
+                  name: Ledstrip Kast
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.wled_paneel_tafel
+                  name: Ledpaneel tafel
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: switch.elektrische_deken_1
+                  name: elektriesdeken
+                  icon: 'mdi:radiator'
+                  hold_action:
+                    action: more-info
+                  template:
+                    - fan
+                - type: 'custom:button-card'
+                  entity: media_player.telenettvbox
+                  name: TV Box
+                  show_state: true
+                  icon: 'hass:set-top-box'
+                  template:
+                    - tv
+              square: true
+          p4:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              square: true
+              cards:
+                - type: 'custom:button-card'
+                  entity: cover.jarne
+                  name: Jarne
+                  template:
+                    - covers
+                    - popup
+                - type: 'custom:button-card'
+                  entity: cover.jathe
+                  name: Jathe
+                  template:
+                    - covers
+                    - popup
+                - type: 'custom:button-card'
+                  entity: cover.frank_links
+                  name: Frank Links
+                  template:
+                    - covers
+                    - popup
+                - type: 'custom:button-card'
+                  entity: cover.frank_rechts
+                  name: Frank Rechts
+                  template:
+                    - covers
+                    - popup
+          p2:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              cards:
+                - type: 'custom:button-card'
+                  entity: light.philips_ledstrip_plank_1
+                  name: Ledstrip Plank
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.philips_ledstrip_deur_1
+                  name: Ledstrip Deur
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.philips_ledstrip_kast_1
+                  name: Ledstrip Kast
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.philips_lamp_kast_1
+                  name: Lamp Kast
+                  template:
+                    - light
+                    - popup
+                - type: 'custom:button-card'
+                  entity: light.philips_lamp_nachtkast_1
+                  name: Lamp nachtKast
+                  template:
+                    - light
+                    - popup
+              square: true
+          p3:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              square: true
+              cards:
+                - type: 'custom:button-card'
+                  template:
+                    - light
+                    - popup
+                  entity: light.lidl_light_bar_1_2
+                  name: Light Bar 1
+                - type: 'custom:button-card'
+                  template:
+                    - light
+                    - popup
+                  entity: light.lidl_light_bar_2_2
+                  name: Light Bar 2
+                - type: 'custom:button-card'
+                  template:
+                    - light
+                    - popup
+                  entity: switch.ledjes_kast_nachtkast_1
+                  name: Ledjes Kast
+                  icon: 'mdi:led-strip-variant'
+                - type: 'custom:button-card'
+                  tap_action:
+                    action: none
+                  template:
+                    - light
+                    - popup
+                  entity: switch.ledjes_nachtkast_kast_1
+                  name: ledjesnachtkast
+                  icon: 'mdi:led-strip-variant'
+                - type: 'custom:button-card'
+                  tap_action:
+                    action: none
+                  template:
+                    - light
+                    - popup
+                  entity: switch.led_muismad_1
+                  icon: 'mdi:led-strip-variant'
+                  name: Muismat
+          p5:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              cards:
+                - type: 'custom:button-card'
+                  entity: media_player.telenettvbox
+                  name: TV Box
+                  show_state: true
+                  icon: 'hass:set-top-box'
+                  template:
+                    - tv
+                - type: 'custom:button-card'
+                  entity: media_player.slaapkamer
+                  icon: 'mdi:apple'
+                  template:
+                    - tv
+                  show_state: true
+                - type: 'custom:button-card'
+                  entity: media_player.sync.box
+                  name: Sync Box
+                  show_state: true
+                  icon: 'hass:set-top-box'
+                  template:
+                    - tv
+                - type: 'custom:button-card'
+                  entity: media_player.lg_webos_smart_tv_2
+                  name: TV LG
+                  show_state: true
+                  icon: 'mdi:television'
+                  template:
+                    - tv
+                - type: 'custom:button-card'
+                  entity: media_player.sonos_beam
+                  name: Sonos Beam
+                  show_state: true
+                  icon: 'mdi:speaker'
+                  template:
+                    - tv
+                - type: 'custom:button-card'
+                  entity: media_player.sonos_ra
+                  name: Sonos Ra
+                  show_state: true
+                  icon: 'mdi:speaker'
+                  template:
+                    - tv
+          p6:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              cards:
+                - type: grid
+                  cards:
+                    - type: 'custom:mini-graph-card'
+                      style: |
+                        ha-card {
+                          background-color: var(--dwains-theme-primary);
+                        }
+                      entities:
+                        - entity: sensor.stroommeter_bedachter_power
+                          icon: 'mdi:bed-double-outline'
+                      name: Bedachter
+                      show_icon: true
+                      line_color: blue
+                      hours_to_show: 24
+                      hour24: true
+                      points_per_hour: 2
+                      decimals: 0
+                      show:
+                        graph: bar
+                        extrema: true
+                        average: true
+                    - type: 'custom:button-card'
+                      entity: switch.stroommeter_bedachterachterachter
+                      style: |
+                        ha-card {
+                          background-color: var(--dwains-theme-primary);
+                        }
+                      icon: 'mdi:door'
+                      lock:
+                        enabled: true
+                        exemptions: []
+                      size: null
+                      state:
+                        - color: 'rgb(0, 0, 255)'
+                          name: Bedvoor On
+                          value: 'on'
+                          icon: 'mdi:bed-double-outline'
+                        - color: 'rgb(255, 0, 0)'
+                          name: Bedvoor Off
+                          value: 'off'
+                          icon: 'mdi:bed-double'
+                  columns: 2
+                  square: false
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Vandaag
+                  open: false
+                  entities:
+                    - entity: sensor.stroommeter_bedachter_power
+                      icon: 'mdi:bed-double-outline'
+                      name: Huidig Verbuik Van Bedachter
+                    - entity: sensor.energy_bedachter_daily
+                      name: Energieverbruik Vandaag
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_yesterday_energy
+                      name: Energieverbruik Gisteren
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_daily_cost
+                      name: Energiekosten Vandaag
+                      icon: 'mdi:currency-eur'
+                      title: Bedachter
+                      show_header_toggle: false
+                      state_color: false
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Week
+                  open: false
+                  entities:
+                    - entity: sensor.energy_bedachter_weekly
+                      name: Energieverbruik Deze Week
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_last_week_energy
+                      name: Energieverbruik Vorig Week
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_weekly_cost
+                      name: Energiekosten Week
+                      icon: 'mdi:currency-eur'
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Maand
+                  open: false
+                  entities:
+                    - entity: sensor.energy_bedachter_monthly
+                      name: Energieverbruik Deze Maand
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_last_month_energy
+                      name: Energieverbruik Vorig Maand
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_monthly_cost
+                      name: Energiekosten Maand
+                      icon: 'mdi:currency-eur'
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Jaar
+                  open: false
+                  entities:
+                    - entity: sensor.energy_bedachter_yearly
+                      name: Energieverbruik Deze Jaar
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_last_year_energy
+                      name: Energieverbruik Vorig Jaar
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedachter_yearly_cost
+                      name: Energiekosten Jaar
+                      icon: 'mdi:currency-eur'
+              columns: 1
+              square: false
+          p7:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              cards:
+                - type: grid
+                  cards:
+                    - type: 'custom:mini-graph-card'
+                      style: |
+                        ha-card {
+                          background-color: var(--dwains-theme-primary);
+                        }
+                      entities:
+                        - entity: sensor.stroommeter_bedvoor_power
+                          icon: 'mdi:bed-double-outline'
+                      name: Bedvoor
+                      show_icon: true
+                      line_color: blue
+                      hours_to_show: 24
+                      hour24: true
+                      points_per_hour: 2
+                      decimals: 0
+                      show:
+                        graph: bar
+                        extrema: true
+                        average: true
+                    - type: 'custom:button-card'
+                      entity: switch.stroommeter_bedvoor
+                      style: |
+                        ha-card {
+                          background-color: var(--dwains-theme-primary);
+                        }
+                      icon: 'mdi:door'
+                      lock:
+                        enabled: true
+                        exemptions: []
+                      size: null
+                      state:
+                        - color: 'rgb(0, 0, 255)'
+                          name: Bedvoor On
+                          value: 'on'
+                          icon: 'mdi:bed-double-outline'
+                        - color: 'rgb(255, 0, 0)'
+                          name: Bedvoor Off
+                          value: 'off'
+                          icon: 'mdi:bed-double'
+                  columns: 2
+                  square: false
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Vandaag
+                  open: false
+                  entities:
+                    - entity: sensor.stroommeter_bedvoor_power
+                      icon: 'mdi:bed-double-outline'
+                      name: Huidig Verbuik Van Bedvoor
+                    - entity: sensor.energy_bedvoor_daily
+                      name: Energieverbruik Vandaag
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_yesterday_energy
+                      name: Energieverbruik Gisteren
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_daily_cost
+                      name: Energiekosten Vandaag
+                      icon: 'mdi:currency-eur'
+                      title: Bedachter
+                      show_header_toggle: false
+                      state_color: false
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Week
+                  open: false
+                  entities:
+                    - entity: sensor.energy_bedvoor_weekly
+                      name: Energieverbruik Deze Week
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_last_week_energy
+                      name: Energieverbruik Vorig Week
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_weekly_cost
+                      name: Energiekosten Week
+                      icon: 'mdi:currency-eur'
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Maand
+                  open: false
+                  entities:
+                    - entity: sensor.energy_bedvoor_monthly
+                      name: Energieverbruik Deze Maand
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_last_month_energy
+                      name: Energieverbruik Vorig Maand
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_monthly_cost
+                      name: Energiekosten Maand
+                      icon: 'mdi:currency-eur'
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Jaar
+                  open: false
+                  entities:
+                    - entity: sensor.energy_bedvoor_yearly
+                      name: Energieverbruik Deze Jaar
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_last_year_energy
+                      name: Energieverbruik Vorig Jaar
+                      icon: 'mdi:counter'
+                    - entity: sensor.energy_bedvoor_yearly_cost
+                      name: Energiekosten Jaar
+                      icon: 'mdi:currency-eur'
+              columns: 1
+              square: false
+          p8:
+            type: 'custom:mod-card'
+            style: |
+              ha-card {
+                background: none;
+                padding: 10px;
+                margin-top: none;
+                }
+            card:
+              type: grid
+              cards:
+                - type: weather-forecast
+                  entity: weather.openweathermap
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Weer Voorspeling
+                  open: open
+                  entities:
+                    - entity: sensor.openweathermap_weather
+                      name: Weer Voorspeling
+                      icon: 'mdi:weather-cloudy-alert'
+                    - entity: sensor.season
+                    - entity: sun.sun
+                    - entity: sensor.moon
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Weer Statistieken
+                  open: false
+                  entities:
+                    - entity: sensor.openweathermap_feels_like_temperature
+                      name: Voelt Aan Als
+                      icon: 'mdi:thermometer-alert'
+                    - entity: sensor.openweathermap_forecast_temperature
+                      name: Max Temperature
+                      icon: 'mdi:thermometer-chevron-up'
+                    - entity: sensor.openweathermap_forecast_temperature_low
+                      name: Min Temperature
+                      icon: 'mdi:thermometer-chevron-down'
+                    - entity: sensor.openweathermap_forecast_precipitation
+                      name: Neerslag
+                      icon: 'mdi:weather-rainy'
+                    - entity: sensor.openweathermap_wind_speed
+                      name: Wind Snelheid
+                      icon: 'mdi:windsock'
+                    - entity: sensor.openweathermap_uv_index
+                      name: UV-INDEX
+                      icon: 'mdi:weather-sunny'
+                    - entity: sensor.openweathermap_weather_code
+              columns: 1
+              square: false
+        square: false
+  - type: 'custom:mod-card'
+    style: |
+      ha-card {
+        background: var( --ha-card-background, var(--card-background-color, white) );
+        padding: 7px;
+        border-radius: 25px;
+        margin: 0 auto;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+        }
+    card:
+      type: grid
+      cards:
+        - type: 'custom:button-card'
+          entity_picture: /local/person/jarne-memoji.png
+          entity: input_boolean.jarne_thuis
+          show_entity_picture: true
+          state:
+            - value: 'on'
+              name: Jarne home
+              styles:
+                name:
+                  - color: '#008000'
+              entity_picture: /local/person/jarne-memoji.png
+            - value: 'off'
+              name: Jarne Weg
+              styles:
+                name:
+                  - color: '#EF4F1A'
+              entity_picture: /local/person/jarnem-memoji.png
+        - type: 'custom:button-card'
+          entity_picture: /local/person/jarne-memoji.png
+          entity: input_boolean.jarne_weg
+          show_entity_picture: true
+          state:
+            - value: 'on'
+              name: Jarne weg
+              styles:
+                name:
+                  - color: '#008000'
+              entity_picture: /local/person/jarnem-memoji.png
+            - value: 'off'
+              name: Weg
+              styles:
+                name:
+                  - color: '#EF4F1A'
+              entity_picture: /local/person/jarnem-memoji.png
+        - type: 'custom:button-card'
+          entity_picture: /local/person/jarne-memoji.png
+          entity: input_boolean.jarne_slaap
+          show_entity_picture: true
+          state:
+            - value: 'on'
+              name: Jarne slaapt
+              styles:
+                name:
+                  - color: '#008000'
+              entity_picture: /local/person/jarnezzz-memoji.png
+            - value: 'off'
+              name: Slaap
+              styles:
+                name:
+                  - color: '#EF4F1A'
+              entity_picture: /local/person/jarnemzzz-memoji.png
+      square: false

@@ -1,0 +1,799 @@
+#################################################
+## Dashboards / Dashboard1 / Select Info card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Select Info card 
+#################################################
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:account-supervisor-circle-outline'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.find_my
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.find_my
+            option: apparaten
+        state:
+          - value: apparaten
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:devices'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.find_my
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.find_my
+            option: devices
+        state:
+          - value: devices
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:map'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.find_my
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.find_my
+            option: map
+        state:
+          - value: map
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:door-closed'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.find_my
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.find_my
+            option: alarm
+        state:
+          - value: alarm
+            styles:
+              card:
+                - border: 5px solid blue
+  - type: conditional
+    conditions:
+      - entity: input_select.find_my
+        state: apparaten
+    card:
+      type: 'custom:vertical-stack-in-card'
+      cards:
+        - type: markdown
+          content: '<ha-icon icon="mdi:account-multiple"></ha-icon> Family'
+          style: |
+            ha-card { 
+              #background: rgba(0,0,0,0);
+              font-size: 20px;
+            }
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              entity: person.jarne
+              aspect_ratio: 4/4
+              show_name: false
+              show_icon: false
+              styles:
+                card:
+                  - padding: 4%
+                  - background-image: url("/local/person/jarne-memoji.png")
+                  - background-size: 99%
+                  - background-repeat: no-repeat
+                  - background-position: top center
+                custom_fields:
+                  location:
+                    - text-transform: capitalize
+                    - position: absolute
+                    - left: 45%
+                    - top: 85%
+                    - color: >-
+                        [[[ if (states["device_tracker.iphone_van_jarne"].state
+                        == "not_home") return "#e45649"; else return "#50A14F";
+                        ]]]
+                  battery:
+                    - align-self: right
+                    - position: absolute
+                    - right: 4%
+                    - top: 4%
+                    - color: >-
+                        [[[ if
+                        (states["sensor.iphone_van_jarne_battery_state_2"].state
+                        <= 30) return "#e45649"; if
+                        (states["sensor.iphone_van_jarne_battery_state_2"].state
+                        <= 50) return "#ffa229"; else return "#50A14F"; ]]]
+                  sd:
+                    - align-self: right
+                    - position: absolute
+                    - right: 65%
+                    - top: 75%
+                    - color: >-
+                        [[[ if
+                        (states["sensor.lenovo_tb_x606f_batterijniveau"].state
+                        <= 30) return "#e45649"; if
+                        (states["sensor.lenovo_tb_x606f_batterijniveau"].state
+                        <= 50) return "#ffa229"; else return "#50A14F"; ]]]
+                  ram:
+                    - align-self: right
+                    - position: absolute
+                    - right: 65%
+                    - top: 4%
+                    - color: >-
+                        [[[ if
+                        (states["sensor.apple_watch_van_jarne_battery_state"].state
+                        <= 30) return "#e45649"; if
+                        (states["sensor.apple_watch_van_jarne_battery_state"].state
+                        <= 50) return "#ffa229"; else return "#50A14F"; ]]]
+              custom_fields:
+                location: |
+                  [[[
+                    if (states["device_tracker.iphone_van_jarne"].state == "not_home")
+                      return `<ha-icon
+                        icon="mdi:home-export-outline"
+                        style="width: 22px; height: 22px;">
+                        </ha-icon>`
+                    else 
+                      return `<ha-icon
+                        icon="mdi:home"
+                        style="width: 22px; height: 22px;">
+                        </ha-icon>`
+                  ]]]
+                battery: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery"
+                      style="width: 20px; height: 20px;"></ha-icon
+                      <span>${states['sensor.iphone_van_jarne_battery_state_2'].state}%</span>`
+                  ]]]
+                sd: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:tablet"
+                      style="width: 20px; height: 20px;"></ha-icon
+                      <span>${states['sensor.lenovo_tb_x606f_batterijniveau'].state}%</span>`
+                  ]]]
+                ram: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:watch"
+                      style="width: 20px; height: 20px;"></ha-icon
+                      <span>${states['sensor.apple_watch_van_jarne_battery_state'].state}%</span>`
+                  ]]]
+            - type: 'custom:button-card'
+              entity: person.jathe
+              aspect_ratio: 4/4
+              name: Jarne
+              show_name: false
+              show_icon: false
+              styles:
+                card:
+                  - padding: 4%
+                  - background-image: url("/local/person/jathe-memoji.png")
+                  - background-size: 99%
+                  - background-repeat: no-repeat
+                  - background-position: top center
+                custom_fields:
+                  location:
+                    - text-transform: capitalize
+                    - position: absolute
+                    - left: 45%
+                    - top: 85%
+                    - color: >-
+                        [[[ if (states["device_tracker.iphone_van_jathe"].state
+                        == "not_home") return "#e45649"; else return "#50A14F";
+                        ]]]
+                  battery:
+                    - align-self: right
+                    - position: absolute
+                    - right: 4%
+                    - top: 4%
+                    - color: >-
+                        [[[ if
+                        (states["sensor.iphone_van_jathe_battery_state_2"].state
+                        <= 30) return "#e45649"; if
+                        (states["sensor.iphone_van_jathe_battery_state_2"].state
+                        <= 50) return "#ffa229"; else return "#50A14F"; ]]]
+                  sd:
+                    - align-self: right
+                    - position: absolute
+                    - right: 65%
+                    - top: 4%
+                    - color: >-
+                        [[[ if
+                        (states["sensor.macbook_air_van_jathe_battery_state"].state
+                        <= 30) return "#e45649"; if
+                        (states["sensor.macbook_air_van_jathe_battery_state"].state
+                        <= 50) return "#ffa229"; else return "#50A14F"; ]]]
+              custom_fields:
+                location: |
+                  [[[
+                    if (states["device_tracker.iphone_van_jathe"].state == "not_home")
+                      return `<ha-icon
+                        icon="mdi:home-export-outline"
+                        style="width: 22px; height: 22px;">
+                        </ha-icon>`
+                    else 
+                      return `<ha-icon
+                        icon="mdi:home"
+                        style="width: 22px; height: 22px;">
+                        </ha-icon>`
+                  ]]]
+                battery: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery"
+                      style="width: 20px; height: 20px;"></ha-icon
+                      <span>${states['sensor.iphone_van_jathe_battery_state_2'].state}%</span>`
+                  ]]]
+                sd: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:laptop"
+                      style="width: 20px; height: 20px;"></ha-icon
+                      <span>${states['sensor.macbook_air_van_jathe_battery_state'].state}%</span>`
+                  ]]]
+        - type: grid
+          cards:
+            - type: 'custom:button-card'
+              entity: sensor.iphone_van_jarne_battery_level
+              entity_picture: /local/person/iphone11-black.png
+              show_entity_picture: true
+              aspect_ratio: 1/1
+              name: iPhone Jarne
+              styles:
+                card:
+                  - background-color: null
+                  - border-radius: 10%
+                  - padding: 7%
+                  - color: ivory
+                  - font-size: 10px
+                  - text-shadow: 0px 0px 5px black
+                  - text-transform: capitalize
+                grid:
+                  - grid-template-areas: '"i temp" "n n" "cpu cpu" "ram ram" "sd sd"'
+                  - grid-template-columns: 1fr 1fr
+                  - grid-template-rows: 1fr min-content min-content min-content min-content
+                name:
+                  - font-weight: bold
+                  - font-size: 15px
+                  - color: white
+                  - align-self: middle
+                  - justify-self: start
+                  - padding-bottom: 6px
+                img_cell:
+                  - justify-content: start
+                  - align-items: start
+                  - margin: none
+                icon:
+                  - width: 70%
+                custom_fields:
+                  temp:
+                    - align-self: start
+                    - justify-self: end
+                    - font-size: 13px
+                  cpu:
+                    - padding-bottom: 2px
+                    - align-self: middle
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if (states['device_tracker.iphone_van_jarne'].state
+                        !== 'home') return "red"; ]]] 
+                  ram:
+                    - padding-bottom: 2px
+                    - align-self: middle
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if (states["sensor.iphone_van_jarne_sim_1"].state
+                        !== 'Proximus') return "red"; ]]] 
+                  sd:
+                    - align-self: middle
+                    - padding-bottom: 2px
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if
+                        (states['sensor.iphone_van_jarne_battery_state'].state
+                        !== 'ac') return "red"; ]]]          
+              custom_fields:
+                temp: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery-high"
+                      style="width: 22px; height: 22px; color: white;">
+                       </ha-icon><span>${entity.state}%</span>`
+                  ]]]
+                cpu: |
+                  [[[
+                   return `<ha-icon
+                     icon="ios:house"
+                     style="width: 20px; height: 20px; color: white;">
+                      </ha-icon><span>  locatie: <span style="color: var(--text-color-sensor);">${states['device_tracker.iphone_van_jarne'].state}</span></span>`
+                  ]]]
+                ram: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:access-point-network"
+                      style="width: 20px; height: 20px; color: white;">
+                       </ha-icon><span>  WiFi: <span style="color: var(--text-color-sensor);">${states['sensor.iphone_van_jarne_sim_1'].state}</span></span>`
+                  ]]]
+                sd: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery-charging"
+                      style="width: 20px; height: 20px; color: white;">
+                       </ha-icon><span>  Charging: <span style="color: var(--text-color-sensor);">${states['sensor.iphone_van_jarne_battery_state'].state}</span></span>`
+                  ]]]
+            - type: 'custom:button-card'
+              entity: sensor.apple_watch_van_jarne_battery_state
+              entity_picture: /local/person/apple-watch-black-1.png
+              show_entity_picture: true
+              aspect_ratio: 1/1
+              name: Applewatch Jarne
+              styles:
+                card:
+                  - background-color: null
+                  - border-radius: 10%
+                  - padding: 7%
+                  - color: ivory
+                  - font-size: 10px
+                  - text-shadow: 0px 0px 5px black
+                  - text-transform: capitalize
+                grid:
+                  - grid-template-areas: '"i temp" "n n" "cpu cpu" "ram ram" "sd sd"'
+                  - grid-template-columns: 1fr 1fr
+                  - grid-template-rows: 1fr min-content min-content min-content min-content
+                name:
+                  - font-weight: bold
+                  - font-size: 15px
+                  - color: white
+                  - align-self: middle
+                  - justify-self: start
+                  - padding-bottom: 6px
+                img_cell:
+                  - justify-content: start
+                  - align-items: start
+                  - margin: none
+                icon:
+                  - width: 70%
+                custom_fields:
+                  temp:
+                    - align-self: start
+                    - justify-self: end
+                    - font-size: 13px
+                  cpu:
+                    - padding-bottom: 2px
+                    - align-self: middle
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if (states['device_tracker.iphone_van_jarne'].state
+                        !== 'home') return "red"; ]]] 
+                  ram:
+                    - padding-bottom: 2px
+                    - align-self: middle
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if (states["sensor.iphone_van_jarne_sim_1"].state
+                        !== 'Proximus') return "red"; ]]] 
+                  sd:
+                    - align-self: middle
+                    - padding-bottom: 2px
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if
+                        (states['sensor.apple_watch_van_jarne_battery_state'].state
+                        !== 'ac') return "red"; ]]]          
+              custom_fields:
+                temp: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery-high"
+                      style="width: 22px; height: 22px; color: white;">
+                       </ha-icon><span>${entity.state}%</span>`
+                  ]]]
+                cpu: |
+                  [[[
+                   return `<ha-icon
+                     icon="ios:house"
+                     style="width: 20px; height: 20px; color: white;">
+                      </ha-icon><span>  locatie: <span style="color: var(--text-color-sensor);">${states['device_tracker.iphone_van_jarne'].state}</span></span>`
+                  ]]]
+                ram: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:access-point-network"
+                      style="width: 20px; height: 20px; color: white;">
+                       </ha-icon><span>  WiFi: <span style="color: var(--text-color-sensor);">${states['sensor.iphone_van_jarne_sim_1'].state}</span></span>`
+                  ]]]
+                sd: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery-charging"
+                      style="width: 20px; height: 20px; color: white;">
+                       </ha-icon><span>  Charging: <span style="color: var(--text-color-sensor);">${states['sensor.iphone_van_jarne_battery_state_2'].state}</span></span>`
+                  ]]]
+            - type: 'custom:button-card'
+              entity: sensor.iphone_van_jathe_battery_level
+              entity_picture: /local/person/iphone11-green.png
+              show_entity_picture: true
+              aspect_ratio: 1/1
+              name: iPhone Jathe
+              styles:
+                card:
+                  - background-color: null
+                  - border-radius: 10%
+                  - padding: 7%
+                  - color: ivory
+                  - font-size: 10px
+                  - text-shadow: 0px 0px 5px black
+                  - text-transform: capitalize
+                grid:
+                  - grid-template-areas: '"i temp" "n n" "cpu cpu" "ram ram" "sd sd"'
+                  - grid-template-columns: 1fr 1fr
+                  - grid-template-rows: 1fr min-content min-content min-content min-content
+                name:
+                  - font-weight: bold
+                  - font-size: 15px
+                  - color: white
+                  - align-self: middle
+                  - justify-self: start
+                  - padding-bottom: 6px
+                img_cell:
+                  - justify-content: start
+                  - align-items: start
+                  - margin: none
+                icon:
+                  - width: 70%
+                custom_fields:
+                  temp:
+                    - align-self: start
+                    - justify-self: end
+                    - font-size: 13px
+                  cpu:
+                    - padding-bottom: 2px
+                    - align-self: middle
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if (states['device_tracker.iphone_van_jathe'].state
+                        !== 'home') return "red"; ]]] 
+                  ram:
+                    - padding-bottom: 2px
+                    - align-self: middle
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if (states["sensor.iphone_van_jathe_sim_1"].state
+                        !== 'Proximus') return "red"; ]]] 
+                  sd:
+                    - align-self: middle
+                    - padding-bottom: 2px
+                    - justify-self: start
+                    - font-size: 11px
+                    - '--text-color-sensor': >-
+                        [[[ if
+                        (states['sensor.iphone_van_jathe_battery_state'].state
+                        !== 'ac') return "red"; ]]]          
+              custom_fields:
+                temp: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery-high"
+                      style="width: 22px; height: 22px; color: white;">
+                       </ha-icon><span>${entity.state}%</span>`
+                  ]]]
+                cpu: |
+                  [[[
+                   return `<ha-icon
+                     icon="ios:house"
+                     style="width: 20px; height: 20px; color: white;">
+                      </ha-icon><span>  locatie: <span style="color: var(--text-color-sensor);">${states['device_tracker.iphone_van_jathe'].state}</span></span>`
+                  ]]]
+                ram: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:access-point-network"
+                      style="width: 20px; height: 20px; color: white;">
+                       </ha-icon><span>  WiFi: <span style="color: var(--text-color-sensor);">${states['sensor.iphone_van_jathe_sim_1'].state}</span></span>`
+                  ]]]
+                sd: |
+                  [[[
+                    return `<ha-icon
+                      icon="mdi:battery-charging"
+                      style="width: 20px; height: 20px; color: white;">
+                       </ha-icon><span>  Charging: <span style="color: var(--text-color-sensor);">${states['sensor.iphone_van_jathe_battery_state'].state}</span></span>`
+                  ]]]
+  - type: conditional
+    conditions:
+      - entity: input_select.find_my
+        state: devices
+    card:
+      type: entities
+      title: Devices
+      style: |
+        ha-card {
+          border-radius: 10px;
+          padding-bottom: 10px;
+          background-color: var(--dwains-theme-primary)
+        }
+        :host {
+          --paper-item-icon-color: var(--dwains-theme-accent) !important;
+        }
+        .card-header {
+          padding: 5px 16px;
+          font-size: 15px;
+          font-weight: 700 !important;
+        }
+        .card-content div {
+            margin: 0 !important;
+        }
+        #states {
+          padding-top: 0px !important;
+          padding-bottom: 0px !important;
+        }
+        .secondary {
+          color: darkgray !important;
+          margin-left: 2px !important;
+        }
+      entities:
+        - entity: person.jarne
+          secondary_info: last-updated
+        - entity: device_tracker.iphone_van_jarne
+          secondary_info: last-updated
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Meer devices
+          entities:
+            - entity_picture: /local/person/jarne-memoji.png
+              entity: sensor.iphone_van_jarne_battery_state_2
+              secondary_info: last-updated
+            - entity: sensor.iphone_van_jarne_battery_state
+              secondary_info: last-updated
+            - entity: sensor.apple_watch_van_jarne_battery_state
+              secondary_info: last-updated
+              icon: 'mdi:watch'
+            - entity: device_tracker.ipad_van_jarne
+              secondary_info: last-updated
+            - entity: sensor.lenovo_tb_x606f_batterijniveau
+              name: Lenovo state
+              secondary_info: last-updated
+            - entity: sensor.lenovo_tb_x606f_batterij_laadstatus
+              name: Lenovo aadstatus
+              secondary_info: last-updated
+        - type: divider
+          style:
+            pandding-top: 10px;
+            height: 1px
+            width: 100%
+            margin-left: auto
+            margin-right: auto
+            background: var(--primary-text-color)
+          entities: null
+        - entity: person.jathe
+          secondary_info: last-updated
+        - entity: device_tracker.iphone_van_jathe
+          secondary_info: last-updated
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Meer devices
+          entities:
+            - entity: sensor.iphone_van_jathe_battery_state
+              secondary_info: last-updated
+            - entity: sensor.iphone_van_jathe_battery_state_2
+              secondary_info: last-updated
+            - entity: sensor.macbook_air_van_jathe_battery_state
+              secondary_info: last-updated
+        - type: divider
+          style:
+            pandding-top: 10px;
+            height: 1px
+            width: 100%
+            margin-left: auto
+            margin-right: auto
+            background: var(--primary-text-color)
+  - type: conditional
+    conditions:
+      - entity: input_select.find_my
+        state: map
+    card:
+      type: map
+      entities:
+        - entity: person.jarne
+        - entity: person.jathe
+      dark_mode: true
+      hours_to_show: 24
+      default_zoom: 12
+  - type: conditional
+    conditions:
+      - entity: input_select.find_my
+        state: alarm
+    card:
+      type: vertical-stack
+      cards:
+        - type: grid
+          style: |
+            ha-card {
+              margin-top: 10px;
+             }
+          columns: 2
+          square: false
+          cards:
+            - type: 'custom:button-card'
+              style: |
+                ha-card:hover {
+                  transform: scale(1.05);
+                  }
+              tap_action:
+                action: toggle
+              entity: binary_sensor.deur_sensor_jarne
+              layout: icon_name_state2nd
+              show_state: true
+              show_name: true
+              name: Deur Jarne
+              styles:
+                card:
+                  - box-shadow: '0px 8px 15px rgba(0, 0, 0, 0.2)'
+              state:
+                - color: 'rgb(255, 0, 0)'
+                  name: deur open
+                  value: 'on'
+                  icon: 'mdi:door-open'
+                - color: 'rgb(0, 0, 255)'
+                  name: deur dicht
+                  value: 'off'
+                  icon: 'mdi:door-closed'
+                  card:
+                    - background: 'rgba(255,255,255,.3)'
+                    - border-radius: 30px
+                  state:
+                    - color: blue
+                    - animation: blink 2s infinite
+            - type: 'custom:button-card'
+              style: |
+                ha-card:hover {
+                  transform: scale(1.05);
+                  }
+              tap_action:
+                action: toggle
+              entity: binary_sensor.raam_sensor_jarne_1
+              layout: icon_name_state2nd
+              show_state: true
+              styles:
+                card:
+                  - box-shadow: '0px 8px 15px rgba(0, 0, 0, 0.2)'
+              state:
+                - color: 'rgb(255, 0, 0)'
+                  name: raam open
+                  value: 'on'
+                  icon: 'mdi:window-open-variant'
+                - color: 'rgb(0, 0, 255)'
+                  name: raam dicht
+                  value: 'off'
+                  icon: 'mdi:window-closed-variant'
+                  state:
+                    - color: blue
+                    - animation: blink 2s infinite
+        - type: 'custom:mod-card'
+          style: |
+            ha-card {
+              background: var( --ha-card-background, var(--card-background-color, white) );
+              padding: 10px;
+              border-radius: 30px;
+            }
+          card:
+            type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: alarm_control_panel.alarmo
+                    secondary_info: last-changed
+                    name: Alarm
+                style: |
+                  ha-card {
+                    background: rgba(255,255,255,.1);
+                    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                  }
+                show_header_toggle: true
+                state_color: true
+        - type: grid
+          cards:
+            - type: entity
+              entity: sensor.temperature_kamer_jarne_1
+              name: Jarne
+              style: |
+                ha-card {
+                  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                  background: rgba(255,255,255,.1);
+                }
+            - type: entity
+              entity: sensor.temperature_kamer_jathe_1
+              name: Jathe
+              style: |
+                ha-card {
+                  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                  background: rgba(255,255,255,.1);
+                }
+            - type: entity
+              entity: sensor.temperature_kamer_papa_1
+              name: Papa
+              style: |
+                ha-card {
+                  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                  background: rgba(255,255,255,.1);
+                }
+            - type: entity
+              entity: sensor.temperature_terras_1
+              name: Terras
+              style: |
+                ha-card {
+                  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                  background: rgba(255,255,255,.1);
+                }
+            - type: entity
+              entity: sensor.temperature_living_1
+              name: Living
+              style: |
+                ha-card {
+                  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                  background: rgba(255,255,255,.1);
+                }
+            - type: entity
+              entity: sensor.temperature_badkamer_1
+              name: Badkamer
+              style: |
+                ha-card {
+                  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+                  background: rgba(255,255,255,.1);
+                }
+          square: false

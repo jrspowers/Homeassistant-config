@@ -1,0 +1,632 @@
+################################################
+## Dashboards / Dashboard1 / Energy card 
+################################################
+
+####################################################
+## Dashboards / Dashboard1 / Energy card / Today
+####################################################
+type: grid
+cards:
+  - type: 'custom:button-card'
+    color_type: label-card
+    color: '#1c1c1e'
+    name: Achter het bed
+  - type: grid
+    cards:
+      - type: 'custom:mini-graph-card'
+        style: |
+          ha-card {
+            background-color: var(--dwains-theme-primary);
+          }
+        entities:
+          - entity: sensor.stroommeter_bedachter_power
+            icon: 'mdi:bed-double-outline'
+        name: Bedachter
+        font_size_header: 12
+        font_size: 80
+        line_width: 2
+        show_icon: true
+        line_color: blue
+        hours_to_show: 24
+        hour24: true
+        points_per_hour: 2
+        decimals: 0
+        show:
+          graph: bar
+          extrema: true
+          average: true
+      - type: 'custom:button-card'
+        entity: switch.stroommeter_bedachterachterachter
+        style: |
+          ha-card {
+            background-color: var(--dwains-theme-primary);
+          }
+        icon: 'mdi:bed-double-outline'
+        lock:
+          enabled: true
+          duration: 10
+          unlock: hold
+        aspect_ratio: 1/1
+        size: 40%
+        state:
+          - color: 'rgb(0, 0, 255)'
+            name: Bedachter On
+            value: 'on'
+            icon: 'mdi:bed-double-outline'
+          - color: 'rgb(255, 0, 0)'
+            name: Bedachter Off
+            value: 'off'
+            icon: 'mdi:bed-double'
+    columns: 2
+    square: false
+  - type: 'custom:fold-entity-row'
+    head:
+      type: section
+      label: Vandaag
+    open: true
+    entities:
+      - entity: sensor.stroommeter_bedachter_power
+        icon: 'mdi:bed-double-outline'
+        name: Huidig verbuik van bedachter
+      - entity: sensor.energy_bedachter_daily
+        name: Energieverbruik vandaag
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_yesterday_energy
+        name: Energieverbruik gisteren
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_daily_cost
+        name: Energiekosten vandaag
+        icon: 'mdi:currency-eur'
+columns: 1
+square: false
+######################################################
+## Dashboards / Dashboard1 / Energy card / Full card
+######################################################
+type: grid
+cards:
+  - type: 'custom:button-card'
+    color_type: label-card
+    color: '#1c1c1e'
+    name: Achter het bed
+  - type: grid
+    cards:
+      - type: 'custom:mini-graph-card'
+        style: |
+          ha-card {
+            background-color: var(--dwains-theme-primary);
+          }
+        entities:
+          - entity: sensor.stroommeter_bedachter_power
+            icon: 'mdi:bed-double-outline'
+        name: Bedachter
+        font_size_header: 12
+        font_size: 80
+        line_width: 2
+        show_icon: true
+        line_color: blue
+        hours_to_show: 24
+        hour24: true
+        points_per_hour: 2
+        decimals: 0
+        show:
+          graph: bar
+          extrema: true
+          average: true
+      - type: 'custom:button-card'
+        entity: switch.stroommeter_bedachterachterachter
+        style: |
+          ha-card {
+            background-color: var(--dwains-theme-primary);
+          }
+        icon: 'mdi:bed-double-outline'
+        lock:
+          enabled: true
+          duration: 10
+          unlock: hold
+        aspect_ratio: 1/1
+        size: 40%
+        state:
+          - color: 'rgb(0, 0, 255)'
+            name: Bedachter On
+            value: 'on'
+            icon: 'mdi:bed-double-outline'
+          - color: 'rgb(255, 0, 0)'
+            name: Bedachter Off
+            value: 'off'
+            icon: 'mdi:bed-double'
+    columns: 2
+    square: false
+  - type: 'custom:fold-entity-row'
+    head:
+      type: section
+      label: Vandaag
+    open: true
+    entities:
+      - entity: sensor.stroommeter_bedachter_power
+        icon: 'mdi:bed-double-outline'
+        name: Huidig verbuik van bedachter
+      - entity: sensor.energy_bedachter_daily
+        name: Energieverbruik vandaag
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_yesterday_energy
+        name: Energieverbruik gisteren
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_daily_cost
+        name: Energiekosten vandaag
+        icon: 'mdi:currency-eur'
+  - type: 'custom:fold-entity-row'
+    head:
+      type: section
+      label: Week
+    open: false
+    entities:
+      - entity: sensor.energy_bedachter_weekly
+        name: Energieverbruik deze week
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_last_week_energy
+        name: Energieverbruik vorig week
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_weekly_cost
+        name: Energiekosten week
+        icon: 'mdi:currency-eur'
+  - type: 'custom:fold-entity-row'
+    head:
+      type: section
+      label: Maand
+    open: false
+    entities:
+      - entity: sensor.energy_bedachter_monthly
+        name: Energieverbruik deze maand
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_last_month_energy
+        name: Energieverbruik vorig maand
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_monthly_cost
+        name: Energiekosten maand
+        icon: 'mdi:currency-eur'
+  - type: 'custom:fold-entity-row'
+    head:
+      type: section
+      label: Jaar
+    open: false
+    entities:
+      - entity: sensor.energy_bedachter_yearly
+        name: Energieverbruik deze jaar
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_last_year_energy
+        name: Energieverbruik vorig jaar
+        icon: 'mdi:counter'
+      - entity: sensor.energy_bedachter_yearly_cost
+        name: Energiekosten jaar
+        icon: 'mdi:currency-eur'
+columns: 1
+square: false
+###############################################################
+## Dashboards / Dashboard1 / Energy card / Select Energy card 
+###############################################################
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:bed-double-outline'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+            - position: relative
+            - height: 40px
+            - width: 80px
+        entity: input_select.energy
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.energy
+            option: stroommeter - bedachter
+        state:
+          - value: stroommeter - bedachter
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:bed-double'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+            - position: relative
+            - height: 40px
+            - width: 80px
+            - left: 110px
+        entity: input_select.energy
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.energy
+            option: stroommeter - bedvoor
+        state:
+          - value: stroommeter - bedvoor
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:server'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+            - position: absolute
+            - height: 40px
+            - width: 80px
+            - left: 210px
+        entity: input_select.energy
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.energy
+            option: stroommeter - serverkast
+        state:
+          - value: stroommeter - serverkast
+            styles:
+              card:
+                - border: 5px solid blue
+  - type: conditional
+    conditions:
+      - entity: input_select.energy
+        state: stroommeter - bedachter
+    card:
+      type: grid
+      cards:
+        - type: grid
+          cards:
+            - type: 'custom:mini-graph-card'
+              style: |
+                ha-card {
+                  background-color: var(--dwains-theme-primary);
+                }
+              entities:
+                - entity: sensor.stroommeter_bedachter_power
+                  icon: 'mdi:bed-double-outline'
+              name: Bedachter
+              show_icon: true
+              line_color: blue
+              hours_to_show: 24
+              hour24: true
+              points_per_hour: 2
+              decimals: 0
+              show:
+                graph: bar
+                extrema: true
+                average: true
+            - type: 'custom:button-card'
+              entity: switch.stroommeter_bedachterachterachter
+              style: |
+                ha-card {
+                  background-color: var(--dwains-theme-primary);
+                }
+              icon: 'mdi:door'
+              lock:
+                enabled: true
+                exemptions: []
+              size: null
+              state:
+                - color: 'rgb(0, 0, 255)'
+                  name: Bedachter On
+                  value: 'on'
+                  icon: 'mdi:bed-double-outline'
+                - color: 'rgb(255, 0, 0)'
+                  name: Bedachter Off
+                  value: 'off'
+                  icon: 'mdi:bed-double'
+          columns: 2
+          square: false
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Vandaag
+          open: true
+          entities:
+            - entity: sensor.stroommeter_bedachter_power
+              icon: 'mdi:bed-double-outline'
+              name: Huidig verbuik van bedachter
+            - entity: sensor.energy_bedachter_daily
+              name: Energieverbruik vandaag
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_yesterday_energy
+              name: Energieverbruik gisteren
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_daily_cost
+              name: Energiekosten vandaag
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Week
+          open: false
+          entities:
+            - entity: sensor.energy_bedachter_weekly
+              name: Energieverbruik deze week
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_last_week_energy
+              name: Energieverbruik vorig week
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_weekly_cost
+              name: Energiekosten week
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Maand
+          open: false
+          entities:
+            - entity: sensor.energy_bedachter_monthly
+              name: Energieverbruik deze maand
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_last_month_energy
+              name: Energieverbruik vorig maand
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_monthly_cost
+              name: Energiekosten maand
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Jaar
+          open: false
+          entities:
+            - entity: sensor.energy_bedachter_yearly
+              name: Energieverbruik deze jaar
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_last_year_energy
+              name: Energieverbruik vorig jaar
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_yearly_cost
+              name: Energiekosten jaar
+              icon: 'mdi:currency-eur'
+      columns: 1
+      square: false
+  - type: conditional
+    conditions:
+      - entity: input_select.energy
+        state: stroommeter - bedvoor
+    card:
+      type: grid
+      cards:
+        - type: grid
+          cards:
+            - type: 'custom:mini-graph-card'
+              style: |
+                ha-card {
+                  background-color: var(--dwains-theme-primary);
+                }
+              entities:
+                - entity: sensor.stroommeter_bedvoor_power
+                  icon: 'mdi:bed-double-outline'
+              name: Bedvoor
+              show_icon: true
+              line_color: blue
+              hours_to_show: 24
+              hour24: true
+              points_per_hour: 2
+              decimals: 0
+              show:
+                graph: bar
+                extrema: true
+                average: true
+            - type: 'custom:button-card'
+              entity: switch.stroommeter_bedvoor
+              style: |
+                ha-card {
+                  background-color: var(--dwains-theme-primary);
+                }
+              icon: 'mdi:door'
+              lock:
+                enabled: true
+                exemptions: []
+              size: null
+              state:
+                - color: 'rgb(0, 0, 255)'
+                  name: Bedvoor On
+                  value: 'on'
+                  icon: 'mdi:bed-double-outline'
+                - color: 'rgb(255, 0, 0)'
+                  name: Bedvoor Off
+                  value: 'off'
+                  icon: 'mdi:bed-double'
+          columns: 2
+          square: false
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Vandaag
+          open: true
+          entities:
+            - entity: sensor.stroommeter_bedvoor_power
+              icon: 'mdi:bed-double-outline'
+              name: Huidig verbuik van bedvoor
+            - entity: sensor.energy_bedvoor_daily
+              name: Energieverbruik vandaag
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedvoor_yesterday_energy
+              name: Energieverbruik gisteren
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedvoor_daily_cost
+              name: Energiekosten vandaag
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Week
+          open: false
+          entities:
+            - entity: sensor.energy_bedvoor_weekly
+              name: Energieverbruik deze week
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedvoor_last_week_energy
+              name: Energieverbruik vorig week
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedvoor_weekly_cost
+              name: Energiekosten week
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Maand
+          open: false
+          entities:
+            - entity: sensor.energy_bedachter_monthly
+              name: Energieverbruik deze maand
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_last_month_energy
+              name: Energieverbruik vorig maand
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedachter_monthly_cost
+              name: Energiekosten maand
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Jaar
+          open: false
+          entities:
+            - entity: sensor.energy_bedvoor_yearly
+              name: Energieverbruik deze jaar
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedvoor_last_year_energy
+              name: Energieverbruik vorig jaar
+              icon: 'mdi:counter'
+            - entity: sensor.energy_bedvoor_yearly_cost
+              name: Energiekosten jaar
+              icon: 'mdi:currency-eur'
+      columns: 1
+      square: false
+  - type: conditional
+    conditions:
+      - entity: input_select.energy
+        state: stroommeter - serverkast
+    card:
+      type: grid
+      cards:
+        - type: grid
+          cards:
+            - type: 'custom:mini-graph-card'
+              style: |
+                ha-card {
+                  background-color: var(--dwains-theme-primary);
+                }
+              entities:
+                - entity: sensor.stroommeter_stroommeter_serverkast_power
+                  icon: 'mdi:server'
+              name: Serverkast
+              show_icon: true
+              line_color: blue
+              hours_to_show: 24
+              hour24: true
+              points_per_hour: 2
+              decimals: 0
+              show:
+                graph: bar
+                extrema: true
+                average: true
+            - type: 'custom:button-card'
+              entity: switch.stroommeter_stroommeter_serverkast
+              style: |
+                ha-card {
+                  background-color: var(--dwains-theme-primary);
+                }
+              icon: 'mdi:server'
+              lock:
+                enabled: true
+                exemptions: []
+              size: null
+              state:
+                - color: 'rgb(0, 0, 255)'
+                  name: Serverkast On
+                  value: 'on'
+                  icon: 'mdi:server'
+                - color: 'rgb(255, 0, 0)'
+                  name: Serverkast Off
+                  value: 'off'
+                  icon: 'mdi:server-off'
+          columns: 2
+          square: false
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Vandaag
+          open: true
+          entities:
+            - entity: sensor.stroommeter_stroommeter_serverkast_power
+              icon: 'mdi:server'
+              name: Huidig verbuik van serverkast
+            - entity: sensor.energy_serverkast_daily
+              name: Energieverbruik vandaag
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_yesterday_energy
+              name: Energieverbruik gisteren
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_daily_cost
+              name: Energiekosten vandaag
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Week
+          open: false
+          entities:
+            - entity: sensor.energy_serverkast_weekly
+              name: Energieverbruik deze week
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_last_week_energy
+              name: Energieverbruik vorig week
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_weekly_cost
+              name: Energiekosten week
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Maand
+          open: false
+          entities:
+            - entity: sensor.energy_serverkast_monthly
+              name: Energieverbruik deze maand
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_last_month_energy
+              name: Energieverbruik vorig maand
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_monthly_cost
+              name: Energiekosten maand
+              icon: 'mdi:currency-eur'
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Jaar
+          open: false
+          entities:
+            - entity: sensor.energy_serverkast_yearly
+              name: Energieverbruik deze jaar
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_last_year_energy
+              name: Energieverbruik vorig jaar
+              icon: 'mdi:counter'
+            - entity: sensor.energy_serverkast_yearly_cost
+              name: Energiekosten jaar
+              icon: 'mdi:currency-eur'
+      columns: 1
+      square: false

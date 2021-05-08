@@ -1,0 +1,223 @@
+#################################################
+## Dashboards / Dashboard1 / Notifications card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Notifications card 
+#################################################
+type: 'custom:mod-card'
+style: |
+  ha-card {
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 30px;
+    background: var( --ha-card-background, var(--card-background-color, white) );
+  }
+card:
+  type: vertical-stack
+  cards:
+    - type: grid
+      columns: 2
+      cards:
+        - type: 'custom:button-card'
+          tap_action:
+            action: none
+          entity: sensor.time
+          show_icon: false
+          show_name: false
+          show_state: true
+          styles:
+            card:
+              - background: 'rgba(255,255,255,.1)'
+              - box-shadow: '0px 8px 15px rgba(0, 0, 0, 0.2)'
+            state:
+              - font-size: 40px
+              - font-family: DM Sans
+        - type: 'custom:vertical-stack-in-card'
+          style: |
+            ha-card {
+              text-align: center;
+              background: rgba(255,255,255,.1);
+              box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+              font-family: DM Sans;
+              background: rgba(255,255,255,.1);
+              line-height: .125em;
+              padding-top: 4px;
+              }
+          cards:
+            - type: markdown
+              style: |
+                ha-card {
+                  background: none;
+                  padding: 0px;
+                  font-size: 30px;
+                  box-shadow: none;
+                }
+              content: weer
+            - type: markdown
+              style: |
+                ha-card {
+                background: none;
+                padding: 0px;
+                font-size: 20px;
+                }
+              content: |-
+                {{
+                  state_attr('weather.openweathermap', 'temperature') }}°c
+      square: false
+    - type: vertical-stack
+      cards:
+        - type: conditional
+          conditions:
+            - entity: sensor.temperature_kamer_jarne_1
+              state: 'on'
+          card:
+            type: entities
+            entities:
+              - entity: sensor.temperature_kamer_jarne_1
+                name: Washer
+                secondary_info:
+                  entity: sensor.temperature_kamer_jarne_1
+                  prefix: 'Time Remaining: '
+                  postfix: ' minutes'
+            style: |
+              ha-card {
+                background: rgba(255,255,255,.1);
+                box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+              }
+        - type: conditional
+          conditions:
+            - entity: sensor.temperature_kamer_jarne_1
+              state: 'on'
+          card:
+            type: entities
+            entities:
+              - entity: sensor.temperature_kamer_jarne_1
+                name: Dryer
+                secondary_info:
+                  entity: sensor.temperature_kamer_jarne_1
+                  prefix: 'Time Remaining: '
+                  postfix: ' minutes'
+            style: |
+              ha-card {
+                background: rgba(255,255,255,.1);
+                box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+              }
+    - type: grid
+      cards:
+        - type: markdown
+          content: |-
+            content: |Tijd
+            {% if now().hour  < 5 %} Goede nacht {{'\U0001F634'}}
+                  {% elif now().hour < 12 %} Goedemorgen {{'\u2615\uFE0F'}}
+                  {% elif now().hour < 18 %} Goedenmiddag {{'\U0001F44B\U0001F3FB'}}
+                  {% else %} Goedenavond {{'\U0001F44B\U0001F3FB'}}{% endif %}
+            {{ state_attr('calendar.jarneroussard_gmail_com', 'message') }}
+            {{ state_attr('calendar.jarneroussard_gmail_com', 'start_time') }}
+            {{ state_attr('calendar.jarneroussard_gmail_com', 'end_time') }}
+        - type: markdown
+          content: |-
+            content: |Afval
+            Afval Is MG: {{ states.sensor.limburg_net_morgen.state }}
+            Afval Is VD: {{ states.sensor.limburg_net_vandaag.state }}
+        - type: markdown
+          content: >-
+            content: |Notify
+
+            {% if "on" in states('input_boolean.jarne_thuis') %} <li>Jarne Thuis
+            </li> {% endif %}
+             {% if "on" in states('input_boolean.jarne_weg') %} <li>Jarne Weg </li> {% endif %} 
+             {% if "on" in states('input_boolean.jarne_slaap') %} <li>Jarne Slapen </li> {%endif %}
+             {% if "armed_away" in states('alarm_control_panel.alarmo') %} <li>Alarm Aan</li> {%endif %}
+             {% if "disarmed" in states('alarm_control_panel.alarmo') %} <li>Alarm Uit</li> {%endif %}  
+        - type: markdown
+          content: >-
+            content: |Sensor
+
+            {% if "on" in states('binary_sensor.deur_sensor_jarne') %} <li>Door
+            Open</li> {% endif %}
+
+            {% if "off" in states('binary_sensor.deur_sensor_jarne') %} <li>Door
+            Closed</li>{% endif %}
+
+            {% if "on" in states('binary_sensor.raam_sensor_jarne') %} <li>Raam
+            Open</li> {% endif %}
+
+            {% if "off" in states('binary_sensor.raam_sensor_jarne') %} <li>Raam
+            Closed</li>{% endif %}
+
+            {% if "open" in states('group.covers') %} <li>Rolluiken Open</li> {%
+            endif %} 
+
+            {% if "closed" in states('group.covers')%} <li>Rolluiken
+            Closed</li>{% endif %}
+        - type: markdown
+          content: >-
+            content: |Update
+
+            {% if states('sensor.hacs') | float > 0 %} <li>Er Is
+            {{states('sensor.hacs')}} HACS Update</li> {% endif %} 
+
+            {% if "on" in states('binary_sensor.updater''') %} <li>nieuw
+            verise</li> {% endif %}
+
+            {{ state_attr('binary_sensor.updater','newest_version') }}
+        - type: markdown
+          content: >-
+            content: |Sonos
+
+            {% if "playing" in states('media_player.sonos_beam') %} <li>Sonos
+            Beam actief</li> {% endif %} 
+
+            {% if "playing" in states('media_player.sonos_ra') %} <li>Sonos RA
+            actief</li> {% endif %}
+
+            {{ state_attr('media_player.sonos_beam', 'source') }}
+        - type: markdown
+          content: >-
+            content: |Syncbox
+
+            {% if "playing" in states('media_player.sync_box') %}
+            <li>Syncbox-On</li> {% endif %} 
+
+            {% if "off" in states('media_player.sync_box') %}
+            <li>Syncbox-Off</li> {% endif %}
+
+            {{ state_attr('media_player.sync_box', 'mode') }}
+
+            {{ state_attr('media_player.sync_box', 'sound_mode') }}
+
+            {{ state_attr('media_player.sync_box', 'source') }}
+        - type: markdown
+          content: >-
+            content: |TVbox
+
+            {% if "playing" in states('media_player.telenettvbox') %}
+            <li>TVbox-On</li> {% endif %} 
+
+            {% if "pause" in states('media_player.telenettvbox') %}
+            <li>TVbox-Off</li> {% endif %}
+
+            {{ state_attr('media_player.telenettvbox', 'source') }}
+
+            {{ state_attr('media_player.telenettvbox', 'media_title') }}
+
+            {{ state_attr('media_player.telenettvbox', 'media_content_type') }}
+        - type: markdown
+          content: >-
+            content: |AppleTV
+
+            {% if "playing" in states('media_player.slaapkamer') %}
+            <li>AppleTV-On</li> {% endif %} 
+
+            {% if "pause" in states('media_player.slaapkamer') %}
+            <li>AppleTV-Off</li> {% endif %}
+
+            {{ state_attr('media_player.slaapkamer', 'app_name') }}
+
+            {{ state_attr('media_player.slaapkamer', 'media_title') }}
+
+            {{ state_attr('media_player.slaapkamer', 'media_content_type') }}
+      square: false
+      columns: 3

@@ -1,0 +1,919 @@
+#########################################
+## Dashboards / Dashboard1 / Media card 
+#########################################
+
+
+
+############################################################
+## Dashboards / Dashboard1 / Media card / Select Media card
+############################################################
+type: vertical-stack
+cards:
+  - type: 'custom:mod-card'
+    style: |
+      ha-card {
+        background: var( --ha-card-background, var(--card-background-color, white) );
+        padding: 10px;
+        border-radius: 30px;
+       }
+    card:
+      type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: card
+              icon: 'mdi:apple'
+              show_name: false
+              name: Slaapkamer
+              styles:
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              entity: input_select.media_player
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.media_player
+                  option: AppleTV - Slaapkamer
+              state:
+                - value: AppleTV - Slaapkamer
+                  styles:
+                    card:
+                      - border: 5px solid blue
+            - type: 'custom:button-card'
+              color_type: card
+              entity: input_select.media_player
+              show_name: false
+              icon: 'mdi:set-top-box'
+              name: TVBox
+              styles:
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              show_entity_picture: true
+              entity_picture: /local/covers/large/telenettvbox.png
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.media_player
+                  option: Telenettvbox
+              state:
+                - value: Telenettvbox
+                  styles:
+                    card:
+                      - border: 5px solid blue
+            - type: 'custom:button-card'
+              color_type: card
+              icon: 'mdi:set-top-box'
+              show_name: false
+              name: Syncbox
+              entity: input_select.media_player
+              styles:
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              show_entity_picture: true
+              entity_picture: /local/covers/hue-sync-box-logo.jpg
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.media_player
+                  option: Sync - Box
+              state:
+                - value: Sync - Box
+                  styles:
+                    card:
+                      - border: 5px solid blue
+            - type: 'custom:button-card'
+              color_type: card
+              icon: 'mdi:set-top-box'
+              show_name: false
+              name: LgTV
+              entity: input_select.media_player
+              styles:
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              show_entity_picture: true
+              entity_picture: /local/covers/lg-logo-1.png
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.media_player
+                  option: LgTV
+              state:
+                - value: LgTV
+                  styles:
+                    card:
+                      - border: 5px solid blue
+            - type: 'custom:button-card'
+              color_type: card
+              icon: 'mdi:speaker'
+              show_name: false
+              entity: input_select.media_player
+              name: Radio
+              styles:
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              show_entity_picture: true
+              entity_picture: /local/covers/sonos-radio.svg
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.media_player
+                  option: Sonos - Radio
+              state:
+                - value: Sonos - Radio
+                  styles:
+                    card:
+                      - border: 5px solid blue
+            - type: 'custom:button-card'
+              color_type: card
+              icon: 'mdi:speaker'
+              show_name: false
+              entity: input_select.media_player
+              name: Spotify
+              styles:
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              show_entity_picture: true
+              entity_picture: /local/covers/spotify-logo-black-1.png
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.media_player
+                  option: Sonos - Spotify
+              state:
+                - value: Sonos - Spotify
+                  styles:
+                    card:
+                      - border: 5px solid blue
+        - type: conditional
+          conditions:
+            - entity: input_select.media_player
+              state: AppleTV - Slaapkamer
+          card:
+            type: vertical-stack
+            cards:
+              - type: picture
+                image: /local/covers/large/apple-tv-4k-logo-1.png
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: markdown
+                content: >-
+                  content: |AppleTV
+
+                  {% if "playing" in states('media_player.slaapkamer') %}
+                  <li>AppleTV-On</li> {% endif %} 
+
+                  {% if "pause" in states('media_player.slaapkamer') %}
+                  <li>AppleTV-Off</li> {% endif %}
+
+                  {{ state_attr('media_player.slaapkamer', 'app_name') }}
+
+                  {{ state_attr('media_player.slaapkamer', 'media_title') }}
+
+                  {{ state_attr('media_player.slaapkamer', 'media_content_type')
+                  }}
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:power'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - wakeup
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:arrow-up-thick'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - up
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:exit-to-app'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - top_menu
+                    hold_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - home_hold
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:arrow-left-thick'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - left
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:image-filter-center-focus'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - select
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:arrow-right-thick'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - right
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:undo'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - menu
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:arrow-down-thick'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - down
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: 'mdi:play-pause'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: call-service
+                      service: media_player.media_play_pause
+                      service_data:
+                        entity_id: media_player.slaapkamer
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:button-card'
+                    color_type: card
+                    entity: script.avr_command_volume_down
+                    icon: 'mdi:volume-minus'
+                    name: ' '
+                    aspect_ratio: 1.5/1
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - volume_down
+                  - type: 'custom:button-card'
+                    color_type: card
+                    icon: null
+                    name: Hold
+                    aspect_ratio: 1.5/1
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                        - font-size: 40px
+                        - font-weight: bold
+                    tap_action:
+                      action: call-service
+                      service: remote.send_command
+                      service_data:
+                        entity_id: remote.slaapkamer
+                        command:
+                          - home_hold
+                  - type: 'custom:button-card'
+                    color_type: card
+                    entity: script.avr_command_volume_up
+                    icon: 'mdi:volume-plus'
+                    aspect_ratio: 1.5/1
+                    name: ' '
+                    styles:
+                      card:
+                        - background-color: var(--card-background-color)
+                        - color: var(--primary-foreground-color)
+                    tap_action:
+                      action: toggle
+              - type: horizontal-stack
+                cards:
+                  - type: 'custom:mini-media-player'
+                    entity: media_player.slaapkamer
+                    hide:
+                      name: true
+                      icon: true
+                      info: true
+                      power: true
+                      source: true
+                      sound_mode: true
+                      controls: true
+                      play_pause: true
+                      play_stop: true
+                      progress: true
+        - type: conditional
+          conditions:
+            - entity: input_select.media_player
+              state: Sonos - Radio
+          card:
+            type: vertical-stack
+            cards:
+              - type: picture
+                image: /local/covers/sonos-radio-logo.png
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: picture
+                image: /local/covers/sonos.png
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: 'custom:mini-media-player'
+                entity: media_player.sonos_beam
+                artwork: full-cover-fit
+                hide:
+                  power: true
+                  icon: true
+                  source: true
+                  icon_state: true
+                  power_color: true
+                  group: true
+                  volume: true
+                  controls: false
+                speaker_group:
+                  platform: sonos
+                  show_group_count: true
+                  entities:
+                    - entity_id: media_player.sonos_beam
+                      name: Sonos beam
+                    - entity_id: media_player.sonos_ra
+                      name: Sonos rechtachter
+              - type: 'custom:mini-media-player'
+                entity: media_player.sonos_beam
+                hide:
+                  power: true
+                  icon: true
+                  info: true
+                  source: true
+                  group: true
+                  icon_state: true
+                  power_color: true
+                  volume: true
+                  shuffle: true
+                  controls: true
+                  name: true
+                idle_view: when_idle
+                info: scroll
+                shortcuts:
+                  align_text: center
+                  columns: 3
+                  column_height: 100
+                  buttons:
+                    - cover: /local/covers/radio_3.png
+                    - id: TV
+                      cover: /local/covers/tv.png
+                      type: source
+                    - id: 538
+                      cover: /local/covers/large/radio538.gif
+                      type: source
+                    - id: 538 Non Stop
+                      cover: /local/covers/large/538nonstop.gif
+                      type: source
+                    - id: 538 Party
+                      cover: /local/covers/large/538party.gif
+                      type: source
+                    - id: 538 Top 50
+                      cover: /local/covers/large/538top50.gif
+                      type: source
+                    - id: SLAM!
+                      cover: /local/covers/large/slamfm.gif
+                      type: source
+                    - id: NPO FunX
+                      cover: /local/covers/large/Funx1.png
+                      type: source
+                    - id: QMusic Belgium
+                      cover: /local/covers/large/q-music_be.gif
+                      type: source
+                    - id: QMusic Non-stop
+                      cover: /local/covers/large/q-musicnonstop.gif
+                      type: source
+                    - id: Q-Maximum Hits
+                      cover: /local/covers/large/qmusicmaximum.gif
+                      type: source
+                    - id: MNM
+                      cover: /local/covers/large/mnm.gif
+                      type: source
+                    - id: VRT MNM Hits
+                      cover: /local/covers/large/mnmhits.gif
+                      type: source
+                    - id: TOPradio
+                      cover: /local/covers/large/topradio.gif
+                      type: source
+                    - id: Studio Brussel
+                      cover: /local/covers/large/stubru.gif
+                      type: source
+        - type: conditional
+          conditions:
+            - entity: input_select.media_player
+              state: Telenettvbox
+          card:
+            type: vertical-stack
+            cards:
+              - type: picture
+                image: /local/covers/large/telenet-logo.png
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: markdown
+                content: >-
+                  content: |TVbox
+
+                  {% if "playing" in states('media_player.telenettvbox') %}
+                  <li>TVbox-On</li> {% endif %} 
+
+                  {% if "pause" in states('media_player.telenettvbox') %}
+                  <li>TVbox-Off</li> {% endif %}
+
+                  {{ state_attr('media_player.telenettvbox', 'source') }}
+
+                  {{ state_attr('media_player.telenettvbox', 'media_title') }}
+
+                  {{ state_attr('media_player.telenettvbox',
+                  'media_content_type') }}
+
+                  {{ state_attr('media_player.telenettvbox', 'play_mode') }}
+              - type: 'custom:mini-media-player'
+                entity: media_player.telenettvbox
+                artwork: full-cover-fit
+                name: Telenet TV Box
+                shortcuts:
+                  columns: 3
+                  column_height: 75
+                  align_text: center
+                  buttons:
+                    - icon: 'mdi:power'
+                      name: TV Box on
+                      type: service
+                      id: media_player.turn_on
+                      data:
+                        entity_id: media_player.telenettvbox
+                    - icon: 'mdi:power'
+                      name: TV Box off
+                      type: service
+                      id: media_player.turn_off
+                      data:
+                        entity_id: media_player.telenettvbox
+                    - cover: /local/covers/large/telenettvbox.png
+                    - icon: 'mdi:rewind'
+                      type: service
+                      id: ziggonext.rewind
+                      data:
+                        entity_id: media_player.telenettvbox
+                    - icon: 'mdi:play-pause'
+                      type: service
+                      id: media_player.media_play_pause
+                      data:
+                        entity_id: media_player.telenettvbox
+                    - icon: 'mdi:fast-forward'
+                      type: service
+                      id: ziggonext.fast_forward
+                      data:
+                        entity_id: media_player.telenttvbox
+                    - id: één HD
+                      cover: /local/covers/large/een.png
+                      type: source
+                    - id: vtm HD
+                      cover: /local/covers/large/vtm.png
+                      type: source
+                    - id: VTM 2
+                      cover: /local/covers/large/vtm2.png
+                      type: source
+                    - id: VTM 3
+                      cover: /local/covers/large/vtm3.jpg
+                      type: source
+                    - id: VTM 4
+                      cover: /local/covers/large/vtm4.png
+                      type: source
+                    - id: VTM GOLD
+                      cover: /local/covers/large/vtmgold.png
+                      type: source
+                    - id: Play4
+                      cover: /local/covers/large/play4.png
+                      type: source
+                    - id: Play5
+                      cover: /local/covers/large/play5.png
+                      type: source
+                    - id: Play6
+                      cover: /local/covers/large/Play6.png
+                      type: source
+                    - id: Play7
+                      cover: /local/covers/large/play7.png
+                      type: source
+                    - id: TV Limburg
+                      cover: /local/covers/large/tvlimburg.png
+                      type: source
+                    - id: Eurosport HD
+                      cover: /local/covers/large/europsort1.png
+                      type: source
+                    - id: Eurosport 2 HD
+                      cover: /local/covers/large/Europsort2.png
+                      type: source
+                    - id: Q-music
+                      cover: /local/covers/large/q-music_be.gif
+                      type: source
+                    - id: Q-music
+                      cover: /local/covers/large/q-music_be.gif
+                      type: source
+        - type: conditional
+          conditions:
+            - entity: input_select.media_player
+              state: Sync - Box
+          card:
+            type: vertical-stack
+            cards:
+              - type: picture
+                image: /local/covers/hue-sync-box-logo.svg
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: markdown
+                content: >-
+                  content: |Syncbox
+
+                  {% if "playing" in states('media_player.sync_box') %}
+                  <li>Syncbox-On</li> {% endif %} 
+
+                  {% if "off" in states('media_player.sync_box') %}
+                  <li>Syncbox-Off</li> {% endif %}
+
+                  {{ state_attr('media_player.sync_box', 'mode') }}
+
+                  {{ state_attr('media_player.sync_box', 'sound_mode') }}
+
+                  {{ state_attr('media_player.sync_box', 'source') }}
+              - type: 'custom:mini-media-player'
+                entity: media_player.sync_box
+                artwork: full-cover-fit
+                name: Philips Hue Sync Box
+                shortcuts:
+                  columns: 3
+                  column_height: 75
+                  align_text: center
+                  buttons:
+                    - icon: 'mdi:power'
+                      name: Sync Box on
+                      type: service
+                      id: media_player.turn_on
+                      data:
+                        entity_id: media_player.sync_box
+                    - icon: 'mdi:power'
+                      name: Sync Box off
+                      type: service
+                      id: media_player.turn_off
+                      data:
+                        entity_id: media_player.sync_box
+                    - name: Telenet Box
+                      type: source
+                      id: Telenet Box
+                    - icon: 'mdi:rewind'
+                      type: service
+                      id: media_player.media_previous_track
+                      data:
+                        entity_id: media_player.sync_box
+                    - icon: 'mdi:play-pause'
+                      type: service
+                      id: media_player.media_play_pause
+                      data:
+                        entity_id: media_player.sync_box
+                    - icon: 'mdi:fast-forward'
+                      type: service
+                      id: media_player.media_next_track
+                      data:
+                        entity_id: media_player.sync_box
+                    - name: Apple TV
+                      type: source
+                      id: Apple TV
+                    - icon: 'mdi:brightness-5'
+                      type: service
+                      id: media_player.volume_down
+                      data:
+                        entity_id: media_player.sync_box
+                    - icon: 'mdi:brightness-7'
+                      type: service
+                      id: media_player.volume_up
+                      data:
+                        entity_id: media_player.sync_box
+                    - name: subtle
+                      type: service
+                      id: media_player.select_sound_mode
+                      data:
+                        entity_id: media_player.sync_box
+                        sound_mode: subtle
+                    - name: moderate
+                      type: service
+                      id: media_player.select_sound_mode
+                      data:
+                        entity_id: media_player.sync_box
+                        sound_mode: moderate
+                    - name: high
+                      type: service
+                      id: media_player.select_sound_mode
+                      data:
+                        entity_id: media_player.sync_box
+                        sound_mode: high
+                    - name: intense
+                      type: service
+                      id: media_player.select_sound_mode
+                      data:
+                        entity_id: media_player.sync_box
+                        sound_mode: intense
+        - type: conditional
+          conditions:
+            - entity: input_select.media_player
+              state: LgTV
+          card:
+            type: vertical-stack
+            cards:
+              - type: picture
+                image: /local/covers/lg-logo.png
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: 'custom:lg-remote-control'
+                entity: media_player.lg_webos_smart_tv_2
+                color_buttons: enable
+                colors:
+                  buttons: '#03a9f4'
+                  texts: 'rgb(255,255,255)'
+                  background: 'rgb(36,46,66)'
+        - type: conditional
+          conditions:
+            - entity: input_select.media_player
+              state: Sonos - Spotify
+          card:
+            type: vertical-stack
+            cards:
+              - type: picture
+                image: /local/covers/sonos.png
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: picture
+                image: /local/covers/Spotify.png
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - type: 'custom:mini-media-player'
+                entity: media_player.sonos_beam
+                artwork: full-cover-fit
+                hide:
+                  power: true
+                  icon: true
+                  source: true
+                  icon_state: true
+                  power_color: true
+                  group: true
+                  volume: true
+                  controls: false
+                speaker_group:
+                  platform: sonos
+                  show_group_count: true
+                  entities:
+                    - entity_id: media_player.sonos_beam
+                      name: Sonos beam
+                    - entity_id: media_player.sonos_ra
+                      name: Sonos rechtachter
+              - type: 'custom:mini-media-player'
+                group: true
+                entity: media_player.sonos_beam
+                hide:
+                  power: true
+                  icon: true
+                  info: true
+                  source: true
+                  group: true
+                  icon_state: true
+                  power_color: true
+                  volume: true
+                  shuffle: true
+                  controls: true
+                  name: true
+                idle_view: when_idle
+                info: scroll
+                shortcuts:
+                  align_text: center
+                  columns: 3
+                  column_height: 100
+                  hide_when_off: true
+                  buttons:
+                    - image: /local/covers/Spotify.png
+                    - id: Release Radar
+                      cover: /local/covers/large/yourreleaseradar.gif
+                      type: source
+                    - id: Discover Weekly
+                      cover: /local/covers/discover-weekly.png
+                      type: source
+                    - id: Jouw Discover Weekly
+                      cover: /local/covers/Jouw_Discover_Weekly_1.png
+                      type: source
+                    - id: Top 50 België
+                      cover: /local/covers/Top_50_Belgie.png
+                      type: source
+                    - id: Top 50 Nederland
+                      cover: /local/covers/top_50_nederland.png
+                      type: source
+                    - id: Top 50 Wereld
+                      cover: /local/covers/Top_50_Wereld.png
+                      type: source
+                    - id: Your Top Songs 2020
+                      cover: /local/covers/Your_Top_Songs_2020.png
+                      type: source
+                    - id: Missed Hits
+                      cover: /local/covers/Missed_Hits.png
+                      type: source
+                    - id: Home Alone
+                      cover: /local/covers/Home_Alone.png
+                      type: source
+                    - id: Home Assistant Homies
+                      cover: /local/covers/Home_Assistant_Homies.png
+                      type: source
+                    - id: Jay Wall Radio
+                      cover: /local/covers/Jay_Wall.png
+                      type: source
+                    - id: Omdat Het Kan Soundsystem
+                      cover: /local/covers/Omdat_Het_Kan.png
+                      type: source
+                    - id: Skumic Radio
+                      cover: /local/covers/Skumic.png
+                      type: source
+                    - id: Nicky Romero Radio
+                      cover: /local/covers/Nicky_Romero.png
+                      type: source
+                    - id: Laidback Luke Radio
+                      cover: /local/covers/Laidback_Luke.png
+                      type: source
+                    - id: NANDOLEAKS 2021 Playlist
+                      cover: /local/covers/large/nandoleaks.png
+                      type: source
+                    - id: Enzo Rap
+                      name: Enzo Rap
+                      cover: /local/covers/large/Enzo-Rap.png
+                      type: source
+                    - id: FunX Fresh
+                      cover: /local/covers/funX-fresh.png
+                      type: source
+                    - id: Remixes & Mashups 2021
+                      cover: /local/covers/remixes-2021.png
+                      type: source
+                    - id: Remixes 2021
+                      cover: /local/covers/remixed-hits-2021.png
+                      type: source
+  - type: entities
+    style: |
+      ha-card {
+        background: none;
+        box-shadow: none;
+        animation: fade-in-top 1s;
+          }
+      @keyframes fade-in-top {
+        0%{
+          -webkit-transform: translateY(-50px);
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        100%{
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+          opacity: 1;
+        }
+       }
+        }
+    entities:
+      - type: 'custom:paper-buttons-row'
+        buttons:
+          - entity: group.boudoir
+            name: false
+            icon: 'hass:home'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                box-shadow: >-
+                  0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px
+                  rgba(255,255,255,.5)
+                border-radius: 50px
+                padding: 20px
+                color: white
+              icon:
+                '--mdc-icon-size': 40px
+            tap_action:
+              action: navigate
+              navigation_path: home
