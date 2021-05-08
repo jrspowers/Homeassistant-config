@@ -1,3 +1,3 @@
 # Energy Card
 
-![select energy card](dashboards/dashboard1/images/select_energy_card.png)
+![select energy card](config/dashboards/dashboard1/images/select_energy_card.png)
