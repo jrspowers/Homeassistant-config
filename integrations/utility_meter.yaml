@@ -51,3 +51,27 @@ utility_meter:
     tariffs:
       - peak
       - offpeak
+  energy_serverkast_monthly:
+    source: sensor.stroommeter_stroommeter_serverkast_consumption
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  energy_serverkast_daily:
+    source: sensor.stroommeter_stroommeter_serverkast_consumption
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  energy_serverkast_weekly:
+    source: sensor.stroommeter_stroommeter_serverkast_consumption
+    cycle: weekly
+    tariffs:
+      - peak
+      - offpeak
+  energy_serverkast_yearly:
+    source: sensor.stroommeter_stroommeter_serverkast_consumption
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak
