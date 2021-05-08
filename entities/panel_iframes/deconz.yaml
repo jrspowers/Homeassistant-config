@@ -1,0 +1,4 @@
+deconz:
+  title: "Deconz"
+  url: "http://192.168.0.144/"
+  icon: mdi:zigbee

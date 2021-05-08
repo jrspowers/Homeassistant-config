@@ -1,0 +1,9 @@
+################################################
+## Entities / Input Selects / Energy
+################################################
+energy:
+  name: Energy
+  options:
+    - stroommeter - bedachter
+    - stroommeter - bedvoor
+    - stroommeter - serverkast
