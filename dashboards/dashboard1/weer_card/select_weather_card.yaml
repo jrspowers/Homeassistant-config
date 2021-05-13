@@ -1,0 +1,230 @@
+#################################################
+## Dashboards / Dashboard1 / Select Weather card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Select Weather card 
+#################################################
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:cloud-outline'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.weer
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.weer
+            option: weer - voorspeling
+        state:
+          - value: weer - voorspeling
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:devices'
+        show_entity_picture: true
+        entity_picture: /local/covers/pollen-icon.png
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.weer
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.weer
+            option: pollen
+        state:
+          - value: pollen
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:weather-pouring'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.weer
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.weer
+            option: regen - sensor
+        state:
+          - value: regen - sensor
+            styles:
+              card:
+                - border: 5px solid blue
+  - type: conditional
+    conditions:
+      - entity: input_select.weer
+        state: weer - voorspeling
+    card:
+      type: grid
+      cards:
+        - type: weather-forecast
+          entity: weather.openweathermap
+        - type: entities
+          entities:
+            - entity: sensor.openweathermap_weather
+              name: Weer Voorspeling
+              icon: 'mdi:weather-cloudy-alert'
+            - entity: sensor.openweathermap_feels_like_temperature
+              name: Voelt Aan Als
+              icon: 'mdi:thermometer-alert'
+            - entity: sensor.openweathermap_forecast_temperature
+              name: Max Temperature
+              icon: 'mdi:thermometer-chevron-up'
+            - entity: sensor.openweathermap_forecast_temperature_low
+              name: Min Temperature
+              icon: 'mdi:thermometer-chevron-down'
+            - entity: sensor.openweathermap_forecast_precipitation
+              name: Neerslag
+              icon: 'mdi:weather-rainy'
+            - entity: sensor.cc_example_climacell_wind_speed
+              name: Wind Snelheid
+              icon: 'mdi:windsock'
+            - entity: sensor.openweathermap_uv_index
+              name: UV-INDEX
+              icon: 'mdi:weather-sunny'
+            - type: 'custom:fold-entity-row'
+              head:
+                type: section
+                label: Weer Statistieken
+              open: false
+              entities:
+                - entity: sensor.season
+                - entity: sun.sun
+                - entity: sensor.moon
+                - entity: sensor.openweathermap_weather
+                  name: Weer Voorspeling
+                  icon: 'mdi:weather-cloudy-alert'
+                - entity: sun.sun
+          state_color: false
+      columns: 1
+      square: false
+  - type: conditional
+    conditions:
+      - entity: input_select.weer
+        state: pollen
+    card:
+      type: grid
+      cards:
+        - type: picture
+          image: /local/covers/pollen-logo.png
+        - type: 'custom:fold-entity-row'
+          head:
+            type: section
+            label: Pollen
+          open: true
+          entities:
+            - entity: sensor.pollen_grass_risk
+              type: 'custom:multiple-entity-row'
+              entities:
+                - entity: sensor.pollen_grass_count
+                  name: false
+            - entity: sensor.pollen_tree_risk
+              type: 'custom:multiple-entity-row'
+              entities:
+                - entity: sensor.pollen_tree_count
+                  name: false
+            - entity: sensor.pollen_weed_risk
+              type: 'custom:multiple-entity-row'
+              entities:
+                - entity: sensor.pollen_weed_count
+                  name: false
+            - entity: sensor.pollen_last_updated
+            - type: 'custom:fold-entity-row'
+              head:
+                type: section
+                label: Meer informatie
+              entities:
+                - entity: sensor.pollen_berk_count
+                - entity: sensor.pollen_coniferen_count
+                - entity: sensor.pollen_den_count
+                - entity: sensor.pollen_eik_count
+                - entity: sensor.pollen_els_count
+                - entity: sensor.pollen_hazelaar_count
+                - entity: sensor.pollen_iep_count
+                - entity: sensor.pollen_plataan_count
+                - entity: sensor.pollen_populier_count
+                - entity: sensor.pollen_amaranten_count
+                - entity: sensor.pollen_ambrosia_count
+                - entity: sensor.pollen_bijvoet_count
+                - entity: sensor.pollen_brandnetel_count
+      columns: 1
+      square: false
+  - type: conditional
+    conditions:
+      - entity: input_select.weer
+        state: regen - sensor
+    card:
+      type: 'custom:apexcharts-card'
+      graph_span: 12h
+      update_interval: 5m
+      cache: true
+      header:
+        show: true
+        title: Regen sensor per day
+      span:
+        end: day
+      apex_config:
+        yaxis:
+          - show: true
+            showAlways: true
+            decimalsInFloat: 0
+            title:
+              text: mm
+        stroke:
+          show: true
+          width: 1
+        legend:
+          show: true
+        dataLabels:
+          enabled: true
+        chart:
+          type: area
+        fill:
+          type: gradient
+          gradient:
+            shadeIntensity: 0.1
+            opacityFrom: 0.25
+            opacityTo: 1
+            inverseColors: true
+            stops:
+              - 0
+              - 90
+              - 100
+      series:
+        - entity: sensor.openweathermap_forecast_precipitation
+          type: column
+          name: Stroom
+          float_precision: 2
+          show:
+            datalabels: total
+          group_by:
+            func: max
+            duration: 1h
