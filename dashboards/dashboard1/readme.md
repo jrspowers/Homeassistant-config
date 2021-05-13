@@ -8,7 +8,8 @@ Pictures cards | Links to card
 ✔️[press here to my Picture Select info card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/select_info_card) | ✔️[press here to my Select info card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/select_info_card/select_info_card.yaml)
 📺[press here to my Picture Media card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/media_card) | 📺[press here to my Media card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/media_card/media_card.yaml)
 🔌[press here to my Picture Energy card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/energy_card) | 🔌[press here to my Energy card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/energy_card/energy_card.yaml)
-☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weer_card) | ☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weer_card/select_weather_card.yaml)
+☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card) | ☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card/select_weather_card.yaml)
+🌳 [press here to my Pollen card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card) | 🌳 [press here to my Pollen card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card/pollen_card.yaml)
 ## Dashboard 🖥️
 ![dashboard 1 home screen](https://user-images.githubusercontent.com/60328474/118138917-28f75280-b407-11eb-9e87-ca076318031a.png)
 ## Media 📺
