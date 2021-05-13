@@ -7,3 +7,5 @@ energy:
     - stroommeter - bedachter
     - stroommeter - bedvoor
     - stroommeter - serverkast
+    - Stacked diagram - per device
+    - Stacked diagram - per energy
