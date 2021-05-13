@@ -186,7 +186,7 @@ cards:
                 battery: |
                   [[[
                     return `<ha-icon
-                      icon="mdi:battery"
+                      icon="mdi:cellphone-charging"
                       style="width: 20px; height: 20px;"></ha-icon
                       <span>${states['sensor.iphone_van_jarne_battery_state_2'].state}%</span>`
                   ]]]
@@ -200,7 +200,7 @@ cards:
                 ram: |
                   [[[
                     return `<ha-icon
-                      icon="mdi:watch"
+                      icon="mdi:watch-variant"
                       style="width: 20px; height: 20px;"></ha-icon
                       <span>${states['sensor.apple_watch_van_jarne_battery_state'].state}%</span>`
                   ]]]
@@ -266,7 +266,7 @@ cards:
                 battery: |
                   [[[
                     return `<ha-icon
-                      icon="mdi:battery"
+                      icon="mdi:cellphone-charging"
                       style="width: 20px; height: 20px;"></ha-icon
                       <span>${states['sensor.iphone_van_jathe_battery_state_2'].state}%</span>`
                   ]]]
@@ -601,7 +601,7 @@ cards:
               secondary_info: last-updated
             - entity: sensor.apple_watch_van_jarne_battery_state
               secondary_info: last-updated
-              icon: 'mdi:watch'
+              icon: 'mdi:watch-variant'
             - entity: device_tracker.ipad_van_jarne
               secondary_info: last-updated
             - entity: sensor.lenovo_tb_x606f_batterijniveau
@@ -797,3 +797,4 @@ cards:
                   background: rgba(255,255,255,.1);
                 }
           square: false
+
