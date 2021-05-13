@@ -765,34 +765,49 @@ cards:
                     - entity: sensor.season
                     - entity: sun.sun
                     - entity: sensor.moon
-                - type: 'custom:fold-entity-row'
-                  head:
-                    type: section
-                    label: Weer Statistieken
-                  open: false
-                  entities:
-                    - entity: sensor.openweathermap_feels_like_temperature
-                      name: Voelt Aan Als
-                      icon: 'mdi:thermometer-alert'
-                    - entity: sensor.openweathermap_forecast_temperature
-                      name: Max Temperature
-                      icon: 'mdi:thermometer-chevron-up'
-                    - entity: sensor.openweathermap_forecast_temperature_low
-                      name: Min Temperature
-                      icon: 'mdi:thermometer-chevron-down'
-                    - entity: sensor.openweathermap_forecast_precipitation
-                      name: Neerslag
-                      icon: 'mdi:weather-rainy'
-                    - entity: sensor.openweathermap_wind_speed
-                      name: Wind Snelheid
-                      icon: 'mdi:windsock'
-                    - entity: sensor.openweathermap_uv_index
-                      name: UV-INDEX
-                      icon: 'mdi:weather-sunny'
-                    - entity: sensor.openweathermap_weather_code
+                    - entity: sensor.pollen_grass_risk
+                      type: 'custom:multiple-entity-row'
+                      entities:
+                        - entity: sensor.pollen_grass_count
+                          name: false
+                    - entity: sensor.pollen_tree_risk
+                      type: 'custom:multiple-entity-row'
+                      entities:
+                        - entity: sensor.pollen_tree_count
+                          name: false
+                    - entity: sensor.pollen_weed_risk
+                      type: 'custom:multiple-entity-row'
+                      entities:
+                        - entity: sensor.pollen_weed_count
+                          name: false
+                    - type: 'custom:fold-entity-row'
+                      head:
+                        type: section
+                        label: Weer Statistieken
+                      open: false
+                      entities:
+                        - entity: sensor.openweathermap_feels_like_temperature
+                          name: Voelt Aan Als
+                          icon: 'mdi:thermometer-alert'
+                        - entity: sensor.openweathermap_forecast_temperature
+                          name: Max Temperature
+                          icon: 'mdi:thermometer-chevron-up'
+                        - entity: sensor.openweathermap_forecast_temperature_low
+                          name: Min Temperature
+                          icon: 'mdi:thermometer-chevron-down'
+                        - entity: sensor.openweathermap_forecast_precipitation
+                          name: Neerslag
+                          icon: 'mdi:weather-rainy'
+                        - entity: sensor.openweathermap_wind_speed
+                          name: Wind Snelheid
+                          icon: 'mdi:windsock'
+                        - entity: sensor.openweathermap_uv_index
+                          name: UV-INDEX
+                          icon: 'mdi:weather-sunny'
+                        - entity: sensor.openweathermap_weather_code
               columns: 1
               square: false
-        square: false
+          square: false
   - type: 'custom:mod-card'
     style: |
       ha-card {
@@ -857,3 +872,4 @@ cards:
                   - color: '#EF4F1A'
               entity_picture: /local/person/jarnemzzz-memoji.png
       square: false
+
