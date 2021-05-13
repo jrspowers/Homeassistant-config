@@ -327,7 +327,6 @@ views:
                   style: |
                     ha-card {
                       text-align: center;
-                      text-transform: capitalize;
                       background: rgba(255,255,255,.1);
                       box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
                       font-family: DM Sans;
@@ -1279,34 +1278,50 @@ views:
                             - entity: sensor.season
                             - entity: sun.sun
                             - entity: sensor.moon
-                        - type: 'custom:fold-entity-row'
-                          head:
-                            type: section
-                            label: Weer Statistieken
-                          open: false
-                          entities:
-                            - entity: sensor.openweathermap_feels_like_temperature
-                              name: Voelt Aan Als
-                              icon: 'mdi:thermometer-alert'
-                            - entity: sensor.openweathermap_forecast_temperature
-                              name: Max Temperature
-                              icon: 'mdi:thermometer-chevron-up'
-                            - entity: sensor.openweathermap_forecast_temperature_low
-                              name: Min Temperature
-                              icon: 'mdi:thermometer-chevron-down'
-                            - entity: sensor.openweathermap_forecast_precipitation
-                              name: Neerslag
-                              icon: 'mdi:weather-rainy'
-                            - entity: sensor.openweathermap_wind_speed
-                              name: Wind Snelheid
-                              icon: 'mdi:windsock'
-                            - entity: sensor.openweathermap_uv_index
-                              name: UV-INDEX
-                              icon: 'mdi:weather-sunny'
-                            - entity: sensor.openweathermap_weather_code
+                            - entity: sensor.pollen_grass_risk
+                              type: 'custom:multiple-entity-row'
+                              entities:
+                                - entity: sensor.pollen_grass_count
+                                  name: false
+                            - entity: sensor.pollen_tree_risk
+                              type: 'custom:multiple-entity-row'
+                              entities:
+                                - entity: sensor.pollen_tree_count
+                                  name: false
+                            - entity: sensor.pollen_weed_risk
+                              type: 'custom:multiple-entity-row'
+                              entities:
+                                - entity: sensor.pollen_weed_count
+                                  name: false
+                            - type: 'custom:fold-entity-row'
+                              head:
+                                type: section
+                                label: Weer Statistieken
+                              open: false
+                              entities:
+                                - entity: sensor.openweathermap_feels_like_temperature
+                                  name: Voelt Aan Als
+                                  icon: 'mdi:thermometer-alert'
+                                - entity: sensor.openweathermap_forecast_temperature
+                                  name: Max Temperature
+                                  icon: 'mdi:thermometer-chevron-up'
+                                - entity: >-
+                                    sensor.openweathermap_forecast_temperature_low
+                                  name: Min Temperature
+                                  icon: 'mdi:thermometer-chevron-down'
+                                - entity: sensor.openweathermap_forecast_precipitation
+                                  name: Neerslag
+                                  icon: 'mdi:weather-rainy'
+                                - entity: sensor.openweathermap_wind_speed
+                                  name: Wind Snelheid
+                                  icon: 'mdi:windsock'
+                                - entity: sensor.openweathermap_uv_index
+                                  name: UV-INDEX
+                                  icon: 'mdi:weather-sunny'
+                                - entity: sensor.openweathermap_weather_code
                       columns: 1
                       square: false
-                square: false
+                  square: false
           - type: 'custom:mod-card'
             style: |
               ha-card {
@@ -1555,7 +1570,7 @@ views:
                         battery: |
                           [[[
                             return `<ha-icon
-                              icon="mdi:battery"
+                              icon="mdi:cellphone-charging"
                               style="width: 20px; height: 20px;"></ha-icon
                               <span>${states['sensor.iphone_van_jarne_battery_state_2'].state}%</span>`
                           ]]]
@@ -1569,7 +1584,7 @@ views:
                         ram: |
                           [[[
                             return `<ha-icon
-                              icon="mdi:watch"
+                              icon="mdi:watch-variant"
                               style="width: 20px; height: 20px;"></ha-icon
                               <span>${states['sensor.apple_watch_van_jarne_battery_state'].state}%</span>`
                           ]]]
@@ -1638,7 +1653,7 @@ views:
                         battery: |
                           [[[
                             return `<ha-icon
-                              icon="mdi:battery"
+                              icon="mdi:cellphone-charging"
                               style="width: 20px; height: 20px;"></ha-icon
                               <span>${states['sensor.iphone_van_jathe_battery_state_2'].state}%</span>`
                           ]]]
@@ -1985,7 +2000,7 @@ views:
                       secondary_info: last-updated
                     - entity: sensor.apple_watch_van_jarne_battery_state
                       secondary_info: last-updated
-                      icon: 'mdi:watch'
+                      icon: 'mdi:watch-variant'
                     - entity: device_tracker.ipad_van_jarne
                       secondary_info: last-updated
                     - entity: sensor.lenovo_tb_x606f_batterijniveau
@@ -2829,7 +2844,7 @@ views:
                           icon_state: true
                           power_color: true
                           group: true
-                          volume: true
+                          volume: false
                           controls: false
                         speaker_group:
                           platform: sonos
@@ -3398,7 +3413,6 @@ views:
                     - position: relative
                     - height: 40px
                     - width: 80px
-                    - left: 110px
                 entity: input_select.energy
                 tap_action:
                   service: input_select.select_option
@@ -3424,7 +3438,6 @@ views:
                     - position: absolute
                     - height: 40px
                     - width: 80px
-                    - left: 210px
                 entity: input_select.energy
                 tap_action:
                   service: input_select.select_option
@@ -3434,6 +3447,32 @@ views:
                     option: stroommeter - serverkast
                 state:
                   - value: stroommeter - serverkast
+                    styles:
+                      card:
+                        - border: 5px solid blue
+              - type: 'custom:button-card'
+                color_type: card
+                icon: 'mdi:chart-bar-stacked'
+                show_name: false
+                styles:
+                  card:
+                    - background-color: 'rgb(0,0,0)'
+                    - border-radius: 20px
+                    - color: 'rgb(255,255,255)'
+                    - border: 5px solid black
+                    - position: absolute
+                    - height: 40px
+                    - width: 80px
+                    - left: 80px
+                entity: input_select.energy
+                tap_action:
+                  service: input_select.select_option
+                  action: call-service
+                  service_data:
+                    entity_id: input_select.energy
+                    option: Stacked diagram - per device
+                state:
+                  - value: Stacked diagram - per device
                     styles:
                       card:
                         - border: 5px solid blue
@@ -3782,6 +3821,58 @@ views:
                       icon: 'mdi:currency-eur'
               columns: 1
               square: false
+          - type: conditional
+            conditions:
+              - entity: input_select.energy
+                state: Stacked diagram - per device
+            card:
+              type: 'custom:apexcharts-card'
+              graph_span: 7d
+              cache: true
+              update_interval: 5min
+              span:
+                end: day
+              header:
+                show: true
+                title: Per device daily
+              stacked: true
+              apex_config:
+                stroke:
+                  show: true
+                  idth: 1
+                  curve: smooth
+                chart:
+                  type: area
+                fill:
+                  type: gradient
+                  gradient:
+                    shadeIntensity: 0.1
+                    opacityFrom: 0.25
+                    opacityTo: 1
+                    inverseColors: true
+                    stops:
+                      - 0
+                      - 90
+                      - 100
+              series:
+                - entity: sensor.energy_bedachter_daily
+                  name: bedachter
+                  type: column
+                  group_by:
+                    func: diff
+                    duration: 24h
+                - entity: sensor.energy_bedvoor_daily
+                  name: bedvoor
+                  type: column
+                  group_by:
+                    func: diff
+                    duration: 24h
+                - entity: sensor.energy_serverkast_daily
+                  name: serverkast
+                  type: column
+                  group_by:
+                    func: diff
+                    duration: 24h
       - type: grid
         cards:
           - type: 'custom:button-card'
@@ -3820,62 +3911,228 @@ views:
     icon: 'mdi:cloud-outline'
     badges: []
     cards:
-      - type: grid
+      - type: vertical-stack
         cards:
-          - type: weather-forecast
-            entity: weather.openweathermap
-          - type: entities
-            entities:
-              - entity: sensor.openweathermap_weather
-                name: Weer Voorspeling
-                icon: 'mdi:weather-cloudy-alert'
-              - entity: sensor.season
-              - entity: sun.sun
-              - entity: sensor.moon
-              - entity: sensor.openweathermap_weather
-                name: Weer Voorspeling
-                icon: 'mdi:weather-cloudy-alert'
-              - entity: sun.sun
-              - entity: sensor.openweathermap_feels_like_temperature
-                name: Voelt Aan Als
-                icon: 'mdi:thermometer-alert'
-              - entity: sensor.openweathermap_forecast_temperature
-                name: Max Temperature
-                icon: 'mdi:thermometer-chevron-up'
-              - entity: sensor.openweathermap_forecast_temperature_low
-                name: Min Temperature
-                icon: 'mdi:thermometer-chevron-down'
-              - entity: sensor.openweathermap_forecast_precipitation
-                name: Neerslag
-                icon: 'mdi:weather-rainy'
-              - entity: sensor.openweathermap_wind_speed
-                name: Wind Snelheid
-                icon: 'mdi:windsock'
-              - entity: sensor.openweathermap_uv_index
-                name: UV-INDEX
-                icon: 'mdi:weather-sunny'
-              - entity: sensor.openweathermap_weather_code
-            state_color: false
-        columns: 1
-        square: false
-      - type: 'custom:neerslag-card'
-        title: Voorspelling
-        entities:
-          - sensor.openweathermap_forecast_precipitation
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.openweathermap_forecast_precipitation
-        line_color: blue
-        name: Afgelopen uren
-        hours_to_show: 24
-        hour24: true
-        points_per_hour: 2
-        show:
-          graph: bar
-      - type: 'custom:mini-graph-card'
-        entities:
-          - sensor.temperature_terras_1
-        line_color: blue
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: card
+                icon: 'mdi:cloud-outline'
+                show_name: false
+                styles:
+                  card:
+                    - background-color: 'rgb(0,0,0)'
+                    - border-radius: 20px
+                    - color: 'rgb(255,255,255)'
+                    - border: 5px solid black
+                entity: input_select.weer
+                tap_action:
+                  service: input_select.select_option
+                  action: call-service
+                  service_data:
+                    entity_id: input_select.weer
+                    option: weer - voorspeling
+                state:
+                  - value: weer - voorspeling
+                    styles:
+                      card:
+                        - border: 5px solid blue
+              - type: 'custom:button-card'
+                color_type: card
+                icon: 'mdi:devices'
+                show_entity_picture: true
+                entity_picture: /local/covers/pollen-icon.png
+                show_name: false
+                styles:
+                  card:
+                    - background-color: 'rgb(0,0,0)'
+                    - border-radius: 20px
+                    - color: 'rgb(255,255,255)'
+                    - border: 5px solid black
+                entity: input_select.weer
+                tap_action:
+                  service: input_select.select_option
+                  action: call-service
+                  service_data:
+                    entity_id: input_select.weer
+                    option: pollen
+                state:
+                  - value: pollen
+                    styles:
+                      card:
+                        - border: 5px solid blue
+              - type: 'custom:button-card'
+                color_type: card
+                icon: 'mdi:weather-pouring'
+                show_name: false
+                styles:
+                  card:
+                    - background-color: 'rgb(0,0,0)'
+                    - border-radius: 20px
+                    - color: 'rgb(255,255,255)'
+                    - border: 5px solid black
+                entity: input_select.weer
+                tap_action:
+                  service: input_select.select_option
+                  action: call-service
+                  service_data:
+                    entity_id: input_select.weer
+                    option: regen - sensor
+                state:
+                  - value: regen - sensor
+                    styles:
+                      card:
+                        - border: 5px solid blue
+          - type: conditional
+            conditions:
+              - entity: input_select.weer
+                state: weer - voorspeling
+            card:
+              type: grid
+              cards:
+                - type: weather-forecast
+                  entity: weather.openweathermap
+                - type: entities
+                  entities:
+                    - entity: sensor.openweathermap_weather
+                      name: Weer Voorspeling
+                      icon: 'mdi:weather-cloudy-alert'
+                    - entity: sensor.openweathermap_feels_like_temperature
+                      name: Voelt Aan Als
+                      icon: 'mdi:thermometer-alert'
+                    - entity: sensor.openweathermap_forecast_temperature
+                      name: Max Temperature
+                      icon: 'mdi:thermometer-chevron-up'
+                    - entity: sensor.openweathermap_forecast_temperature_low
+                      name: Min Temperature
+                      icon: 'mdi:thermometer-chevron-down'
+                    - entity: sensor.openweathermap_forecast_precipitation
+                      name: Neerslag
+                      icon: 'mdi:weather-rainy'
+                    - entity: sensor.cc_example_climacell_wind_speed
+                      name: Wind Snelheid
+                      icon: 'mdi:windsock'
+                    - entity: sensor.openweathermap_uv_index
+                      name: UV-INDEX
+                      icon: 'mdi:weather-sunny'
+                    - type: 'custom:fold-entity-row'
+                      head:
+                        type: section
+                        label: Weer Statistieken
+                      open: false
+                      entities:
+                        - entity: sensor.season
+                        - entity: sun.sun
+                        - entity: sensor.moon
+                        - entity: sensor.openweathermap_weather
+                          name: Weer Voorspeling
+                          icon: 'mdi:weather-cloudy-alert'
+                        - entity: sun.sun
+                  state_color: false
+              columns: 1
+              square: false
+          - type: conditional
+            conditions:
+              - entity: input_select.weer
+                state: pollen
+            card:
+              type: grid
+              cards:
+                - type: picture
+                  image: /local/covers/pollen-logo.png
+                - type: 'custom:fold-entity-row'
+                  head:
+                    type: section
+                    label: Pollen
+                  open: true
+                  entities:
+                    - entity: sensor.pollen_grass_risk
+                      type: 'custom:multiple-entity-row'
+                      entities:
+                        - entity: sensor.pollen_grass_count
+                          name: false
+                    - entity: sensor.pollen_tree_risk
+                      type: 'custom:multiple-entity-row'
+                      entities:
+                        - entity: sensor.pollen_tree_count
+                          name: false
+                    - entity: sensor.pollen_weed_risk
+                      type: 'custom:multiple-entity-row'
+                      entities:
+                        - entity: sensor.pollen_weed_count
+                          name: false
+                    - entity: sensor.pollen_last_updated
+                    - type: 'custom:fold-entity-row'
+                      head:
+                        type: section
+                        label: Meer informatie
+                      entities:
+                        - entity: sensor.pollen_berk_count
+                        - entity: sensor.pollen_coniferen_count
+                        - entity: sensor.pollen_den_count
+                        - entity: sensor.pollen_eik_count
+                        - entity: sensor.pollen_els_count
+                        - entity: sensor.pollen_hazelaar_count
+                        - entity: sensor.pollen_iep_count
+                        - entity: sensor.pollen_plataan_count
+                        - entity: sensor.pollen_populier_count
+                        - entity: sensor.pollen_amaranten_count
+                        - entity: sensor.pollen_ambrosia_count
+                        - entity: sensor.pollen_bijvoet_count
+                        - entity: sensor.pollen_brandnetel_count
+              columns: 1
+              square: false
+          - type: conditional
+            conditions:
+              - entity: input_select.weer
+                state: regen - sensor
+            card:
+              type: 'custom:apexcharts-card'
+              graph_span: 12h
+              update_interval: 5m
+              cache: true
+              header:
+                show: true
+                title: Regen sensor per day
+              span:
+                end: day
+              apex_config:
+                yaxis:
+                  - show: true
+                    showAlways: true
+                    decimalsInFloat: 0
+                    title:
+                      text: mm
+                stroke:
+                  show: true
+                  width: 1
+                legend:
+                  show: true
+                dataLabels:
+                  enabled: true
+                chart:
+                  type: area
+                fill:
+                  type: gradient
+                  gradient:
+                    shadeIntensity: 0.1
+                    opacityFrom: 0.25
+                    opacityTo: 1
+                    inverseColors: true
+                    stops:
+                      - 0
+                      - 90
+                      - 100
+              series:
+                - entity: sensor.openweathermap_forecast_precipitation
+                  type: column
+                  name: Stroom
+                  float_precision: 2
+                  show:
+                    datalabels: total
+                  group_by:
+                    func: max
+                    duration: 1h
       - type: 'custom:paper-buttons-row'
         buttons:
           - name: home
@@ -11178,6 +11435,670 @@ views:
                     ]]]
         columns: 1
         square: false
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                entity: media_player.sonos_beam
+                icon: 'mdi:music'
+                show_name: false
+                styles:
+                  card:
+                    - height: 36px
+                    - background-color: var(--accent-color)
+                state:
+                  - value: playing
+                    styles:
+                      card:
+                        - animation: blink 5s infinite
+                        - filter: opacity(100%)
+                        - background-color: goldenrod
+              - type: 'custom:button-card'
+                show_name: true
+                name: "\U0001F4FB RADIO FM \U0001F4FB"
+                styles:
+                  card:
+                    - width: 200px
+                    - font-weight: bold
+              - type: 'custom:button-card'
+                entity: media_player.sonos_ra
+                icon: 'mdi:music'
+                show_name: false
+                styles:
+                  card:
+                    - height: 36px
+                    - background-color: var(--accent-color)
+                state:
+                  - value: playing
+                    styles:
+                      card:
+                        - animation: blink 5s infinite
+                        - filter: opacity(100%)
+                        - background-color: goldenrod
+              - type: 'custom:button-card'
+                color_type: blank-card
+          - type: 'custom:mini-media-player'
+            entity: media_player.sonos_beam
+            info: scroll
+            volume_stateless: false
+            group: false
+            name: sonos beam
+            icon: 'mdi:speaker-multiple'
+            source: icon
+            sound_mode: full
+            artwork: full-cover
+          - type: 'custom:text-divider-row'
+            text: "\U0001F3B5 Escolha a rádio \U0001F3B5"
+          - type: 'custom:swipe-card'
+            card_width: 120px
+            start_card: 4
+            parameters:
+              effect: coverflow
+              grabCursor: true
+              centeredSlides: true
+              slidesPerView: auto
+              coverflowEffect:
+                rotate: 50
+                stretch: 0
+                depth: 100
+                modifier: 1
+                slideShadows: true
+              navigation: null
+              keyboard:
+                enabled: true
+                onlyInViewport: true
+            cards:
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.radio_comercial_sala
+                styles:
+                  entity_picture:
+                    - width: 100%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 20%
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/Logo_Radio_Comercial.jpg
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://mcrscast1.mcr.iol.pt/comercial.mp3' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.vodafone_sala
+                styles:
+                  entity_picture:
+                    - width: 143%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 16%
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_vodafone_fm.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                       === 'http://195.23.102.207/vodafone' &&
+                       states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.m80_sala
+                styles:
+                  entity_picture:
+                    - width: 100%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 20%
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_m80.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://mcrscast.mcr.iol.pt/m80' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.rfm_sala
+                styles:
+                  entity_picture:
+                    - width: 73%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 17%
+                    - color: black
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_rfm.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'https://20863.live.streamtheworld.com/RFM_SC' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.nova_era_sala
+                styles:
+                  entity_picture:
+                    - margin-top: 10px
+                    - width: 125%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 17%
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_nova_era.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://centova.radios.pt:9478/stream/1/' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.cidadefm_sala
+                styles:
+                  entity_picture:
+                    - width: 177%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 20%
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_cidade_fm.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://mcrscast.mcr.iol.pt/cidadefm' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.megahits_sala
+                styles:
+                  entity_picture:
+                    - width: 60%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 16%
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_megahits.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://21313.live.streamtheworld.com/MEGA_HITS.mp3'
+                      && states['media_player.googlehome'].state ===
+                      'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.antena3_sala
+                styles:
+                  entity_picture:
+                    - width: 66%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 20%
+                    - color: black
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_antena3.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://radiocast.rtp.pt/antena380a.mp3' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.antena1_sala
+                styles:
+                  entity_picture:
+                    - width: 55%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 17%
+                    - color: black
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_antena1.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://radiocast.rtp.pt/antena180a.mp3' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+              - type: 'custom:button-card'
+                tap_action:
+                  action: call-service
+                  service: script.tsf_sala
+                styles:
+                  entity_picture:
+                    - margin-top: 10px
+                    - width: 75%
+                  card:
+                    - '--mdc-ripple-color': black
+                    - '--mdc-ripple-press-opacity': 0.7
+                    - background-color: ivory
+                    - border-radius: 3%
+                    - padding: 17%
+                    - color: black
+                    - height: 70px
+                entity: media_player.sonos_beam
+                entity_picture: /local/radio_logo/logo_tsf.png
+                show_entity_picture: true
+                show_name: false
+                state:
+                  - operator: template
+                    value: >
+                      [[[ return
+                      states['media_player.googlehome'].attributes.media_content_id
+                      === 'http://tsfdirecto.tsf.pt/tsfdirecto.mp3' &&
+                      states['media_player.googlehome'].state === 'playing']]]
+                    styles:
+                      card:
+                        - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+          - type: 'custom:text-divider-row'
+            text: "\U0001F3B6 No Ar \U0001F3B6"
+          - type: 'custom:fold-entity-row'
+            head:
+              type: section
+              label: Expandir informação
+            entities:
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Comercial
+                entities:
+                  - sensor.comercial_music
+                  - sensor.comercial_artist
+                  - sensor.comercial_album
+                  - sensor.comercial_anim_name
+                  - sensor.comercial_show_name
+                  - sensor.comercial_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Vodafone
+                entities:
+                  - sensor.vodafone_music
+                  - sensor.vodafone_artist
+                  - sensor.vodafone_album
+                  - sensor.vodafone_anim_name
+                  - sensor.vodafone_show_name
+                  - sensor.vodafone_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: M80
+                entities:
+                  - sensor.m80_music
+                  - sensor.m80_artist
+                  - sensor.m80_album
+                  - sensor.m80_anim_name
+                  - sensor.m80_show_name
+                  - sensor.m80_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: RFM
+                entities:
+                  - sensor.rfm_music
+                  - sensor.rfm_artist
+                  - sensor.rfm_album
+                  - sensor.rfm_anim_name
+                  - sensor.rfm_show_name
+                  - sensor.rfm_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Nova Era
+                entities:
+                  - sensor.nova_era_music
+                  - sensor.nova_era_artist
+                  - sensor.nova_era_album
+                  - sensor.nova_era_anim_name
+                  - sensor.nova_era_show_name
+                  - sensor.nova_era_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Cidade FM
+                entities:
+                  - sensor.cidadefm_music
+                  - sensor.cidadefm_artist
+                  - sensor.cidadefm_album
+                  - sensor.cidadefm_anim_name
+                  - sensor.cidadefm_show_name
+                  - sensor.cidadefm_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Mega Hits
+                entities:
+                  - sensor.megahits_music
+                  - sensor.megahits_artist
+                  - sensor.megahits_album
+                  - sensor.megahits_anim_name
+                  - sensor.megahits_show_name
+                  - sensor.megahits_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Antena 3
+                entities:
+                  - sensor.antena_3_music
+                  - sensor.antena_3_artist
+                  - sensor.antena_3_album
+                  - sensor.antena_3_anim_name
+                  - sensor.antena_3_show_name
+                  - sensor.antena_3_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Antena 1
+                entities:
+                  - sensor.antena_1_music
+                  - sensor.antena_1_artist
+                  - sensor.antena_1_album
+                  - sensor.antena_1_anim_name
+                  - sensor.antena_1_show_name
+                  - sensor.antena_1_show_hours
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: TSF (sem informação)
+                entities:
+                  - sensor.tsf_geral
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.temperature_terras_1
+        line_color: blue
+      - type: 'custom:mini-graph-card'
+        entities:
+          - sensor.openweathermap_forecast_precipitation
+        line_color: blue
+        name: Afgelopen uren
+        hours_to_show: 24
+        hour24: true
+        points_per_hour: 2
+        show:
+          graph: bar
+      - type: 'custom:fold-entity-row'
+        head:
+          type: section
+          label: Pollen
+        open: true
+        entities:
+          - entity: sensor.pollen_grass_risk
+            type: 'custom:multiple-entity-row'
+            entities:
+              - entity: sensor.pollen_grass_count
+                name: false
+          - entity: sensor.pollen_tree_risk
+            type: 'custom:multiple-entity-row'
+            entities:
+              - entity: sensor.pollen_tree_count
+                name: false
+          - entity: sensor.pollen_weed_risk
+            type: 'custom:multiple-entity-row'
+            entities:
+              - entity: sensor.pollen_weed_count
+                name: false
+          - entity: sensor.pollen_last_updated
+          - type: 'custom:fold-entity-row'
+            head:
+              type: section
+              label: Meer informatie
+            entities:
+              - entity: sensor.pollen_berk_count
+              - entity: sensor.pollen_coniferen_count
+              - entity: sensor.pollen_den_count
+              - entity: sensor.pollen_eik_count
+              - entity: sensor.pollen_els_count
+              - entity: sensor.pollen_hazelaar_count
+              - entity: sensor.pollen_iep_count
+              - entity: sensor.pollen_plataan_count
+              - entity: sensor.pollen_populier_count
+              - entity: sensor.pollen_amaranten_count
+              - entity: sensor.pollen_ambrosia_count
+              - entity: sensor.pollen_bijvoet_count
+              - entity: sensor.pollen_brandnetel_count
+      - type: grid
+        cards:
+          - type: weather-forecast
+            entity: weather.openweathermap
+          - type: entities
+            entities:
+              - entity: sensor.openweathermap_weather
+                name: Weer Voorspeling
+                icon: 'mdi:weather-cloudy-alert'
+              - entity: sensor.openweathermap_feels_like_temperature
+                name: Voelt Aan Als
+                icon: 'mdi:thermometer-alert'
+              - entity: sensor.openweathermap_forecast_temperature
+                name: Max Temperature
+                icon: 'mdi:thermometer-chevron-up'
+              - entity: sensor.openweathermap_forecast_temperature_low
+                name: Min Temperature
+                icon: 'mdi:thermometer-chevron-down'
+              - entity: sensor.openweathermap_forecast_precipitation
+                name: Neerslag
+                icon: 'mdi:weather-rainy'
+              - entity: sensor.cc_example_climacell_wind_speed
+                name: Wind Snelheid
+                icon: 'mdi:windsock'
+              - entity: sensor.openweathermap_uv_index
+                name: UV-INDEX
+                icon: 'mdi:weather-sunny'
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Weer Statistieken
+                open: false
+                entities:
+                  - entity: sensor.season
+                  - entity: sun.sun
+                  - entity: sensor.moon
+                  - entity: sensor.openweathermap_weather
+                    name: Weer Voorspeling
+                    icon: 'mdi:weather-cloudy-alert'
+                  - entity: sun.sun
+            state_color: false
+        columns: 1
+        square: false
+      - type: grid
+        cards:
+          - type: picture
+            image: /local/covers/pollen-logo.png
+          - type: 'custom:fold-entity-row'
+            head:
+              type: section
+              label: Pollen
+            open: true
+            entities:
+              - entity: sensor.pollen_grass_risk
+                type: 'custom:multiple-entity-row'
+                entities:
+                  - entity: sensor.pollen_grass_count
+                    name: false
+              - entity: sensor.pollen_tree_risk
+                type: 'custom:multiple-entity-row'
+                entities:
+                  - entity: sensor.pollen_tree_count
+                    name: false
+              - entity: sensor.pollen_weed_risk
+                type: 'custom:multiple-entity-row'
+                entities:
+                  - entity: sensor.pollen_weed_count
+                    name: false
+              - entity: sensor.pollen_last_updated
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Meer informatie
+                entities:
+                  - entity: sensor.pollen_berk_count
+                  - entity: sensor.pollen_coniferen_count
+                  - entity: sensor.pollen_den_count
+                  - entity: sensor.pollen_eik_count
+                  - entity: sensor.pollen_els_count
+                  - entity: sensor.pollen_hazelaar_count
+                  - entity: sensor.pollen_iep_count
+                  - entity: sensor.pollen_plataan_count
+                  - entity: sensor.pollen_populier_count
+                  - entity: sensor.pollen_amaranten_count
+                  - entity: sensor.pollen_ambrosia_count
+                  - entity: sensor.pollen_bijvoet_count
+                  - entity: sensor.pollen_brandnetel_count
+        columns: 1
+        square: false
+      - type: 'custom:apexcharts-card'
+        graph_span: 12h
+        update_interval: 5m
+        cache: true
+        header:
+          show: true
+          title: Regen sensor per day
+        span:
+          end: day
+        apex_config:
+          yaxis:
+            - show: true
+              showAlways: true
+              decimalsInFloat: 0
+              title:
+                text: mm
+          stroke:
+            show: true
+            width: 1
+          legend:
+            show: true
+          dataLabels:
+            enabled: true
+          chart:
+            type: area
+          fill:
+            type: gradient
+            gradient:
+              shadeIntensity: 0.1
+              opacityFrom: 0.25
+              opacityTo: 1
+              inverseColors: true
+              stops:
+                - 0
+                - 90
+                - 100
+        series:
+          - entity: sensor.openweathermap_forecast_precipitation
+            type: column
+            name: Stroom
+            float_precision: 2
+            show:
+              datalabels: total
+            group_by:
+              func: max
+              duration: 1h
   - title: test energy
     path: test-energy
     icon: 'mdi:information-outline'
@@ -11970,3 +12891,358 @@ views:
                 icon: 'mdi:currency-eur'
         columns: 1
         square: false
+      - type: grid
+        cards:
+          - type: 'custom:apexcharts-card'
+            graph_span: 7d
+            update_interval: 5m
+            cache: true
+            header:
+              show: true
+              title: Energy bedachter per day
+            span:
+              end: day
+            apex_config:
+              yaxis:
+                - show: true
+                  showAlways: true
+                  decimalsInFloat: 0
+                  title:
+                    text: kWh
+              stroke:
+                show: true
+                width: 1
+              legend:
+                show: true
+              dataLabels:
+                enabled: true
+              chart:
+                type: area
+              fill:
+                type: gradient
+                gradient:
+                  shadeIntensity: 0.1
+                  opacityFrom: 0.25
+                  opacityTo: 1
+                  inverseColors: true
+                  stops:
+                    - 0
+                    - 90
+                    - 100
+            series:
+              - entity: sensor.energy_bedachter_daily
+                type: column
+                name: Stroom
+                float_precision: 2
+                show:
+                  datalabels: total
+                group_by:
+                  func: max
+                  duration: 24h
+          - type: 'custom:apexcharts-card'
+            graph_span: 7d
+            update_interval: 5m
+            cache: true
+            header:
+              show: true
+              title: Energy bedvoor per day
+            span:
+              end: day
+            apex_config:
+              yaxis:
+                - show: true
+                  showAlways: true
+                  decimalsInFloat: 0
+                  title:
+                    text: kWh
+              stroke:
+                show: true
+                width: 1
+              legend:
+                show: true
+              dataLabels:
+                enabled: true
+              chart:
+                type: area
+              fill:
+                type: gradient
+                gradient:
+                  shadeIntensity: 0.1
+                  opacityFrom: 0.25
+                  opacityTo: 1
+                  inverseColors: true
+                  stops:
+                    - 0
+                    - 90
+                    - 100
+            series:
+              - entity: sensor.energy_bedvoor_daily
+                type: column
+                name: Stroom
+                float_precision: 2
+                show:
+                  datalabels: total
+                group_by:
+                  func: max
+                  duration: 24h
+          - type: 'custom:apexcharts-card'
+            graph_span: 7d
+            update_interval: 5m
+            cache: true
+            header:
+              show: true
+              title: Energy serverkast per day
+            span:
+              end: day
+            apex_config:
+              yaxis:
+                - show: true
+                  showAlways: true
+                  decimalsInFloat: 0
+                  title:
+                    text: kWh
+              stroke:
+                show: true
+                width: 1
+              legend:
+                show: true
+              dataLabels:
+                enabled: true
+              chart:
+                type: area
+              fill:
+                type: gradient
+                gradient:
+                  shadeIntensity: 0.1
+                  opacityFrom: 0.25
+                  opacityTo: 1
+                  inverseColors: true
+                  stops:
+                    - 0
+                    - 90
+                    - 100
+            series:
+              - entity: sensor.energy_serverkast_daily
+                type: column
+                name: Stroom
+                float_precision: 2
+                show:
+                  datalabels: total
+                group_by:
+                  func: max
+                  duration: 24h
+        square: false
+        columns: 1
+      - type: grid
+        cards:
+          - type: 'custom:apexcharts-card'
+            graph_span: 7d
+            update_interval: 5m
+            cache: true
+            header:
+              show: true
+              title: Energy bedachter per day
+            span:
+              end: day
+            apex_config:
+              yaxis:
+                - show: true
+                  showAlways: true
+                  decimalsInFloat: 0
+                  title:
+                    text: kWh
+              stroke:
+                show: true
+                width: 1
+              legend:
+                show: true
+              dataLabels:
+                enabled: true
+              chart:
+                type: area
+              fill:
+                type: gradient
+                gradient:
+                  shadeIntensity: 0.1
+                  opacityFrom: 0.25
+                  opacityTo: 1
+                  inverseColors: true
+                  stops:
+                    - 0
+                    - 90
+                    - 100
+            series:
+              - entity: sensor.energy_bedachter_daily
+                type: column
+                name: Stroom
+                float_precision: 2
+                show:
+                  datalabels: total
+                group_by:
+                  func: max
+                  duration: 24h
+          - type: 'custom:apexcharts-card'
+            graph_span: 7d
+            update_interval: 5m
+            cache: true
+            header:
+              show: true
+              title: Energy bedvoor per day
+            span:
+              end: day
+            apex_config:
+              yaxis:
+                - show: true
+                  showAlways: true
+                  decimalsInFloat: 0
+                  title:
+                    text: kWh
+              stroke:
+                show: true
+                width: 1
+              legend:
+                show: true
+              dataLabels:
+                enabled: true
+              chart:
+                type: area
+              fill:
+                type: gradient
+                gradient:
+                  shadeIntensity: 0.1
+                  opacityFrom: 0.25
+                  opacityTo: 1
+                  inverseColors: true
+                  stops:
+                    - 0
+                    - 90
+                    - 100
+            series:
+              - entity: sensor.energy_bedvoor_daily
+                type: column
+                name: Stroom
+                float_precision: 2
+                show:
+                  datalabels: total
+                group_by:
+                  func: max
+                  duration: 24h
+        square: false
+        columns: 1
+      - type: 'custom:apexcharts-card'
+        graph_span: 7d
+        cache: true
+        update_interval: 5min
+        span:
+          end: day
+        header:
+          show: true
+          title: Per device daily
+        stacked: true
+        apex_config:
+          stroke:
+            show: true
+            idth: 1
+            curve: smooth
+          chart:
+            type: area
+          fill:
+            type: gradient
+            gradient:
+              shadeIntensity: 0.1
+              opacityFrom: 0.25
+              opacityTo: 1
+              inverseColors: true
+              stops:
+                - 0
+                - 90
+                - 100
+        series:
+          - entity: sensor.energy_bedachter_daily
+            name: bedachter
+            type: column
+            group_by:
+              func: diff
+              duration: 24h
+          - entity: sensor.energy_bedvoor_daily
+            name: bedvoor
+            type: column
+            group_by:
+              func: diff
+              duration: 24h
+          - entity: sensor.energy_serverkast_daily
+            name: serverkast
+            type: column
+            group_by:
+              func: diff
+              duration: 24h
+      - type: 'custom:apexcharts-card'
+        graph_span: 7d
+        update_interval: 5m
+        cache: true
+        header:
+          show: true
+          title: Energy consumption per day
+        span:
+          end: day
+        apex_config:
+          yaxis:
+            - show: true
+              showAlways: true
+              decimalsInFloat: 0
+              title:
+                text: kWh
+          stroke:
+            show: true
+            width: 1
+          legend:
+            show: true
+          dataLabels:
+            enabled: true
+          chart:
+            type: area
+          fill:
+            type: gradient
+            gradient:
+              shadeIntensity: 0.1
+              opacityFrom: 0.25
+              opacityTo: 1
+              inverseColors: true
+              stops:
+                - 0
+                - 90
+                - 100
+        series:
+          - entity: sensor.energy_bedachter_daily
+            type: column
+            name: Stroom
+            float_precision: 2
+            show:
+              datalabels: total
+            group_by:
+              func: max
+              duration: 24h
+      - type: 'custom:mini-graph-card'
+        name: Energy consumption
+        bar_spacing: 2
+        decimals: 3
+        group_by: date
+        height: 200
+        hours_to_show: 168
+        icon: 'mdi:flash'
+        unit: kWh
+        entities:
+          - entity: sensor.energy_bedachter_monthly_peak
+            name: Peak
+            aggregate_func: max
+            color: orange
+          - entity: sensor.energy_bedachter_monthly_offpeak
+            name: Offpeak
+            aggregate_func: max
+            color: 'rgb(52, 152, 219)'
+        show:
+          labels: false
+          graph: bar
+          hour24: true
+          extrema: false
+          average: false
