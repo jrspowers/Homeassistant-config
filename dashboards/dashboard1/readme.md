@@ -10,11 +10,11 @@ Pictures cards | Links to card
 🔌[press here to my Picture Energy card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/energy_card) | 🔌[press here to my Energy card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/energy_card/energy_card.yaml)
 
 ## Dashboard 🖥️
-![dashboard 1 home screen](https://user-images.githubusercontent.com/60328474/117547820-f8dc3800-b031-11eb-8006-fe6416ee9aed.png)
+![dashboard 1 home screen](https://user-images.githubusercontent.com/60328474/118138917-28f75280-b407-11eb-9e87-ca076318031a.png)
 ## Media 📺
 ![dashboard 1 media screen](https://user-images.githubusercontent.com/60328474/117547832-0d203500-b032-11eb-8c0b-225c830c4408.png)
 ## Energy 🔌
-![dashboard 1 energy screen](https://user-images.githubusercontent.com/60328474/117547843-17423380-b032-11eb-808e-c718b041573f.png)
+![dashboard 1 energy screen](https://user-images.githubusercontent.com/60328474/118138873-1b41cd00-b407-11eb-8b68-0593cda0648f.png)
 ## Weer ☁️
 ![dashboard 1 weer screen](https://user-images.githubusercontent.com/60328474/117547848-1d381480-b032-11eb-89c2-33e3909a9618.png)
 
