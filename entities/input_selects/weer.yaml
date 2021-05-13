@@ -1,0 +1,9 @@
+################################################
+## Entities / Input Selects / Weer
+################################################
+weer:
+  name: weer 
+  options:
+    - weer - voorspeling
+    - pollen
+    - regen - sensor 
