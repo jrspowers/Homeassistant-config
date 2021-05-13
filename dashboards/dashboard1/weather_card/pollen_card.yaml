@@ -1,0 +1,54 @@
+#################################################
+## Dashboards / Dashboard1 / Select Weather card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Pollen card 
+#################################################
+type: grid
+cards:
+  - type: picture
+    image: /local/covers/pollen-logo.png
+  - type: 'custom:fold-entity-row'
+    head:
+      type: section
+      label: Pollen
+    open: true
+    entities:
+      - entity: sensor.pollen_grass_risk
+        type: 'custom:multiple-entity-row'
+        entities:
+          - entity: sensor.pollen_grass_count
+            name: false
+      - entity: sensor.pollen_tree_risk
+        type: 'custom:multiple-entity-row'
+        entities:
+          - entity: sensor.pollen_tree_count
+            name: false
+      - entity: sensor.pollen_weed_risk
+        type: 'custom:multiple-entity-row'
+        entities:
+          - entity: sensor.pollen_weed_count
+            name: false
+      - entity: sensor.pollen_last_updated
+      - type: 'custom:fold-entity-row'
+        head:
+          type: section
+          label: Meer informatie
+        entities:
+          - entity: sensor.pollen_berk_count
+          - entity: sensor.pollen_coniferen_count
+          - entity: sensor.pollen_den_count
+          - entity: sensor.pollen_eik_count
+          - entity: sensor.pollen_els_count
+          - entity: sensor.pollen_hazelaar_count
+          - entity: sensor.pollen_iep_count
+          - entity: sensor.pollen_plataan_count
+          - entity: sensor.pollen_populier_count
+          - entity: sensor.pollen_amaranten_count
+          - entity: sensor.pollen_ambrosia_count
+          - entity: sensor.pollen_bijvoet_count
+          - entity: sensor.pollen_brandnetel_count
+columns: 1
+square: false
