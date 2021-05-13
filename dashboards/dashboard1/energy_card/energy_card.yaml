@@ -246,7 +246,6 @@ cards:
             - position: relative
             - height: 40px
             - width: 80px
-            - left: 110px
         entity: input_select.energy
         tap_action:
           service: input_select.select_option
@@ -272,7 +271,6 @@ cards:
             - position: absolute
             - height: 40px
             - width: 80px
-            - left: 210px
         entity: input_select.energy
         tap_action:
           service: input_select.select_option
@@ -282,6 +280,32 @@ cards:
             option: stroommeter - serverkast
         state:
           - value: stroommeter - serverkast
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:chart-bar-stacked'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+            - position: absolute
+            - height: 40px
+            - width: 80px
+            - left: 80px
+        entity: input_select.energy
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.energy
+            option: Stacked diagram - per device
+        state:
+          - value: Stacked diagram - per device
             styles:
               card:
                 - border: 5px solid blue
@@ -630,3 +654,106 @@ cards:
               icon: 'mdi:currency-eur'
       columns: 1
       square: false
+  - type: conditional
+    conditions:
+      - entity: input_select.energy
+        state: Stacked diagram - per device
+    card:
+      type: 'custom:apexcharts-card'
+      graph_span: 7d
+      cache: true
+      update_interval: 5min
+      span:
+        end: day
+      header:
+        show: true
+        title: Per device daily
+      stacked: true
+      apex_config:
+        stroke:
+          show: true
+          idth: 1
+          curve: smooth
+        chart:
+          type: area
+        fill:
+          type: gradient
+          gradient:
+            shadeIntensity: 0.1
+            opacityFrom: 0.25
+            opacityTo: 1
+            inverseColors: true
+            stops:
+              - 0
+              - 90
+              - 100
+      series:
+        - entity: sensor.energy_bedachter_daily
+          name: bedachter
+          type: column
+          group_by:
+            func: diff
+            duration: 24h
+        - entity: sensor.energy_bedvoor_daily
+          name: bedvoor
+          type: column
+          group_by:
+            func: diff
+            duration: 24h
+        - entity: sensor.energy_serverkast_daily
+          name: serverkast
+          type: column
+          group_by:
+            func: diff
+            duration: 24h
+###############################################################
+## Dashboards / Dashboard1 / Energy card / Stacked diagram card 
+###############################################################
+type: 'custom:apexcharts-card'
+graph_span: 7d
+cache: true
+update_interval: 5min
+span:
+  end: day
+header:
+  show: true
+  title: Per device daily
+stacked: true
+apex_config:
+  stroke:
+    show: true
+    idth: 1
+    curve: smooth
+  chart:
+    type: area
+  fill:
+    type: gradient
+    gradient:
+      shadeIntensity: 0.1
+      opacityFrom: 0.25
+      opacityTo: 1
+      inverseColors: true
+      stops:
+        - 0
+        - 90
+        - 100
+series:
+  - entity: sensor.energy_bedachter_daily
+    name: bedachter
+    type: column
+    group_by:
+      func: diff
+      duration: 24h
+  - entity: sensor.energy_bedvoor_daily
+    name: bedvoor
+    type: column
+    group_by:
+      func: diff
+      duration: 24h
+  - entity: sensor.energy_serverkast_daily
+    name: serverkast
+    type: column
+    group_by:
+      func: diff
+      duration: 24h
+
