@@ -4,18 +4,18 @@
 platform: template
 sensors:      
     formula_1:
-      friendly_name: Formula 1
-      icon_template: mdi:keyboard-f1
-      value_template: >
+    friendly_name: Formula 1
+    icon_template: mdi:keyboard-f1
+    value_template: >
         {% set raceWeekNr = as_timestamp(strptime(state_attr('calendar.f1_free_practice_1', 'start_time'), '%d %h %m')) | timestamp_custom('%U') %}
         {% set curWeekNr = as_timestamp(now()) | timestamp_custom('%U') %}
         
         {% if raceWeekNr != curWeekNr %}
-          No race this week
+        No race this week
         {% else %}
-          Race week!
+        Race week!
         {% endif %}
-      attribute_templates:
+    attribute_templates:
         free_practice_1_day: >
             {{ as_timestamp(strptime(state_attr('calendar.f1_free_practice_1', 'start_time'), '%d %h %m')) | timestamp_custom('%A %d %B') | replace("Thursday", "donderdag") | replace("Friday", "vrijdag") | replace("Saturday", "zaterdag") | replace("Sunday", "zondag") | replace("January", "Januari") | replace("February", "Februari") | replace("March", "Maart") | replace("May", "Mei") | replace("June", "Juni") | replace("July", "Juli") | replace("August", "Augustus") | replace("October", "Oktober") }}
         free_practice_1_time: >
