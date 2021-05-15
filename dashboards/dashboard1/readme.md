@@ -10,6 +10,8 @@ Pictures cards | Links to card
 🔌[press here to my Picture Energy card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/energy_card) | 🔌[press here to my Energy card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/energy_card/energy_card.yaml)
 ☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card) | ☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card/select_weather_card.yaml)
 🌳 [press here to my Pollen card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card) | 🌳 [press here to my Pollen card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card/pollen_card.yaml)
+🔨 [press here to my Covers card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/covers_card) | 🔨 [press here to my Covers card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/covers_card/covers_card.yaml)
+
 ## Dashboard 🖥️
 ![dashboard 1 home screen](https://user-images.githubusercontent.com/60328474/118138917-28f75280-b407-11eb-9e87-ca076318031a.png)
 ## Media 📺
@@ -18,4 +20,5 @@ Pictures cards | Links to card
 ![dashboard 1 energy screen](https://user-images.githubusercontent.com/60328474/118138873-1b41cd00-b407-11eb-8b68-0593cda0648f.png)
 ## Weer ☁️
 ![dashboard 1 weer screen](https://user-images.githubusercontent.com/60328474/118172208-67533880-b42c-11eb-84e1-acd273e09120.png)
-
+## Covers 🔨
+![dashboard 1 covers](https://user-images.githubusercontent.com/60328474/118363280-e31bc500-b593-11eb-85cd-38edff873c5e.png)
