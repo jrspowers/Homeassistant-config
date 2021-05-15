@@ -1,0 +1,120 @@
+#################################################
+## Dashboards / Dashboard1 / covers card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / covers card 
+#################################################
+type: vertical-stack
+cards:
+  - type: picture
+    image: /local/covers/somfy-logo.png
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:window-shutter'
+        show_name: true
+        name: Jarne
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.covers
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.covers
+            option: cover - jarne
+        state:
+          - value: cover - jarne
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:window-shutter'
+        show_name: true
+        name: jathe
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.covers
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.covers
+            option: cover - jathe
+        state:
+          - value: cover - jathe
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:window-shutter'
+        show_name: true
+        name: papa
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.covers
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.covers
+            option: cover - papa
+        state:
+          - value: cover - papa
+            styles:
+              card:
+                - border: 5px solid blue
+  - type: conditional
+    conditions:
+      - entity: input_select.covers
+        state: cover - jarne
+    card:
+      type: vertical-stack
+      cards:
+        - entities:
+            - entity: cover.jarne
+          type: 'custom:shutter-card'
+  - type: conditional
+    conditions:
+      - entity: input_select.covers
+        state: cover - jathe
+    card:
+      type: vertical-stack
+      cards:
+        - entities:
+            - entity: cover.jathe
+          type: 'custom:shutter-card'
+  - type: conditional
+    conditions:
+      - entity: input_select.covers
+        state: cover - papa
+    card:
+      type: vertical-stack
+      cards:
+        - entities:
+            - entity: cover.frank_links
+          type: 'custom:shutter-card'
+        - entities:
+            - entity: cover.frank_rechts
+          type: 'custom:shutter-card'
