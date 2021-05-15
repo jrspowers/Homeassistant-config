@@ -624,13 +624,13 @@ views:
                         border-radius: 30px
                         padding: 10px
                         box-shadow: |
-                          {% if is_state('group.covers', 'on') %}
+                          {% if is_state('group.covers', 'open') %}
                            0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0,0,255,.5)
                           {% else %}
                             0px 8px 15px rgba(0, 0, 0, 0.2);
                           {% endif %}
                         color: |
-                          {% if is_state('group.covers', 'on') %}
+                          {% if is_state('group.covers', 'gesloten') %}
                             white
                           {% else %}
                             rgba(0,0,0,.5)
@@ -642,7 +642,7 @@ views:
                       navigation_path: '#p4'
                     hold_action:
                       action: navigate
-                      navigation_path: network
+                      navigation_path: covers
                   - entity: group.media
                     name: false
                     icon: 'hass:television'
@@ -839,33 +839,118 @@ views:
                         margin-top: none;
                         }
                     card:
-                      type: grid
-                      square: true
+                      type: vertical-stack
                       cards:
-                        - type: 'custom:button-card'
-                          entity: cover.jarne
-                          name: Jarne
-                          template:
-                            - covers
-                            - popup
-                        - type: 'custom:button-card'
-                          entity: cover.jathe
-                          name: Jathe
-                          template:
-                            - covers
-                            - popup
-                        - type: 'custom:button-card'
-                          entity: cover.frank_links
-                          name: Frank Links
-                          template:
-                            - covers
-                            - popup
-                        - type: 'custom:button-card'
-                          entity: cover.frank_rechts
-                          name: Frank Rechts
-                          template:
-                            - covers
-                            - popup
+                        - type: picture
+                          image: /local/covers/somfy-logo.png
+                          tap_action:
+                            action: none
+                          hold_action:
+                            action: none
+                        - type: horizontal-stack
+                          cards:
+                            - type: 'custom:button-card'
+                              color_type: card
+                              icon: 'mdi:window-shutter'
+                              show_name: true
+                              name: Jarne
+                              styles:
+                                card:
+                                  - background-color: 'rgb(0,0,0)'
+                                  - border-radius: 20px
+                                  - color: 'rgb(255,255,255)'
+                                  - border: 5px solid black
+                              entity: input_select.covers
+                              tap_action:
+                                service: input_select.select_option
+                                action: call-service
+                                service_data:
+                                  entity_id: input_select.covers
+                                  option: cover - jarne
+                              state:
+                                - value: cover - jarne
+                                  styles:
+                                    card:
+                                      - border: 5px solid blue
+                            - type: 'custom:button-card'
+                              color_type: card
+                              icon: 'mdi:window-shutter'
+                              show_name: true
+                              name: jathe
+                              styles:
+                                card:
+                                  - background-color: 'rgb(0,0,0)'
+                                  - border-radius: 20px
+                                  - color: 'rgb(255,255,255)'
+                                  - border: 5px solid black
+                              entity: input_select.covers
+                              tap_action:
+                                service: input_select.select_option
+                                action: call-service
+                                service_data:
+                                  entity_id: input_select.covers
+                                  option: cover - jathe
+                              state:
+                                - value: cover - jathe
+                                  styles:
+                                    card:
+                                      - border: 5px solid blue
+                            - type: 'custom:button-card'
+                              color_type: card
+                              icon: 'mdi:window-shutter'
+                              show_name: true
+                              name: papa
+                              styles:
+                                card:
+                                  - background-color: 'rgb(0,0,0)'
+                                  - border-radius: 20px
+                                  - color: 'rgb(255,255,255)'
+                                  - border: 5px solid black
+                              entity: input_select.covers
+                              tap_action:
+                                service: input_select.select_option
+                                action: call-service
+                                service_data:
+                                  entity_id: input_select.covers
+                                  option: cover - papa
+                              state:
+                                - value: cover - papa
+                                  styles:
+                                    card:
+                                      - border: 5px solid blue
+                        - type: conditional
+                          conditions:
+                            - entity: input_select.covers
+                              state: cover - jarne
+                          card:
+                            type: vertical-stack
+                            cards:
+                              - entities:
+                                  - entity: cover.jarne
+                                type: 'custom:shutter-card'
+                        - type: conditional
+                          conditions:
+                            - entity: input_select.covers
+                              state: cover - jathe
+                          card:
+                            type: vertical-stack
+                            cards:
+                              - entities:
+                                  - entity: cover.jathe
+                                type: 'custom:shutter-card'
+                        - type: conditional
+                          conditions:
+                            - entity: input_select.covers
+                              state: cover - papa
+                          card:
+                            type: vertical-stack
+                            cards:
+                              - entities:
+                                  - entity: cover.frank_links
+                                type: 'custom:shutter-card'
+                              - entities:
+                                  - entity: cover.frank_rechts
+                                type: 'custom:shutter-card'
                   p2:
                     type: 'custom:mod-card'
                     style: |
@@ -2864,7 +2949,7 @@ views:
                           group: true
                           icon_state: true
                           power_color: true
-                          volume: true
+                          volume: false
                           shuffle: true
                           controls: true
                           name: true
@@ -3188,7 +3273,7 @@ views:
                           icon_state: true
                           power_color: true
                           group: true
-                          volume: true
+                          volume: false
                           controls: false
                         speaker_group:
                           platform: sonos
@@ -3209,7 +3294,7 @@ views:
                           group: true
                           icon_state: true
                           power_color: true
-                          volume: true
+                          volume: false
                           shuffle: true
                           controls: true
                           name: true
@@ -4133,7 +4218,8 @@ views:
                   group_by:
                     func: max
                     duration: 1h
-      - type: 'custom:paper-buttons-row'
+      - &ref_0
+        type: 'custom:paper-buttons-row'
         buttons:
           - name: home
             icon: 'mdi:home-outline'
@@ -4148,6 +4234,212 @@ views:
             tap_action:
               action: navigate
               navigation_path: home
+  - title: covers
+    path: covers
+    icon: 'mdi:window-shutter'
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: picture
+            image: /local/covers/somfy-logo.png
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+          - type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: card
+                icon: 'mdi:window-shutter'
+                show_name: true
+                name: Jarne
+                styles:
+                  card:
+                    - background-color: 'rgb(0,0,0)'
+                    - border-radius: 20px
+                    - color: 'rgb(255,255,255)'
+                    - border: 5px solid black
+                entity: input_select.covers
+                tap_action:
+                  service: input_select.select_option
+                  action: call-service
+                  service_data:
+                    entity_id: input_select.covers
+                    option: cover - jarne
+                state:
+                  - value: cover - jarne
+                    styles:
+                      card:
+                        - border: 5px solid blue
+              - type: 'custom:button-card'
+                color_type: card
+                icon: 'mdi:window-shutter'
+                show_name: true
+                name: jathe
+                styles:
+                  card:
+                    - background-color: 'rgb(0,0,0)'
+                    - border-radius: 20px
+                    - color: 'rgb(255,255,255)'
+                    - border: 5px solid black
+                entity: input_select.covers
+                tap_action:
+                  service: input_select.select_option
+                  action: call-service
+                  service_data:
+                    entity_id: input_select.covers
+                    option: cover - jathe
+                state:
+                  - value: cover - jathe
+                    styles:
+                      card:
+                        - border: 5px solid blue
+              - type: 'custom:button-card'
+                color_type: card
+                icon: 'mdi:window-shutter'
+                show_name: true
+                name: papa
+                styles:
+                  card:
+                    - background-color: 'rgb(0,0,0)'
+                    - border-radius: 20px
+                    - color: 'rgb(255,255,255)'
+                    - border: 5px solid black
+                entity: input_select.covers
+                tap_action:
+                  service: input_select.select_option
+                  action: call-service
+                  service_data:
+                    entity_id: input_select.covers
+                    option: cover - papa
+                state:
+                  - value: cover - papa
+                    styles:
+                      card:
+                        - border: 5px solid blue
+          - type: conditional
+            conditions:
+              - entity: input_select.covers
+                state: cover - jarne
+            card:
+              type: vertical-stack
+              cards:
+                - entities:
+                    - entity: cover.jarne
+                  type: 'custom:shutter-card'
+          - type: conditional
+            conditions:
+              - entity: input_select.covers
+                state: cover - jathe
+            card:
+              type: vertical-stack
+              cards:
+                - entities:
+                    - entity: cover.jathe
+                  type: 'custom:shutter-card'
+          - type: conditional
+            conditions:
+              - entity: input_select.covers
+                state: cover - papa
+            card:
+              type: vertical-stack
+              cards:
+                - entities:
+                    - entity: cover.frank_links
+                  type: 'custom:shutter-card'
+                - entities:
+                    - entity: cover.frank_rechts
+                  type: 'custom:shutter-card'
+      - *ref_0
+  - title: Find my
+    path: find-my
+    icon: 'mdi:radar'
+    badges: []
+    cards:
+      - type: vertical-stack
+        item_classes: col-xs-12 col-sm-3
+        cards:
+          - type: entities
+            title: Devices
+            style: |
+              ha-card {
+                border-radius: 10px;
+                padding-bottom: 10px;
+                background-color: var(--dwains-theme-primary)
+              }
+              :host {
+                --paper-item-icon-color: var(--dwains-theme-accent) !important;
+              }
+              .card-header {
+                padding: 5px 16px;
+                font-size: 15px;
+                font-weight: 700 !important;
+              }
+              .card-content div {
+                  margin: 0 !important;
+              }
+              #states {
+                padding-top: 0px !important;
+                padding-bottom: 0px !important;
+              }
+              .secondary {
+                color: darkgray !important;
+                margin-left: 2px !important;
+              }
+            entities:
+              - entity: person.jarne
+                secondary_info: last-updated
+              - entity: device_tracker.iphone_van_jarne
+                secondary_info: last-updated
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Meer devices
+                entities:
+                  - entity: sensor.iphone_van_jarne_battery_state
+                    secondary_info: last-updated
+                  - entity: sensor.iphone_van_jarne_battery_state_2
+                    secondary_info: last-updated
+                  - entity: device_tracker.ipad_van_jarne
+                    secondary_info: last-updated
+              - type: divider
+                style:
+                  pandding-top: 10px;
+                  height: 1px
+                  width: 100%
+                  margin-left: auto
+                  margin-right: auto
+                  background: var(--primary-text-color)
+                entities: null
+              - entity: person.jathe
+                secondary_info: last-updated
+              - entity: device_tracker.iphone_van_jathe
+                secondary_info: last-updated
+              - type: 'custom:fold-entity-row'
+                head:
+                  type: section
+                  label: Meer devices
+                entities:
+                  - entity: sensor.iphone_van_jathe_battery_state
+                    secondary_info: last-updated
+                  - entity: sensor.iphone_van_jathe_battery_state_2
+                    secondary_info: last-updated
+              - type: divider
+                style:
+                  pandding-top: 10px;
+                  height: 1px
+                  width: 100%
+                  margin-left: auto
+                  margin-right: auto
+                  background: var(--primary-text-color)
+          - type: map
+            item_classes: col-xs-12 col-sm-9
+            entities:
+              - entity: person.jarne
+              - entity: person.jathe
+            dark_mode: true
+            hours_to_show: 24
   - title: Network
     path: network
     icon: 'hass:router-wireless'
@@ -4401,94 +4693,6 @@ views:
                     tap_action:
                       action: navigate
                       navigation_path: home
-  - title: Find my
-    path: find-my
-    icon: 'mdi:radar'
-    badges: []
-    cards:
-      - type: vertical-stack
-        item_classes: col-xs-12 col-sm-3
-        cards:
-          - type: entities
-            title: Devices
-            style: |
-              ha-card {
-                border-radius: 10px;
-                padding-bottom: 10px;
-                background-color: var(--dwains-theme-primary)
-              }
-              :host {
-                --paper-item-icon-color: var(--dwains-theme-accent) !important;
-              }
-              .card-header {
-                padding: 5px 16px;
-                font-size: 15px;
-                font-weight: 700 !important;
-              }
-              .card-content div {
-                  margin: 0 !important;
-              }
-              #states {
-                padding-top: 0px !important;
-                padding-bottom: 0px !important;
-              }
-              .secondary {
-                color: darkgray !important;
-                margin-left: 2px !important;
-              }
-            entities:
-              - entity: person.jarne
-                secondary_info: last-updated
-              - entity: device_tracker.iphone_van_jarne
-                secondary_info: last-updated
-              - type: 'custom:fold-entity-row'
-                head:
-                  type: section
-                  label: Meer devices
-                entities:
-                  - entity: sensor.iphone_van_jarne_battery_state
-                    secondary_info: last-updated
-                  - entity: sensor.iphone_van_jarne_battery_state_2
-                    secondary_info: last-updated
-                  - entity: device_tracker.ipad_van_jarne
-                    secondary_info: last-updated
-              - type: divider
-                style:
-                  pandding-top: 10px;
-                  height: 1px
-                  width: 100%
-                  margin-left: auto
-                  margin-right: auto
-                  background: var(--primary-text-color)
-                entities: null
-              - entity: person.jathe
-                secondary_info: last-updated
-              - entity: device_tracker.iphone_van_jathe
-                secondary_info: last-updated
-              - type: 'custom:fold-entity-row'
-                head:
-                  type: section
-                  label: Meer devices
-                entities:
-                  - entity: sensor.iphone_van_jathe_battery_state
-                    secondary_info: last-updated
-                  - entity: sensor.iphone_van_jathe_battery_state_2
-                    secondary_info: last-updated
-              - type: divider
-                style:
-                  pandding-top: 10px;
-                  height: 1px
-                  width: 100%
-                  margin-left: auto
-                  margin-right: auto
-                  background: var(--primary-text-color)
-          - type: map
-            item_classes: col-xs-12 col-sm-9
-            entities:
-              - entity: person.jarne
-              - entity: person.jathe
-            dark_mode: true
-            hours_to_show: 24
   - title: DEV2
     path: dev2
     theme: ''
