@@ -16,4 +16,8 @@ homeassistant:
 browser_mod:
   prefix: "browser_mod_"
 
-
+mqtt_statestream:
+  base_topic: homeassistant
+  include:
+    entities:
+      - sensor.stroommeter_bedvoor_power
