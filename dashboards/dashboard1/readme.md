@@ -22,3 +22,6 @@ Pictures cards | Links to card
 ![dashboard 1 Weather screen](https://user-images.githubusercontent.com/60328474/118376229-f6945380-b5c6-11eb-9c7e-bd4b8bf94b3e.png)
 ## Covers 🔨
 ![dashboard 1 covers screen](https://user-images.githubusercontent.com/60328474/118376244-1461b880-b5c7-11eb-9890-f05e6d7e3600.png)
+## Network 📈
+![dashboard 1 network screen](https://user-images.githubusercontent.com/60328474/118378122-c0100600-b5d1-11eb-8a98-b0e130019162.png)
+
