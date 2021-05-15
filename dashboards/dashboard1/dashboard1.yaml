@@ -2281,6 +2281,78 @@ views:
                           background: rgba(255,255,255,.1);
                         }
                   square: false
+                - type: grid
+                  cards:
+                    - type: picture
+                      image: /local/covers/home_assistant_logo.png
+                    - type: grid
+                      cards:
+                        - type: 'custom:uptime-card'
+                          entity: binary_sensor.home_assistant
+                          icon: 'mdi:home-assistant'
+                          name: Home assistant
+                          hours_to_show: 24
+                          status_adaptive_color: true
+                          average_text: '% uptime'
+                          alias:
+                            ok: Online
+                            ko: Offline
+                          blink:
+                            effect: fade
+                            target: card
+                            speed: 1
+                          color:
+                            icon: gray
+                            ok: '#45C669'
+                            ko: '#C6B145'
+                            half: '#C66445'
+                            none: '#C9C9C9'
+                            title: gray
+                          show:
+                            header: true
+                            title: true
+                            icon: true
+                            footer: true
+                            status: true
+                            timeline: true
+                            average: true
+                          tooltip:
+                            animation: true
+                        - type: 'custom:uptime-card'
+                          entity: binary_sensor.synology
+                          icon: 'mdi:server'
+                          name: Synology
+                          hours_to_show: 24
+                          status_adaptive_color: true
+                          average_text: '% uptime'
+                          alias:
+                            ok: Online
+                            ko: Offline
+                          blink:
+                            effect: fade
+                            target: card
+                            speed: 1
+                          color:
+                            icon: gray
+                            ok: '#45C669'
+                            ko: '#C6B145'
+                            half: '#C66445'
+                            none: '#C9C9C9'
+                            title: gray
+                          show:
+                            header: true
+                            title: true
+                            icon: true
+                            footer: true
+                            status: true
+                            timeline: true
+                            average: true
+                          tooltip:
+                            animation: true
+                      square: false
+                      columns: 2
+                  columns: 1
+                  square: false
   - title: Media
     path: media
     icon: 'hass:movie'
@@ -4075,28 +4147,46 @@ views:
             card:
               type: grid
               cards:
-                - type: weather-forecast
-                  entity: weather.openweathermap
+                - type: vertical-stack
+                  cards:
+                    - type: 'custom:weather-card'
+                      style: |
+                        ha-card {
+                          border-radius: 10px;
+                          padding-bottom: 10px;
+                          background-color: var(--dwains-theme-primary)
+                        }
+                        :host {
+                          --paper-item-icon-color: var(--dwains-theme-accent) !important;
+                        }
+                        .card-header {
+                          padding: 5px 16px;
+                          font-size: 15px;
+                          font-weight: 700 !important;
+                        }
+                        #states {
+                          padding-top: 0px !important;
+                          padding-bottom: 0px !important;
+                        }
+                        .secondary {
+                          color: darkgray !important;
+                          margin-left: 2px !important;
+                        }
+                      entity: weather.openweathermap
+                      current: true
+                      details: true
+                      forecast: true
+                      hourly_forecast: false
+                      number_of_forecasts: '5'
                 - type: entities
                   entities:
                     - entity: sensor.openweathermap_weather
                       name: Weer Voorspeling
                       icon: 'mdi:weather-cloudy-alert'
+                    - entity: sensor.season
                     - entity: sensor.openweathermap_feels_like_temperature
                       name: Voelt Aan Als
                       icon: 'mdi:thermometer-alert'
-                    - entity: sensor.openweathermap_forecast_temperature
-                      name: Max Temperature
-                      icon: 'mdi:thermometer-chevron-up'
-                    - entity: sensor.openweathermap_forecast_temperature_low
-                      name: Min Temperature
-                      icon: 'mdi:thermometer-chevron-down'
-                    - entity: sensor.openweathermap_forecast_precipitation
-                      name: Neerslag
-                      icon: 'mdi:weather-rainy'
-                    - entity: sensor.cc_example_climacell_wind_speed
-                      name: Wind Snelheid
-                      icon: 'mdi:windsock'
                     - entity: sensor.openweathermap_uv_index
                       name: UV-INDEX
                       icon: 'mdi:weather-sunny'
@@ -4106,9 +4196,20 @@ views:
                         label: Weer Statistieken
                       open: false
                       entities:
-                        - entity: sensor.season
                         - entity: sun.sun
                         - entity: sensor.moon
+                        - entity: sensor.openweathermap_forecast_temperature
+                          name: Max Temperature
+                          icon: 'mdi:thermometer-chevron-up'
+                        - entity: sensor.openweathermap_forecast_temperature_low
+                          name: Min Temperature
+                          icon: 'mdi:thermometer-chevron-down'
+                        - entity: sensor.openweathermap_forecast_precipitation
+                          name: Neerslag
+                          icon: 'mdi:weather-rainy'
+                        - entity: sensor.cc_example_climacell_wind_speed
+                          name: Wind Snelheid
+                          icon: 'mdi:windsock'
                         - entity: sensor.openweathermap_weather
                           name: Weer Voorspeling
                           icon: 'mdi:weather-cloudy-alert'
@@ -4218,8 +4319,7 @@ views:
                   group_by:
                     func: max
                     duration: 1h
-      - &ref_0
-        type: 'custom:paper-buttons-row'
+      - type: 'custom:paper-buttons-row'
         buttons:
           - name: home
             icon: 'mdi:home-outline'
@@ -4351,7 +4451,21 @@ views:
                 - entities:
                     - entity: cover.frank_rechts
                   type: 'custom:shutter-card'
-      - *ref_0
+      - type: 'custom:paper-buttons-row'
+        buttons:
+          - name: home
+            icon: 'mdi:home-outline'
+            style:
+              button:
+                background: 'rgba(255,255,255,.1)'
+                border-radius: 30px
+                font-size: 20px
+                font-family: Assistant
+                padding: 100px 100px
+                box-shadow: '0px 8px 15px rgba(0, 0, 0, 0.2)'
+            tap_action:
+              action: navigate
+              navigation_path: home
   - title: Find my
     path: find-my
     icon: 'mdi:radar'
@@ -4545,154 +4659,74 @@ views:
                 tap_action:
                   action: navigate
                   navigation_path: home
-      - type: 'custom:vertical-stack-in-card'
-        style: |
-          ha-card {
-            background: none;
-          }
+      - type: grid
         cards:
-          - type: 'custom:button-card'
-            tap_action:
-              action: more-info
-            entity: binary_sensor.pi_hole
-            icon: 'hass:pi-hole'
-            show_state: true
-            show_last_changed: true
-            layout: icon_name_state2nd
-            styles:
-              state:
-                - padding: 15px
-          - type: horizontal-stack
-            cards:
-              - type: sensor
-                entity: sensor.pihole_cpu_usage
-                graph: line
-                detail: 2
-                hours_to_show: 48
-                name: CPU
-              - type: sensor
-                entity: sensor.pihole_memory_use
-                graph: line
-                hours_to_show: 48
-                detail: 2
-                name: Memory
-              - type: sensor
-                entity: sensor.pihole_disk_use_drive1
-                graph: line
-                hours_to_show: 48
-                detail: 2
-                name: Disk
-            square: false
-            columns: 2
-          - type: glance
-            entities:
-              - entity: sensor.pi_hole_ads_blocked_today
-                name: Blocked Today
-              - entity: sensor.pi_hole_dns_unique_clients
-                name: Conneced
-              - entity: sensor.pihole_temperature
-                name: Temperature
-            show_name: true
-      - type: vertical-stack
-        cards:
-          - type: 'custom:mod-card'
-            style: |
-              ha-card {
-                padding: 10px;
-                background: var( --ha-card-background, var(--card-background-color, white) );
-              }
-            card:
-              type: vertical-stack
-              cards:
-                - type: 'custom:button-card'
-                  tap_action:
-                    action: more-info
-                  entity: switch.clem
-                  icon: 'fas:dragon'
-                  layout: icon_name_state2nd
-                  show_state: true
-                  show_last_changed: true
-                  name: Clem's Tank
-                  styles:
-                    card:
-                      - background: none
-                      - box-shadow: none
-                - type: grid
-                  cards:
-                    - type: sensor
-                      entity: sensor.lumi_lumi_weather_0a037c06_temperature
-                      graph: line
-                      style: |
-                        ha-card {
-                          background: none;
-                          box-shadow: none;
-                          }
-                      name: Temp
-                    - type: sensor
-                      entity: sensor.lumi_lumi_weather_0a037c06_humidity
-                      graph: line
-                      name: Hum
-                      detail: 1
-                      style: |
-                        ha-card {
-                          background: none;
-                          box-shadow: none;
-                          }
-                    - type: 'custom:button-card'
-                      aspect_ratio: 1/1
-                      tap_action:
-                        action: toggle
-                      entity: switch.tank_heater
-                      icon: 'hass:radiator'
-                      show_state: true
-                      style: |
-                        ha-card {
-                          background: none;
-                          box-shadow: none;
-                          }
-                      lock:
-                        enabled: true
-                  square: true
-          - type: entities
-            style: |
-              ha-card {
-                background: none;
-                box-shadow: none;
-                animation: fade-in-top 1s;
-                  }
-              @keyframes fade-in-top {
-                0%{
-                  -webkit-transform: translateY(-50px);
-                  transform: translateY(-50px);
-                  opacity: 0;
-                }
-                100%{
-                  -webkit-transform: translateY(0);
-                  transform: translateY(0);
-                  opacity: 1;
-                }
-               }
-                }
-            entities:
-              - type: 'custom:paper-buttons-row'
-                buttons:
-                  - entity: group.boudoir
-                    name: false
-                    icon: 'hass:home'
-                    style:
-                      button:
-                        background: 'rgba(255,255,255,.1)'
-                        box-shadow: >-
-                          0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px
-                          rgba(255,255,255,.5)
-                        border-radius: 50px
-                        padding: 20px
-                        color: white
-                      icon:
-                        '--mdc-icon-size': 40px
-                    tap_action:
-                      action: navigate
-                      navigation_path: home
+          - type: picture
+            image: /local/covers/home_assistant_logo.png
+          - type: 'custom:uptime-card'
+            entity: binary_sensor.home_assistant
+            icon: 'mdi:home-assistant'
+            name: Home assistant
+            hours_to_show: 24
+            status_adaptive_color: true
+            average_text: '% uptime'
+            alias:
+              ok: Online
+              ko: Offline
+            blink:
+              effect: fade
+              target: card
+              speed: 1
+            color:
+              icon: gray
+              ok: '#45C669'
+              ko: '#C6B145'
+              half: '#C66445'
+              none: '#C9C9C9'
+              title: gray
+            show:
+              header: true
+              title: true
+              icon: true
+              footer: true
+              status: true
+              timeline: true
+              average: true
+            tooltip:
+              animation: true
+          - type: 'custom:uptime-card'
+            entity: binary_sensor.synology
+            icon: 'mdi:server'
+            name: Synology
+            hours_to_show: 24
+            status_adaptive_color: true
+            average_text: '% uptime'
+            alias:
+              ok: Online
+              ko: Offline
+            blink:
+              effect: fade
+              target: card
+              speed: 1
+            color:
+              icon: gray
+              ok: '#45C669'
+              ko: '#C6B145'
+              half: '#C66445'
+              none: '#C9C9C9'
+              title: gray
+            show:
+              header: true
+              title: true
+              icon: true
+              footer: true
+              status: true
+              timeline: true
+              average: true
+            tooltip:
+              animation: true
+        columns: 1
+        square: false
   - title: DEV2
     path: dev2
     theme: ''
@@ -12303,6 +12337,240 @@ views:
             group_by:
               func: max
               duration: 1h
+      - type: 'custom:uptime-card'
+        entity: binary_sensor.home_assistant
+        icon: 'fas:safari'
+        name: Home assistant
+        hours_to_show: 1
+        status_adaptive_color: true
+        average_text: '% uptime'
+        alias:
+          ok: Online
+          ko: Offline
+        blink:
+          effect: fade
+          target: card
+          speed: 1
+        color:
+          icon: gray
+          ok: '#45C669'
+          ko: '#C6B145'
+          half: '#C66445'
+          none: '#C9C9C9'
+          title: gray
+        show:
+          header: true
+          title: true
+          icon: true
+          footer: true
+          status: true
+          timeline: true
+          average: true
+        tooltip:
+          animation: true
+      - type: 'custom:uptime-card'
+        entity: binary_sensor.synology
+        icon: 'fas:safari'
+        name: Synology
+        hours_to_show: 1
+        status_adaptive_color: true
+        average_text: '% uptime'
+        alias:
+          ok: Online
+          ko: Offline
+        blink:
+          effect: fade
+          target: card
+          speed: 1
+        color:
+          icon: gray
+          ok: '#45C669'
+          ko: '#C6B145'
+          half: '#C66445'
+          none: '#C9C9C9'
+          title: gray
+        show:
+          header: true
+          title: true
+          icon: true
+          footer: true
+          status: true
+          timeline: true
+          average: true
+        tooltip:
+          animation: true
+      - type: grid
+        cards:
+          - type: picture
+            image: /local/covers/home_assistant_logo.png
+          - type: grid
+            cards:
+              - type: 'custom:uptime-card'
+                entity: binary_sensor.home_assistant
+                icon: 'mdi:home-assistant'
+                name: Home assistant
+                hours_to_show: 24
+                status_adaptive_color: true
+                average_text: '% uptime'
+                alias:
+                  ok: Online
+                  ko: Offline
+                blink:
+                  effect: fade
+                  target: card
+                  speed: 1
+                color:
+                  icon: gray
+                  ok: '#45C669'
+                  ko: '#C6B145'
+                  half: '#C66445'
+                  none: '#C9C9C9'
+                  title: gray
+                show:
+                  header: true
+                  title: true
+                  icon: true
+                  footer: true
+                  status: true
+                  timeline: true
+                  average: true
+                tooltip:
+                  animation: true
+              - type: 'custom:uptime-card'
+                entity: binary_sensor.synology
+                icon: 'mdi:server'
+                name: Synology
+                hours_to_show: 24
+                status_adaptive_color: true
+                average_text: '% uptime'
+                alias:
+                  ok: Online
+                  ko: Offline
+                blink:
+                  effect: fade
+                  target: card
+                  speed: 1
+                color:
+                  icon: gray
+                  ok: '#45C669'
+                  ko: '#C6B145'
+                  half: '#C66445'
+                  none: '#C9C9C9'
+                  title: gray
+                show:
+                  header: true
+                  title: true
+                  icon: true
+                  footer: true
+                  status: true
+                  timeline: true
+                  average: true
+                tooltip:
+                  animation: true
+            square: false
+            columns: 2
+        columns: 1
+        square: false
+      - type: vertical-stack
+        cards:
+          - type: 'custom:mod-card'
+            style: |
+              ha-card {
+                padding: 10px;
+                background: var( --ha-card-background, var(--card-background-color, white) );
+              }
+            card:
+              type: vertical-stack
+              cards:
+                - type: 'custom:button-card'
+                  tap_action:
+                    action: more-info
+                  entity: switch.clem
+                  icon: 'fas:dragon'
+                  layout: icon_name_state2nd
+                  show_state: true
+                  show_last_changed: true
+                  name: Clem's Tank
+                  styles:
+                    card:
+                      - background: none
+                      - box-shadow: none
+                - type: grid
+                  cards:
+                    - type: sensor
+                      entity: sensor.lumi_lumi_weather_0a037c06_temperature
+                      graph: line
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          }
+                      name: Temp
+                    - type: sensor
+                      entity: sensor.lumi_lumi_weather_0a037c06_humidity
+                      graph: line
+                      name: Hum
+                      detail: 1
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          }
+                    - type: 'custom:button-card'
+                      aspect_ratio: 1/1
+                      tap_action:
+                        action: toggle
+                      entity: switch.tank_heater
+                      icon: 'hass:radiator'
+                      show_state: true
+                      style: |
+                        ha-card {
+                          background: none;
+                          box-shadow: none;
+                          }
+                      lock:
+                        enabled: true
+                  square: true
+          - type: entities
+            style: |
+              ha-card {
+                background: none;
+                box-shadow: none;
+                animation: fade-in-top 1s;
+                  }
+              @keyframes fade-in-top {
+                0%{
+                  -webkit-transform: translateY(-50px);
+                  transform: translateY(-50px);
+                  opacity: 0;
+                }
+                100%{
+                  -webkit-transform: translateY(0);
+                  transform: translateY(0);
+                  opacity: 1;
+                }
+               }
+                }
+            entities:
+              - type: 'custom:paper-buttons-row'
+                buttons:
+                  - entity: group.boudoir
+                    name: false
+                    icon: 'hass:home'
+                    style:
+                      button:
+                        background: 'rgba(255,255,255,.1)'
+                        box-shadow: >-
+                          0px 8px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px
+                          rgba(255,255,255,.5)
+                        border-radius: 50px
+                        padding: 20px
+                        color: white
+                      icon:
+                        '--mdc-icon-size': 40px
+                    tap_action:
+                      action: navigate
+                      navigation_path: home
   - title: test energy
     path: test-energy
     icon: 'mdi:information-outline'
