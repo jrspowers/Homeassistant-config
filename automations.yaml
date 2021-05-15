@@ -45,11 +45,10 @@
   alias: deur open
   description: ''
   trigger:
-  - type: turned_on
-    platform: device
-    device_id: c29789d36ab7809bd020bd44977b66cb
+  - platform: state
     entity_id: binary_sensor.deur_sensor_jarne
-    domain: binary_sensor
+    from: 'off'
+    to: 'on'
   condition: []
   action:
   - service: notify.mobile_app_iphone_van_jarne
@@ -61,11 +60,10 @@
   alias: deur gesloten
   description: ''
   trigger:
-  - type: not_opened
-    platform: device
-    device_id: c29789d36ab7809bd020bd44977b66cb
+  - platform: state
     entity_id: binary_sensor.deur_sensor_jarne
-    domain: binary_sensor
+    from: 'on'
+    to: 'off'
   condition: []
   action:
   - service: notify.mobile_app_iphone_van_jarne
@@ -1004,36 +1002,29 @@
   alias: 'raam jarne open rolluik 15% open '
   description: rolluik
   trigger:
-  - type: opened
-    platform: device
-    device_id: cf8ca4d9b3a857fc155409e6c4f2e4f9
+  - platform: state
     entity_id: binary_sensor.raam_sensor_jarne_1
-    domain: binary_sensor
-  condition:
-  - type: is_open
-    condition: device
-    device_id: cf8ca4d9b3a857fc155409e6c4f2e4f9
-    entity_id: binary_sensor.raam_sensor_jarne_1
-    domain: binary_sensor
+    from: 'off'
+    to: 'on'
+  condition: []
   action:
-    - device_id: 99bca00e962b9407d2c7cfc60a9ded45
-      domain: cover
-      entity_id: cover.jarne
-      type: set_position
-      position: 15
-    - service: notify.mobile_app_iphone_van_jarne
-      data:
-        message: rolluik 15% raam jarne open
+  - device_id: 99bca00e962b9407d2c7cfc60a9ded45
+    domain: cover
+    entity_id: cover.jarne
+    type: set_position
+    position: 15
+  - service: notify.mobile_app_iphone_van_jarne
+    data:
+      message: rolluik 15% raam jarne open
   mode: single
 - id: '1608583740495'
   alias: 'raam jathe open rolluik 15% open '
   description: rolluik
   trigger:
-  - type: opened
-    platform: device
-    device_id: 471968b87fe7f1386d873b1b47bc9659
+  - platform: state
     entity_id: binary_sensor.raam_sensor_jathe_1
-    domain: binary_sensor
+    from: 'off'
+    to: 'on'
   condition:
   - type: is_open
     condition: device
@@ -1057,11 +1048,10 @@
   alias: 'raam frank rechts open rolluik 15% open '
   description: rolluik
   trigger:
-  - type: opened
-    platform: device
-    device_id: 02b9b72605fe5178f26516710cee1f8e
+  - platform: state
     entity_id: binary_sensor.raam_sensor_papa_1
-    domain: binary_sensor
+    from: 'off'
+    to: 'on'
   condition:
   - type: is_open
     condition: device
@@ -1069,11 +1059,11 @@
     entity_id: binary_sensor.raam_sensor_papa_1
     domain: binary_sensor
   action:
-  - device_id: c5a5c9d5502f1c4770d54652247f6439
-    domain: cover
-    entity_id: cover.frank_rechts
-    type: set_position
-    position: 15
+  - service: cover.set_cover_position
+    target:
+      device_id: 16091f84c9e8afe91f2cb779d5e311bb
+    data:
+      position: 15
   - service: notify.family
     data:
       message: rolluik 15% raam frank rechts open
@@ -1082,23 +1072,17 @@
   alias: raam frank rechts gesloten rolluik 100% open
   description: rolluik
   trigger:
-  - type: opened
-    platform: device
-    device_id: 02b9b72605fe5178f26516710cee1f8e
+  - platform: state
     entity_id: binary_sensor.raam_sensor_papa_1
-    domain: binary_sensor
-  condition:
-  - type: is_open
-    condition: device
-    device_id: 02b9b72605fe5178f26516710cee1f8e
-    entity_id: binary_sensor.raam_sensor_papa_1
-    domain: binary_sensor
+    from: 'on'
+    to: 'off'
+  condition: []
   action:
-  - device_id: c5a5c9d5502f1c4770d54652247f6439
-    domain: cover
-    entity_id: cover.frank_rechts
-    type: set_position
-    position: 100
+  - service: cover.set_cover_position
+    target:
+      device_id: 16091f84c9e8afe91f2cb779d5e311bb
+    data:
+      position: 100
   - service: notify.family
     data:
       message: rolluik 100% raam frank rechts gesloten
@@ -1291,6 +1275,10 @@
       - utility_meter.energy_bedvoor_weekly
       - utility_meter.energy_bedvoor_monthly
       - utility_meter.energy_bedvoor_yearly
+      - utility_meter.energy_serverkast_daily
+      - utility_meter.energy_serverkast_weekly
+      - utility_meter.energy_serverkast_monthly
+      - utility_meter.energy_serverkast_yearly
   mode: single
 - id: '1619360873448'
   alias: deCONZ - Tradfri Shortcut Button wled
@@ -1381,4 +1369,83 @@
     device_id: 87da323c661908efcd53f7d2e021825c
     entity_id: light.philips_plafonlamp_2_1
     domain: light
+  mode: single
+- id: '1620905622863'
+  alias: deCONZ - Tradfri Shortcut Button home,slapen button bed
+  description: ''
+  use_blueprint:
+    path: homeassistant/deCONZ_Ikea_Tradfri_Shortcut_Button.yaml
+    input:
+      remote: 6e94217ff8a6b47d90d46cea3154165b
+      button_short:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.jarne_thuis
+      button_long:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.jarne_slaap
+- id: '1620905798415'
+  alias: deCONZ - Tradfri Shortcut Button home,weg button deur
+  description: ''
+  use_blueprint:
+    path: homeassistant/deCONZ_Ikea_Tradfri_Shortcut_Button.yaml
+    input:
+      remote: 33854a9d1da0fbe80f7328d77a75f5cf
+      button_short:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.jarne_thuis
+      button_long:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.jarne_weg
+- id: '1620938775301'
+  alias: peak & offpeak sensor weekend & feestdagen
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00:00
+  - platform: time
+    at: '22:00:00'
+  condition:
+  - condition: state
+    entity_id:
+    - binary_sensor.workday_sensor
+    state: 'on'
+  action:
+  - service: utility_meter.next_tariff
+    target:
+      entity_id:
+      - utility_meter.energy_bedachter_daily
+      - utility_meter.energy_bedachter_weekly
+      - utility_meter.energy_bedachter_monthly
+      - utility_meter.energy_bedachter_yearly
+      - utility_meter.energy_bedvoor_daily
+      - utility_meter.energy_bedvoor_weekly
+      - utility_meter.energy_bedvoor_monthly
+      - utility_meter.energy_bedvoor_yearly
+      - utility_meter.energy_serverkast_daily
+      - utility_meter.energy_serverkast_weekly
+      - utility_meter.energy_serverkast_monthly
+      - utility_meter.energy_serverkast_yearly
+  mode: single
+- id: '1620994964459'
+  alias: 'raam Jarne gesloten rolluik 60% open '
+  description: rolluik
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.raam_sensor_jarne_1
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: cover.set_cover_position
+    data:
+      position: 60
+    target:
+      device_id: 431ac87a4e33f29a4151f8d33cd5683d
+  - service: notify.mobile_app_iphone_van_jarne
+    data:
+      message: 'raam dicht rolluik 60 % open '
   mode: single
