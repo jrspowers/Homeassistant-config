@@ -19,6 +19,6 @@ Pictures cards | Links to card
 ## Energy 🔌
 ![dashboard 1 energy screen](https://user-images.githubusercontent.com/60328474/118138873-1b41cd00-b407-11eb-8b68-0593cda0648f.png)
 ## Weer ☁️
-![dashboard 1 weer screen](https://user-images.githubusercontent.com/60328474/118172208-67533880-b42c-11eb-84e1-acd273e09120.png)
+![dashboard 1 Weather screen](https://user-images.githubusercontent.com/60328474/118376229-f6945380-b5c6-11eb-9c7e-bd4b8bf94b3e.png)
 ## Covers 🔨
-![dashboard 1 covers](https://user-images.githubusercontent.com/60328474/118363280-e31bc500-b593-11eb-85cd-38edff873c5e.png)
+![dashboard 1 covers screen](https://user-images.githubusercontent.com/60328474/118376244-1461b880-b5c7-11eb-9890-f05e6d7e3600.png)
