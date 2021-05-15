@@ -85,28 +85,46 @@ cards:
     card:
       type: grid
       cards:
-        - type: weather-forecast
-          entity: weather.openweathermap
+        - type: vertical-stack
+          cards:
+            - type: 'custom:weather-card'
+              style: |
+                ha-card {
+                  border-radius: 10px;
+                  padding-bottom: 10px;
+                  background-color: var(--dwains-theme-primary)
+                }
+                :host {
+                  --paper-item-icon-color: var(--dwains-theme-accent) !important;
+                }
+                .card-header {
+                  padding: 5px 16px;
+                  font-size: 15px;
+                  font-weight: 700 !important;
+                }
+                #states {
+                  padding-top: 0px !important;
+                  padding-bottom: 0px !important;
+                }
+                .secondary {
+                  color: darkgray !important;
+                  margin-left: 2px !important;
+                }
+              entity: weather.openweathermap
+              current: true
+              details: true
+              forecast: true
+              hourly_forecast: false
+              number_of_forecasts: '5'
         - type: entities
           entities:
             - entity: sensor.openweathermap_weather
               name: Weer Voorspeling
               icon: 'mdi:weather-cloudy-alert'
+            - entity: sensor.season
             - entity: sensor.openweathermap_feels_like_temperature
               name: Voelt Aan Als
               icon: 'mdi:thermometer-alert'
-            - entity: sensor.openweathermap_forecast_temperature
-              name: Max Temperature
-              icon: 'mdi:thermometer-chevron-up'
-            - entity: sensor.openweathermap_forecast_temperature_low
-              name: Min Temperature
-              icon: 'mdi:thermometer-chevron-down'
-            - entity: sensor.openweathermap_forecast_precipitation
-              name: Neerslag
-              icon: 'mdi:weather-rainy'
-            - entity: sensor.cc_example_climacell_wind_speed
-              name: Wind Snelheid
-              icon: 'mdi:windsock'
             - entity: sensor.openweathermap_uv_index
               name: UV-INDEX
               icon: 'mdi:weather-sunny'
@@ -116,9 +134,20 @@ cards:
                 label: Weer Statistieken
               open: false
               entities:
-                - entity: sensor.season
                 - entity: sun.sun
                 - entity: sensor.moon
+                - entity: sensor.openweathermap_forecast_temperature
+                  name: Max Temperature
+                  icon: 'mdi:thermometer-chevron-up'
+                - entity: sensor.openweathermap_forecast_temperature_low
+                  name: Min Temperature
+                  icon: 'mdi:thermometer-chevron-down'
+                - entity: sensor.openweathermap_forecast_precipitation
+                  name: Neerslag
+                  icon: 'mdi:weather-rainy'
+                - entity: sensor.cc_example_climacell_wind_speed
+                  name: Wind Snelheid
+                  icon: 'mdi:windsock'
                 - entity: sensor.openweathermap_weather
                   name: Weer Voorspeling
                   icon: 'mdi:weather-cloudy-alert'
@@ -228,3 +257,4 @@ cards:
           group_by:
             func: max
             duration: 1h
+
