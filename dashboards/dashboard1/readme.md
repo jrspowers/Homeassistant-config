@@ -11,6 +11,7 @@ Pictures cards | Links to card
 ☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card) | ☁️[press here to my weather card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card/select_weather_card.yaml)
 🌳 [press here to my Pollen card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card) | 🌳 [press here to my Pollen card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/weather_card/pollen_card.yaml)
 🔨 [press here to my Covers card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/covers_card) | 🔨 [press here to my Covers card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/covers_card/covers_card.yaml)
+🧮 [press here to my Uptime card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/network_card) | 🧮 [press here to my Uptime card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/network_card/uptime-card.yaml)
 
 ## Dashboard 🖥️
 ![dashboard 1 home screen](https://user-images.githubusercontent.com/60328474/118138917-28f75280-b407-11eb-9e87-ca076318031a.png)
@@ -23,5 +24,5 @@ Pictures cards | Links to card
 ## Covers 🔨
 ![dashboard 1 covers screen](https://user-images.githubusercontent.com/60328474/118376244-1461b880-b5c7-11eb-9890-f05e6d7e3600.png)
 ## Network 📈
-![dashboard 1 network screen](https://user-images.githubusercontent.com/60328474/118378122-c0100600-b5d1-11eb-8a98-b0e130019162.png)
+![dashboard 1 network screen](https://user-images.githubusercontent.com/60328474/118397723-ba5c0400-b655-11eb-9867-8ba39efd8ea1.png)
 
