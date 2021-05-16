@@ -1,0 +1,80 @@
+#################################################
+## Dashboards / Dashboard1 / Uptime card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Uptime card 
+#################################################
+type: grid
+cards:
+  - type: picture
+    image: /local/covers/home_assistant_logo.png
+  - type: grid
+    cards:
+      - type: 'custom:uptime-card'
+        entity: binary_sensor.home_assistant
+        icon: 'mdi:home-assistant'
+        name: Home assistant
+        hours_to_show: 24
+        status_adaptive_color: true
+        average_text: '% uptime'
+        alias:
+          ok: Online
+          ko: Offline
+        blink:
+          effect: fade
+          target: card
+          speed: 1
+        color:
+          icon: gray
+          ok: '#45C669'
+          ko: '#C6B145'
+          half: '#C66445'
+          none: '#C9C9C9'
+          title: gray
+        show:
+          header: true
+          title: true
+          icon: true
+          footer: true
+          status: true
+          timeline: true
+          average: true
+        tooltip:
+          animation: true
+      - type: 'custom:uptime-card'
+        entity: binary_sensor.synology
+        icon: 'mdi:server'
+        name: Synology
+        hours_to_show: 24
+        status_adaptive_color: true
+        average_text: '% uptime'
+        alias:
+          ok: Online
+          ko: Offline
+        blink:
+          effect: fade
+          target: card
+          speed: 1
+        color:
+          icon: gray
+          ok: '#45C669'
+          ko: '#C6B145'
+          half: '#C66445'
+          none: '#C9C9C9'
+          title: gray
+        show:
+          header: true
+          title: true
+          icon: true
+          footer: true
+          status: true
+          timeline: true
+          average: true
+        tooltip:
+          animation: true
+    square: false
+    columns: 2
+columns: 1
+square: false
