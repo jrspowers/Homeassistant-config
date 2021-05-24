@@ -1,4 +1,4 @@
-# Ek2021:tv:
+# Ek2021⚽
 
 ## ⚽[press here to my Ek2021 card](https://github.com/jrspowers/Homeassistant-config/blob/master/dashboards/dashboard1/ek2021_card/ek2021_card.yaml)
 
