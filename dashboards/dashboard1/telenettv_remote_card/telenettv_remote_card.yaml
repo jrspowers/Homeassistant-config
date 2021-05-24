@@ -1,0 +1,295 @@
+####################################################
+## Dashboards / Dashboard1 / telenettv remote card 
+####################################################
+
+
+####################################################
+## Dashboards / Dashboard1 / telenettv remote card 
+####################################################
+type: grid
+cards:
+  - type: picture
+    image: /local/media/Telenet-Logo.png
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+  - type: grid
+    cards:
+      - type: conditional
+        conditions:
+          - entity: media_player.telenettvbox
+            state: playing
+        card:
+          type: 'custom:mini-media-player'
+          volume_stateless: false
+          toggle_power: true
+          sound_mode: icon
+          hide:
+            volume: true
+            power: true
+            info: false
+            source: true
+            icon: true
+            icon_state: true
+            next: true
+            prev: true
+          group: true
+          entity: media_player.telenettvbox
+          artwork: material
+      - type: conditional
+        conditions:
+          - entity: media_player.lg_webos_smart_tv
+            state: 'on'
+        card:
+          type: 'custom:mini-media-player'
+          hide:
+            power: true
+            icon: true
+            source: true
+            icon_state: true
+            power_color: true
+            group: true
+            volume: true
+            controls: false
+          speaker_group:
+            platform: sonos
+            show_group_count: true
+            entities:
+              - entity_id: media_player.sonos_beam
+                name: Sonos beam
+              - entity_id: media_player.sonos_ra
+                name: Sonos rechtachter
+          entity: media_player.sonos_beam
+          artwork: material
+    square: false
+    columns: 1
+  - type: grid
+    cards:
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:power'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: media_player.toggle
+          service_data:
+            entity_id: media_player.telenettvbox
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:home-outline'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: MediaTopMenu
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:television-guide'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: Guide
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:undo'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: Escape
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-up-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: ArrowUp
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:dots-horizontal'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: ContextMenu
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-left-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: ArrowLeft
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:checkbox-marked-circle'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: Enter
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-right-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: ArrowRight
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:chevron-up'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: ChannelUp
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-down-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: ArrowDown
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:chevron-down'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: ChannelDown
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:skip-backward'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: MediaRewind
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:play-pause'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: MediaPlayPause
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:skip-forward'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: ziggonext.remote_key_press
+          service_data:
+            entity_id: media_player.telenettvbox
+            remote_key: MediaFastForward
+    square: false
+columns: 1
+square: false
