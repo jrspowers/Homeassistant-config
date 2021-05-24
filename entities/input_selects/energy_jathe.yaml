@@ -1,0 +1,9 @@
+################################################
+## Entities / Input Selects / Energy Jathe
+################################################
+energy_jathe:
+  name: Energy jathe
+  options:
+    - stroommeter - bedachter - jathe
+    - stroommeter - tvkast - jathe
+    - Stacked diagram - per device

@@ -1,0 +1,9 @@
+################################################
+## Entities / Input Selects / Energy living
+################################################
+energy_living:
+  name: Energy living
+  options:
+    - stroommeter - koelkast - diepvriezer
+    - stroommeter - diepvriezer - berging
+    - Stacked diagram - per device
