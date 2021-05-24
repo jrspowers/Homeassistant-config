@@ -1,0 +1,155 @@
+jarne_thuis:
+  alias: jarne thuis
+  sequence:
+  - type: turn_on
+    device_id: cc9377e9133411eba3f495f864615ea1
+    entity_id: light.ledstrip_deur_level_light_color_on_off
+    domain: light
+    brightness_pct: 100
+  - type: turn_on
+    device_id: e75312b5133411ebb22e2d048bd1a10c
+    entity_id: light.ledstrip_kast_level_light_color_on_off
+    domain: light
+    brightness_pct: 100
+  - type: turn_on
+    device_id: 637c1fea133411ebb37df515f3b27bf7
+    entity_id: light.ledstrip_plank_level_light_color_on_off
+    domain: light
+    brightness_pct: 50
+  - type: turn_on
+    device_id: 4c37991e133411ebb3f6c9333eee2829
+    entity_id: light.nachtkast_level_light_color_on_off
+    domain: light
+    brightness_pct: 100
+  - type: turn_on
+    device_id: a975b9d6133411eb996e07cef5936326
+    entity_id: light.kast_lamp_level_light_color_on_off
+    domain: light
+    brightness_pct: 100
+  - service: notify.mobile_app_iphone_van_jarne
+    data:
+      title: jarne thuis
+      message: welkom thuis
+  - service: input_boolean.turn_on
+    data: {}
+    entity_id: input_boolean.notify_jarne
+  mode: single
+'1606076319745':
+  alias: Set WLED Effect
+  sequence:
+  - service: wled.effect
+    data:
+      effect: '{{ states(''input_select.wled_effect'') }}'
+      intensity: '{{ states(''input_number.wled_intensity'') | int }}'
+      palette: '{{ states(''input_select.wled_palette'') }}'
+      reverse: '{{ states(''input_boolean.wled_reverse'') }}'
+      speed: '{{ states(''input_number.wled_speed'') | int }}'
+    entity_id: light.wled
+  mode: single
+lounge_appletv_netflix:
+  alias: Select Netflix
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.slaapkamer
+    data:
+      delay_secs: 1.5
+      command:
+      - top_menu
+      - home
+      - right
+      - select
+  - service: input_select.select_option
+    entity_id: input_select.media_card
+    data:
+      option: Apple TV
+'1621692567001':
+  alias: Select Plex
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.slaapkamer
+    data:
+      delay_secs: 1.5
+      command:
+      - top_menu
+      - home
+      - right
+      - right
+      - select
+  - service: input_select.select_option
+    entity_id: input_select.media_card
+    data:
+      option: Plex
+'1621693008655':
+  alias: Select IptvX
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.slaapkamer
+    data:
+      delay_secs: 1.5
+      command:
+      - top_menu
+      - home
+      - right
+      - right
+      - right
+      - select
+  - service: input_select.select_option
+    entity_id: input_select.media_card
+    data:
+      option: Apple TV
+'1621693125942':
+  alias: Select Youtube
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.slaapkamer
+    data:
+      delay_secs: 1.5
+      command:
+      - top_menu
+      - home
+      - right
+      - right
+      - right
+      - right
+      - select
+  - service: input_select.select_option
+    entity_id: input_select.media_card
+    data:
+      option: Apple TV
+'1621694532730':
+  alias: Select Videoland
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.slaapkamer
+    data:
+      delay_secs: 1.5
+      command:
+      - top_menu
+      - home
+      - select
+  - service: input_select.select_option
+    entity_id: input_select.media_card
+    data:
+      option: Apple TV
+'1621695077336':
+  alias: Select Streamz
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.slaapkamer
+    data:
+      delay_secs: 1.5
+      command:
+      - top_menu
+      - home
+      - down
+      - select
+  - service: input_select.select_option
+    entity_id: input_select.media_card
+    data:
+      option: Apple TV
