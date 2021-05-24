@@ -75,3 +75,99 @@ utility_meter:
     tariffs:
       - peak
       - offpeak
+  energy_koelkast_diepvriezer_monthly:
+    source: sensor.stroommeter_koelkast_diepvriezer_consumption
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  energy_koelkast_diepvriezer_daily:
+    source: sensor.stroommeter_koelkast_diepvriezer_consumption
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  energy_koelkast_diepvriezer_weekly:
+    source: sensor.stroommeter_koelkast_diepvriezer_consumption
+    cycle: weekly
+    tariffs:
+      - peak
+      - offpeak
+  energy_koelkast_diepvriezer_yearly:
+    source: sensor.stroommeter_koelkast_diepvriezer_consumption
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak
+  energy_diepvriezer_berging_monthly:
+    source: sensor.stroommeter_diepvriezer_berging_consumption
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  energy_diepvriezer_berging_daily:
+    source: sensor.stroommeter_diepvriezer_berging_consumption
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  energy_diepvriezer_berging_weekly:
+    source: sensor.stroommeter_diepvriezer_berging_consumption
+    cycle: weekly
+    tariffs:
+      - peak
+      - offpeak
+  energy_diepvriezer_berging_yearly:
+    source: sensor.stroommeter_diepvriezer_berging_consumption
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_jathe_monthly:
+    source: sensor.stroommeter_bedachter_jathe_consumption
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_jathe_daily:
+    source: sensor.stroommeter_bedachter_jathe_consumption
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_jathe_weekly:
+    source: sensor.stroommeter_bedachter_jathe_consumption
+    cycle: weekly
+    tariffs:
+      - peak
+      - offpeak
+  energy_bedachter_jathe_yearly:
+    source: sensor.stroommeter_bedachter_jathe_consumption
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak
+  energy_tvkast_jathe_monthly:
+    source: sensor.stroommeter_tvkast_jathe_consumption
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  energy_tvkast_jathe_daily:
+    source: sensor.stroommeter_tvkast_jathe_consumption
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  energy_tvkast_jathe_weekly:
+    source: sensor.stroommeter_tvkast_jathe_consumption
+    cycle: weekly
+    tariffs:
+      - peak
+      - offpeak
+  energy_tvkast_jathe_yearly:
+    source: sensor.stroommeter_tvkast_jathe_consumption
+    cycle: yearly
+    tariffs:
+      - peak
+      - offpeak
