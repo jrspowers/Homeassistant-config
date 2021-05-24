@@ -78,6 +78,28 @@ cards:
             styles:
               card:
                 - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:weather-sunny'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.weer
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.weer
+            option: sunset
+        state:
+          - value: sunset
+            styles:
+              card:
+                - border: 5px solid blue
   - type: conditional
     conditions:
       - entity: input_select.weer
@@ -257,4 +279,13 @@ cards:
           group_by:
             func: max
             duration: 1h
+  - type: conditional
+    conditions:
+      - entity: input_select.weer
+        state: sunset
+    card:
+      type: 'custom:sun-card'
+      language: nl
+      darkMode: true
+      showElevation: true
 

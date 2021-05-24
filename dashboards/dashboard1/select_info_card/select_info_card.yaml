@@ -98,6 +98,72 @@ cards:
             styles:
               card:
                 - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:recycle'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.find_my
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.find_my
+            option: afvalbeheer
+        state:
+          - value: afvalbeheer
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:soccer'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.find_my
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.find_my
+            option: Ek - 2021
+        state:
+          - value: Ek - 2021
+            styles:
+              card:
+                - border: 5px solid blue
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:keyboard-f1'
+        show_name: false
+        styles:
+          card:
+            - background-color: 'rgb(0,0,0)'
+            - border-radius: 20px
+            - color: 'rgb(255,255,255)'
+            - border: 5px solid black
+        entity: input_select.find_my
+        tap_action:
+          service: input_select.select_option
+          action: call-service
+          service_data:
+            entity_id: input_select.find_my
+            option: f1
+        state:
+          - value: f1
+            styles:
+              card:
+                - border: 5px solid blue
   - type: conditional
     conditions:
       - entity: input_select.find_my
@@ -245,9 +311,9 @@ cards:
                     - top: 4%
                     - color: >-
                         [[[ if
-                        (states["sensor.macbook_air_van_jathe_battery_state"].state
+                        (states["sensor.macbook_air_van_jathe_internal_battery_level"].state
                         <= 30) return "#e45649"; if
-                        (states["sensor.macbook_air_van_jathe_battery_state"].state
+                        (states["sensor.macbook_air_van_jathe_internal_battery_level"].state
                         <= 50) return "#ffa229"; else return "#50A14F"; ]]]
               custom_fields:
                 location: |
@@ -275,7 +341,7 @@ cards:
                     return `<ha-icon
                       icon="mdi:laptop"
                       style="width: 20px; height: 20px;"></ha-icon
-                      <span>${states['sensor.macbook_air_van_jathe_battery_state'].state}%</span>`
+                      <span>${states['sensor.macbook_air_van_jathe_internal_battery_level'].state}%</span>`
                   ]]]
         - type: grid
           cards:
@@ -797,4 +863,521 @@ cards:
                   background: rgba(255,255,255,.1);
                 }
           square: false
+        - type: grid
+          cards:
+            - type: picture
+              image: /local/covers/home_assistant_logo.png
+            - type: grid
+              cards:
+                - type: 'custom:uptime-card'
+                  entity: binary_sensor.home_assistant
+                  icon: 'mdi:home-assistant'
+                  name: Home assistant
+                  hours_to_show: 24
+                  status_adaptive_color: true
+                  average_text: '% uptime'
+                  alias:
+                    ok: Online
+                    ko: Offline
+                  blink:
+                    effect: fade
+                    target: card
+                    speed: 1
+                  color:
+                    icon: gray
+                    ok: '#45C669'
+                    ko: '#C6B145'
+                    half: '#C66445'
+                    none: '#C9C9C9'
+                    title: gray
+                  show:
+                    header: true
+                    title: true
+                    icon: true
+                    footer: true
+                    status: true
+                    timeline: true
+                    average: true
+                  tooltip:
+                    animation: true
+                - type: 'custom:uptime-card'
+                  entity: binary_sensor.synology
+                  icon: 'mdi:server'
+                  name: Synology
+                  hours_to_show: 24
+                  status_adaptive_color: true
+                  average_text: '% uptime'
+                  alias:
+                    ok: Online
+                    ko: Offline
+                  blink:
+                    effect: fade
+                    target: card
+                    speed: 1
+                  color:
+                    icon: gray
+                    ok: '#45C669'
+                    ko: '#C6B145'
+                    half: '#C66445'
+                    none: '#C9C9C9'
+                    title: gray
+                  show:
+                    header: true
+                    title: true
+                    icon: true
+                    footer: true
+                    status: true
+                    timeline: true
+                    average: true
+                  tooltip:
+                    animation: true
+              square: false
+              columns: 2
+          columns: 1
+          square: false
+  - type: conditional
+    conditions:
+      - entity: input_select.find_my
+        state: afvalbeheer
+    card:
+      type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards:
+            - type: picture
+              image: /local/covers/large/limburg.net.png
+        - type: vertical-stack
+          cards:
+            - cards:
+                - entity: sensor.limburg_net_vandaag
+                  name: Vandaag
+                  image: /local/images/afval_geen_large.png
+                  state_image:
+                    gft: /local/images/afval_gft_large.png
+                    papier: /local/images/afval_papier_large.png
+                    restafval: /local/images/afval_rest_large.png
+                    pmd: /local/images/afval_pmd_large.png
+                    'papier, pmd': /local/images/afval_papier-pmd_large.png
+                    'gft, pmd': /local/images/afval_gft-pmd_large.png
+                  type: picture-entity
+                - entity: sensor.limburg_net_morgen
+                  name: Morgen
+                  image: /local/images/afval_geen_large.png
+                  state_image:
+                    gft: /local/images/afval_gft_large.png
+                    papier: /local/images/afval_papier_large.png
+                    restafval: /local/images/afval_rest_large.png
+                    pmd: /local/images/afval_pmd_large.png
+                    'papier, pmd': /local/images/afval_papier-pmd_large.png
+                    'gft, pmd': /local/images/afval_gft-pmd_large.png
+                  type: picture-entity
+              type: horizontal-stack
+            - entities:
+                - entity: sensor.limburg_net_gft
+                  name: GFT
+                - entity: sensor.limburg_net_papier
+                  name: Papier
+                - entity: sensor.limburg_net_pmd
+                  name: PMD
+                - entity: sensor.limburg_net_restafval
+                  name: Restafval
+                - entity: sensor.limburg_net_kerstboom
+              type: glance
+  - type: conditional
+    conditions:
+      - entity: input_select.find_my
+        state: Ek - 2021
+    card:
+      type: grid
+      cards:
+        - type: markdown
+          content: >
+            ![Image](https://images0.persgroep.net/rcs/gDnYYGmqHEQ7xWBg1sGBGT4UeX0/diocontent/168483979/_fitwidth/694/?appId=21791a8992982cd8da851550a453bd7f&quality=0.8&desiredformat=webp)
+        - type: horizontal-stack
+          cards:
+            - type: 'custom:button-card'
+              color_type: card
+              show_name: true
+              show_icon: true
+              name: Matches
+              icon: 'mdi:soccer'
+              layout: icon_name
+              styles:
+                icon:
+                  - opacity: 0.5
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              entity: input_select.ek_2021
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.ek_2021
+                  option: matches
+              state:
+                - value: matches
+                  styles:
+                    card:
+                      - border: 5px solid blue
+            - type: 'custom:button-card'
+              color_type: card
+              show_name: true
+              show_icon: true
+              name: Pools
+              icon: 'mdi:clipboard-list-outline'
+              layout: icon_name
+              styles:
+                icon:
+                  - opacity: 0.5
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              entity: input_select.ek_2021
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.ek_2021
+                  option: pools
+              state:
+                - value: pools
+                  styles:
+                    card:
+                      - border: 5px solid blue
+            - type: 'custom:button-card'
+              color_type: card
+              show_name: true
+              show_icon: true
+              name: Schedule
+              icon: 'mdi:calendar-month'
+              layout: icon_name
+              styles:
+                icon:
+                  - opacity: 0.5
+                card:
+                  - background-color: 'rgb(0,0,0)'
+                  - border-radius: 20px
+                  - color: 'rgb(255,255,255)'
+                  - border: 5px solid black
+              entity: input_select.ek_2021
+              tap_action:
+                service: input_select.select_option
+                action: call-service
+                service_data:
+                  entity_id: input_select.ek_2021
+                  option: schedule
+              state:
+                - value: schedule
+                  styles:
+                    card:
+                      - border: 5px solid blue
+        - type: conditional
+          conditions:
+            - entity: input_select.ek_2021
+              state: matches
+          card:
+            type: grid
+            cards:
+              - type: 'custom:button-card'
+                name: Matches
+                styles:
+                  card:
+                    - '--mdc-ripple-press-opacity': 0
+                    - cursor: initial
+                    - padding: 15px
+                    - font-size: 12pt
+                  name:
+                    - text-transform: uppercase
+                    - font-size: 125%
+                    - letter-spacing: 10px
+                    - padding: 5px
+                    - border-bottom: '2px solid rgba(61, 126, 225, 0.60)'
+                    - width: 100vw
+                  grid:
+                    - grid-template-areas: '"n n" "ek2020_message ek2020_content"'
+                    - grid-template-columns: min-content 1fr
+                  custom_fields:
+                    soccer_label:
+                      - text-align: left
+                      - padding-top: 10px
+                      - min-height: 45px
+                  soccer_content:
+                    - text-align: right
+                    - padding-top: 10px
+                    - min-height: 45px
+                    - text-transform: capitalize
+              - type: 'custom:atomic-calendar-revive'
+                style: |
+                  ha-card {
+                    border-radius: 5px;
+                      background-color: var(--dwains-theme-primary);
+                    }
+                    .cal-titleContainer {
+                      display: none;
+                    }
+                showProgressBar: true
+                maxDaysToShow: 30
+                maxEventCount: 5
+                europeanDate: true
+                showNoEventsForToday: true
+                showMonth: true
+                showWeekDay: true
+                eventBarColor: 'rgb(61,126,255)'
+                dayWrapperLineColor: 'rgb(61,126,255)'
+                timeColor: 'rgb(61,126,255)'
+                hideFinishedEvents: true
+                entities:
+                  - calendar.ek_2020
+            columns: 1
+            square: false
+        - type: conditional
+          conditions:
+            - entity: input_select.ek_2021
+              state: pools
+          card:
+            type: grid
+            cards:
+              - type: 'custom:button-card'
+                name: Pools
+                styles:
+                  card:
+                    - '--mdc-ripple-press-opacity': 0
+                    - cursor: initial
+                    - padding: 15px
+                    - font-size: 12pt
+                  name:
+                    - text-transform: uppercase
+                    - font-size: 125%
+                    - letter-spacing: 10px
+                    - padding: 5px
+                    - border-bottom: '2px solid rgba(61, 126, 225, 0.60)'
+                    - width: 100vw
+                  grid:
+                    - grid-template-areas: '"n n" "ek2020_message ek2020_content"'
+                    - grid-template-columns: min-content 1fr
+                  custom_fields:
+                    soccer_label:
+                      - text-align: left
+                      - padding-top: 10px
+                      - min-height: 45px
+                    soccer_content:
+                      - text-align: right
+                      - padding-top: 10px
+                      - min-height: 45px
+                      - text-transform: capitalize
+              - type: markdown
+                content: >
+                  ![Image](https://cms.kaagent.be/uploads/ck/images/UEFA%20EURO%202020%20kwalificaties.jpg)
+            columns: 1
+            square: false
+        - type: conditional
+          conditions:
+            - entity: input_select.ek_2021
+              state: schedule
+          card:
+            type: grid
+            cards:
+              - type: 'custom:button-card'
+                name: Schedule
+                styles:
+                  card:
+                    - '--mdc-ripple-press-opacity': 0
+                    - cursor: initial
+                    - padding: 15px
+                    - font-size: 12pt
+                  name:
+                    - text-transform: uppercase
+                    - font-size: 125%
+                    - letter-spacing: 10px
+                    - padding: 5px
+                    - border-bottom: '2px solid rgba(61, 126, 225, 0.60)'
+                    - width: 100vw
+                  grid:
+                    - grid-template-areas: '"n n" "ek2020_message ek2020_content"'
+                    - grid-template-columns: min-content 1fr
+                  custom_fields:
+                    soccer_label:
+                      - text-align: left
+                      - padding-top: 10px
+                      - min-height: 45px
+                  soccer_content:
+                    - text-align: right
+                    - padding-top: 10px
+                    - min-height: 45px
+                    - text-transform: capitalize
+              - type: markdown
+                content: >
+                  ![Image](https://ekvoetbal.nl/wp-content/uploads/2020/06/speelschema-ek-2021.png)
+            columns: 1
+            square: false
+      columns: 1
+      square: false
+  - type: conditional
+    conditions:
+      - entity: input_select.find_my
+        state: f1
+    card:
+      type: grid
+      cards:
+        - type: markdown
+          content: >
+            ![Image](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1280px-F1.svg.png)
+        - type: grid
+          cards:
+            - type: 'custom:button-card'
+              name: Location
+              styles:
+                card:
+                  - '--mdc-ripple-press-opacity': 0
+                  - cursor: initial
+                  - padding: 15px
+                  - font-size: 12pt
+                name:
+                  - text-transform: uppercase
+                  - font-size: 125%
+                  - letter-spacing: 10px
+                  - padding: 5px
+                  - border-bottom: '2px solid rgba(62, 126, 225, 0.60)'
+                  - width: 100vw
+                grid:
+                  - grid-template-areas: >-
+                      "n n" "race_label race_content" "circuit_label
+                      circuit_content"
+                  - grid-template-columns: min-content 1fr
+                custom_fields:
+                  race_label:
+                    - text-align: left
+                    - padding-top: 10px
+                  race_content:
+                    - text-align: right
+                    - padding-top: 10px
+                  circuit_label:
+                    - text-align: left
+                    - padding-top: 10px
+                  circuit_content:
+                    - text-align: right
+                    - padding-top: 10px
+              custom_fields:
+                race_label: Grand prix
+                circuit_label: Circuit
+                race_content: >
+                  [[[ return
+                  `${states['sensor.formula_1'].attributes.race_name}` ]]]
+                circuit_content: >
+                  [[[ return
+                  `${states['sensor.formula_1'].attributes.race_track}` ]]]
+            - type: 'custom:button-card'
+              name: Race
+              styles:
+                card:
+                  - '--mdc-ripple-press-opacity': 0
+                  - cursor: initial
+                  - padding: 15px
+                  - font-size: 12pt
+                name:
+                  - text-transform: uppercase
+                  - font-size: 125%
+                  - letter-spacing: 10px
+                  - padding: 5px
+                  - border-bottom: '2px solid rgba(62, 126, 225, 0.60)'
+                  - width: 100vw
+                grid:
+                  - grid-template-areas: >-
+                      "n n" "fp1_label fp1_content" "fp2_label fp2_content"
+                      "fp3_label fp3_content" "qualify_label qualify_content"
+                      "race_label race_content"
+                  - grid-template-columns: min-content 1fr
+                custom_fields:
+                  fp1_label:
+                    - text-align: left
+                    - padding-top: 10px
+                    - min-height: 45px
+                  fp2_label:
+                    - text-align: left
+                    - padding-top: 10px
+                    - min-height: 45px
+                  fp3_label:
+                    - text-align: left
+                    - padding-top: 10px
+                    - min-height: 45px
+                  qualify_label:
+                    - text-align: left
+                    - padding-top: 10px
+                    - min-height: 45px
+                  race_label:
+                    - text-align: left
+                    - padding-top: 10px
+                    - min-height: 45px
+                  fp1_content:
+                    - text-align: right
+                    - padding-top: 10px
+                    - min-height: 45px
+                    - text-transform: capitalize
+                  fp2_content:
+                    - text-align: right
+                    - padding-top: 10px
+                    - min-height: 45px
+                    - text-transform: capitalize
+                  fp3_content:
+                    - text-align: right
+                    - padding-top: 10px
+                    - min-height: 45px
+                    - text-transform: capitalize
+                  qualify_content:
+                    - text-align: right
+                    - padding-top: 10px
+                    - min-height: 45px
+                    - text-transform: capitalize
+                  race_content:
+                    - text-align: right
+                    - padding-top: 10px
+                    - min-height: 45px
+                    - text-transform: capitalize
+              custom_fields:
+                fp1_label: Free practice 1
+                fp2_label: Free practice 2
+                fp3_label: Free practice 3
+                qualify_label: Qualifying
+                race_label: Race
+                fp1_content: >
+                  [[[ return
+                  `<span>${states['sensor.formula_1'].attributes.free_practice_1_day}</span>
+                  <br /> <span style="opacity:
+                  0.60">${states['sensor.formula_1'].attributes.free_practice_1_time}</span>`
+                  ]]]
+                fp2_content: >
+                  [[[ return
+                  `<span>${states['sensor.formula_1'].attributes.free_practice_2_day}</span> 
+                  <br /> <span style="opacity:
+                  0.60">${states['sensor.formula_1'].attributes.free_practice_2_time}</span>`
+                  ]]]
+                fp3_content: >
+                  [[[ return
+                  `<span>${states['sensor.formula_1'].attributes.free_practice_3_day}</span>
+                  <br /> <span style="opacity:
+                  0.60">${states['sensor.formula_1'].attributes.free_practice_3_time}</span>`
+                  ]]]
+                qualify_content: >
+                  [[[ return
+                  `<span>${states['sensor.formula_1'].attributes.qualifying_day}</span>
+                  <br /> <span style="opacity:
+                  0.60">${states['sensor.formula_1'].attributes.qualifying_time}</span>`
+                  ]]]
+                race_content: >
+                  [[[ return
+                  `<span>${states['sensor.formula_1'].attributes.race_day}</span>
+                  <br /> <span style="opacity:
+                  0.60">${states['sensor.formula_1'].attributes.race_time}</span>`
+                  ]]]
+          columns: 1
+          square: false
+      square: false
+      columns: 1
+
+
 
