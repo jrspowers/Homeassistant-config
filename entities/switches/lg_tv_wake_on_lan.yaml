@@ -1,0 +1,2 @@
+platform: wake_on_lan
+mac: !secret mac_wake_on_lan
