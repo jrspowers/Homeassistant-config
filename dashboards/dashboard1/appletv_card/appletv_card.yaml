@@ -1,0 +1,371 @@
+#################################################
+## Dashboards / Dashboard1 / Appletv card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Appletv card 
+#################################################
+
+type: grid
+cards:
+  - type: grid
+    cards:
+      - type: conditional
+        conditions:
+          - entity: media_player.slaapkamer
+            state: playing
+        card:
+          type: 'custom:mini-media-player'
+          volume_stateless: false
+          toggle_power: true
+          sound_mode: icon
+          hide:
+            volume: true
+            power: true
+            info: false
+            source: true
+            icon: true
+            icon_state: true
+            next: true
+            prev: true
+          group: true
+          artwork: full-cover
+          entity: media_player.slaapkamer
+      - type: conditional
+        conditions:
+          - entity: media_player.plex_plex_for_apple_tv_slaapkamer
+            state: playing
+        card:
+          type: 'custom:mini-media-player'
+          volume_stateless: false
+          toggle_power: true
+          sound_mode: icon
+          hide:
+            volume: true
+            power: true
+            info: false
+            source: true
+            icon: true
+            icon_state: true
+            next: true
+            prev: true
+          group: true
+          artwork: full-cover
+          entity: media_player.plex_plex_for_apple_tv_slaapkamer
+      - type: conditional
+        conditions:
+          - entity: media_player.lg_webos_smart_tv_2
+            state: 'on'
+        card:
+          type: 'custom:mini-media-player'
+          hide:
+            name: true
+            icon: true
+            info: true
+            power: true
+            source: true
+            controls: false
+            next: true
+            prev: true
+            play_pause: true
+            icon_state: true
+          group: true
+          entity: media_player.sonos_beam
+    columns: 1
+    square: false
+  - type: grid
+    cards:
+      - type: picture
+        image: /local/media/videoland-logo.png
+        tap_action:
+          action: call-service
+          service: script.1621694532730
+          service_data: {}
+          target: {}
+        hold_action:
+          action: call-service
+          service: script.1621694532730
+          service_data: {}
+          target: {}
+      - type: picture
+        image: /local/media/netflix-logo.png
+        tap_action:
+          action: call-service
+          service: script.lounge_appletv_netflix
+          service_data: {}
+          target: {}
+        hold_action:
+          action: call-service
+          service: script.lounge_appletv_netflix
+          service_data: {}
+          target: {}
+      - type: picture
+        image: /local/media/plex-logo.png
+        tap_action:
+          action: call-service
+          service: script.1621692567001
+          service_data: {}
+          target: {}
+        hold_action:
+          action: call-service
+          service: script.1621692567001
+          service_data: {}
+          target: {}
+      - type: picture
+        image: /local/media/iptvx-logo.png
+        tap_action:
+          action: call-service
+          service: script.1621693008655
+          service_data: {}
+          target: {}
+        hold_action:
+          action: call-service
+          service: script.1621693008655
+          service_data: {}
+          target: {}
+      - type: picture
+        image: /local/media/youtube-logo-2.png
+        tap_action:
+          action: call-service
+          service: script.1621693125942
+          service_data: {}
+          target: {}
+        hold_action:
+          action: call-service
+          service: script.1621693125942
+          service_data: {}
+          target: {}
+      - type: picture
+        image: /local/media/streamz-logo.png
+        tap_action:
+          action: call-service
+          service: script.1621695077336
+          service_data: {}
+          target: {}
+        hold_action:
+          action: call-service
+          service: script.1621695077336
+          service_data: {}
+          target: {}
+    columns: 6
+    square: false
+  - type: grid
+    cards:
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:power'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - wakeup
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-up-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - up
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:exit-to-app'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - top_menu
+        hold_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - home_hold
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-left-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data: null
+          entity_id: remote.slaapkamer
+          command:
+            - left
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:image-filter-center-focus'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - select
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-right-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - right
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:undo'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - menu
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:arrow-down-thick'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - down
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:play-pause'
+        name: ' '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: media_player.media_play_pause
+          service_data:
+            entity_id: media_player.slaapkamer
+      - type: 'custom:button-card'
+        style: |
+          ha-card:hover {
+            transform: scale(1.05);
+            }
+        tap_action:
+          action: toggle
+        entity: switch.wake_on_lan
+        show_state: false
+        show_name: true
+        name: Deur Jarne
+        styles:
+          card:
+            - box-shadow: '0px 8px 15px rgba(0, 0, 0, 0.2)'
+        state:
+          - color: 'rgb(255, 0, 0)'
+            name: TV ON
+            value: 'on'
+            icon: 'mdi:television'
+          - color: 'rgb(0, 0, 255)'
+            name: TV OFF
+            value: 'off'
+            icon: 'mdi:television-off'
+            card:
+              - background: 'rgba(255,255,255,.3)'
+              - border-radius: 30px
+            state:
+              - color: blue
+              - animation: blink 2s infinite
+      - type: 'custom:button-card'
+        color_type: card
+        icon: null
+        name: Hold
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+            - font-size: 40px
+            - font-weight: bold
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          service_data:
+            entity_id: remote.slaapkamer
+            command:
+              - home_hold
+      - type: 'custom:button-card'
+        color_type: card
+        icon: 'mdi:apple'
+        name: ' Apple tv '
+        aspect_ratio: 1.5/1
+        styles:
+          card:
+            - background-color: var(--card-background-color)
+            - color: var(--primary-foreground-color)
+        tap_action:
+          action: call-service
+          service: media_player.select_source
+          service_data:
+            entity_id: media_player.sync_box
+            source: Apple TV
+    square: false
+  - type: entities
+    entities:
+      - entity: input_select.media_card
+square: false
+columns: 1
