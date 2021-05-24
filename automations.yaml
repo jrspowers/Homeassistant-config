@@ -1429,6 +1429,22 @@
       - utility_meter.energy_serverkast_weekly
       - utility_meter.energy_serverkast_monthly
       - utility_meter.energy_serverkast_yearly
+      - utility_meter.energy_bedachter_jathe_daily
+      - utility_meter.energy_bedachter_jathe_weekly
+      - utility_meter.energy_bedachter_jathe_monthly
+      - utility_meter.energy_bedachter_jathe_yearly
+      - utility_meter.energy_tvkast_jathe_daily
+      - utility_meter.energy_tvkast_jathe_weekly
+      - utility_meter.energy_tvkast_jathe_monthly
+      - utility_meter.energy_tvkast_jathe_yearly
+      - utility_meter.energy_koelkast_diepvriezer_daily
+      - utility_meter.energy_koelkast_diepvriezer_weekly
+      - utility_meter.energy_koelkast_diepvriezer_monthly
+      - utility_meter.energy_koelkast_diepvriezer_yearly
+      - utility_meter.energy_diepvriezer_berging_daily
+      - utility_meter.energy_diepvriezer_berging_weekly
+      - utility_meter.energy_diepvriezer_berging_monthly
+      - utility_meter.energy_diepvriezer_berging_yearly
   mode: single
 - id: '1620994964459'
   alias: 'raam Jarne gesloten rolluik 60% open '
@@ -1448,4 +1464,16 @@
   - service: notify.mobile_app_iphone_van_jarne
     data:
       message: 'raam dicht rolluik 60 % open '
+  mode: single
+- id: '1621797480109'
+  alias: 'test nieuw fuction '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.deur_sensor_jarne
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_iphone_van_jarne
   mode: single
