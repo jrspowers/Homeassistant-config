@@ -1,0 +1,87 @@
+################################################
+## Entities / Sensors / Stroom Tvkast jathe  
+################################################
+platform: template
+sensors:
+  energy_tvkast_jathe_daily:
+    friendly_name: Stroom per dag
+    unit_of_measurement: kWh
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_daily_offpeak')|float + states('sensor.energy_tvkast_jathe_daily_peak')|float)|round(2) }}"
+  energy_tvkast_jathe_weekly:
+    friendly_name: Stroom per week
+    unit_of_measurement: kWh
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_weekly_offpeak')|float + states('sensor.energy_tvkast_jathe_weekly_peak')|float)|round(2) }}"
+  energy_tvkast_jathe_monthly:
+    friendly_name: Stroom per maand
+    unit_of_measurement: kWh
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_monthly_offpeak')|float + states('sensor.energy_tvkast_jathe_monthly_peak')|float)|round(2) }}"
+  energy_tvkast_jathe_yearly:
+    friendly_name: Stroom per jaar
+    unit_of_measurement: kWh
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_yearly_offpeak')|float + states('sensor.energy_tvkast_jathe_yearly_peak')|float)|round(2) }}"
+  energy_tvkast_jathe_daily_offpeak_cost:
+    friendly_name: Stroomkosten laag tarief | per dag
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_daily_offpeak')|float * states('input_number.energy_supplier_price_low_tarif')|float }}"
+  energy_tvkast_jathe_daily_peak_cost:
+    friendly_name: Stroomkosten hoog tarief | per dag
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_daily_peak')|float * states('input_number.energy_supplier_price_normal_tarif')|float }}"
+  energy_tvkast_jathe_weekly_offpeak_cost:
+    friendly_name: Stroomkosten laag tarief | per week
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_weekly_offpeak')|float * states('input_number.energy_supplier_price_low_tarif')|float }}"
+  energy_tvkast_jathe_weekly_peak_cost:
+    friendly_name: Stroomkosten hoog tarief | per week
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_weekly_peak')|float * states('input_number.energy_supplier_price_normal_tarif')|float }}"
+  energy_tvkast_jathe_monthly_offpeak_cost:
+    friendly_name: Stroomkosten laag tarief | per maand
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_monthly_offpeak')|float * states('input_number.energy_supplier_price_low_tarif')|float }}"
+  energy_tvkast_jathe_monthly_peak_cost:
+    friendly_name: Stroomkosten hoog tarief | per maand
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_monthly_peak')|float * states('input_number.energy_supplier_price_normal_tarif')|float }}"
+  energy_tvkast_jathe_yearly_offpeak_cost:
+    friendly_name: Stroomkosten laag tarief | per jaar
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_yearly_offpeak')|float * states('input_number.energy_supplier_price_low_tarif')|float }}"
+  energy_tvkast_jathe_yearly_peak_cost:
+    friendly_name: Stroomkosten hoog tarief | per jaar
+    unit_of_measurement: €
+    value_template: "{{ states('sensor.energy_tvkast_jathe_yearly_peak')|float * states('input_number.energy_supplier_price_normal_tarif')|float }}"
+  energy_tvkast_jathe_daily_cost:
+    friendly_name: Stroomkosten per dag
+    unit_of_measurement: €
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_daily_offpeak_cost')|float + states('sensor.energy_tvkast_jathe_daily_peak_cost')|float)|round(2) }}"
+  energy_tvkast_jathe_weekly_cost:
+    friendly_name: Stroomkosten per week
+    unit_of_measurement: €
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_weekly_offpeak_cost')|float + states('sensor.energy_tvkast_jathe_weekly_peak_cost')|float)|round(2) }}"
+  energy_tvkast_jathe_monthly_cost:
+    friendly_name: Stroomkosten per maand
+    unit_of_measurement: €
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_monthly_offpeak_cost')|float + states('sensor.energy_tvkast_jathe_monthly_peak_cost')|float)|round(2) }}"
+  energy_tvkast_jathe_yearly_cost:
+    friendly_name: Stroomkosten per jaar
+    unit_of_measurement: €
+    value_template: "{{ (states('sensor.energy_tvkast_jathe_yearly_offpeak_cost')|float + states('sensor.energy_tvkast_jathe_yearly_peak_cost')|float)|round(2) }}"
+
+  # LAST PERIODS energy
+  energy_tvkast_jathe_yesterday_energy:
+    friendly_name: Yesterday energy
+    unit_of_measurement: kWh
+    value_template: "{{ (state_attr('sensor.energy_tvkast_jathe_daily_offpeak','last_period')|float + state_attr('sensor.energy_tvkast_jathe_daily_peak','last_period')|float)|round(2) }}"
+  energy_tvkast_jathe_last_week_energy:
+    friendly_name: Last Week energy
+    unit_of_measurement: kWh
+    value_template: "{{ (state_attr('sensor.energy_tvkast_jathe_weekly_offpeak','last_period')|float + state_attr('sensor.energy_tvkast_jathe_weekly_peak','last_period')|float)|round(2) }}"
+  energy_tvkast_jathe_last_month_energy:
+    friendly_name: Last Month energy
+    unit_of_measurement: kWh
+    value_template: "{{ (state_attr('sensor.energy_tvkast_jathe_monthly_offpeak','last_period')|float + state_attr('sensor.energy_tvkast_jathe_monthly_peak','last_period')|float)|round(2) }}"
+  energy_tvkast_jathe_last_year_energy:
+    friendly_name: Last Year energy
+    unit_of_measurement: kWh
+    value_template: "{{ (state_attr('sensor.energy_tvkast_jathe_yearly_offpeak','last_period')|float + state_attr('sensor.energy_tvkast_jathe_yearly_peak','last_period')|float)|round(2) }}"
