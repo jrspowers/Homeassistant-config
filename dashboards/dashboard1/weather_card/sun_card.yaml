@@ -1,0 +1,12 @@
+#################################################
+## Dashboards / Dashboard1 / Select Weather card 
+#################################################
+
+
+#################################################
+## Dashboards / Dashboard1 / Sun card 
+#################################################
+type: 'custom:sun-card'
+language: nl
+darkMode: true
+showElevation: true
